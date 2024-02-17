@@ -13,10 +13,10 @@ function Home() {
     API();
   }, []);
   return (
-    <div className="App">
+    <>
       <Header />
       <Movies items={movie} />
-    </div>
+    </>
   );
 }
 

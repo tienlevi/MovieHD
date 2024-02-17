@@ -21,3 +21,14 @@ export const DetailMovie = async () => {
     return err;
   }
 };
+
+export const Genre = async () => {
+  try {
+    const response = dataUrl.get(
+      `/genre/movie/list?api_key=${ApiKey}&language=en-US`
+    );
+    return response;
+  } catch (err) {
+    return err;
+  }
+};
