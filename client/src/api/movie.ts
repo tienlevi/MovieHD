@@ -1,6 +1,5 @@
 import dataUrl from "./axios";
-
-const ApiKey = "bec721bcb126b9938b6c2f7b39448c63";
+import { ApiKey } from "../constants";
 
 export const newMovie = async () => {
   try {

@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Genre } from "../../api/movie";
 import { MovieGenre } from "../../types";
-import PersonIcon from "@mui/icons-material/Person";
 import SearchIcon from "@mui/icons-material/Search";
-import LightModeIcon from "@mui/icons-material/LightMode";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
+import LoginIcon from "@mui/icons-material/Login";
 import "./style.scss";
 
 function Header() {
@@ -34,9 +35,14 @@ function Header() {
         </li>
         <li>
           <Link to="/">Genre</Link>
+          <div className="header-arrow-down">
+            <KeyboardArrowDownRoundedIcon />
+          </div>
           <ul className="menu-children">
             {genres.map((genre) => (
-              <li key={genre.id}>{genre.name}</li>
+              <li key={genre.id}>
+                <Link to="/">{genre.name}</Link>
+              </li>
             ))}
           </ul>
         </li>
@@ -53,11 +59,14 @@ function Header() {
       <div className="header-icon-btn">
         <div className="header-icon">
           <SearchIcon />
-          <LightModeIcon />
         </div>
-        <div className="header-btn">
-          <button>Sign In</button>
+        <div className="header-icon">
+          <LightModeOutlinedIcon />
         </div>
+        <Link to="/" className="header-btn">
+          <LoginIcon />
+          <p>Sign In</p>
+        </Link>
       </div>
     </header>
   );

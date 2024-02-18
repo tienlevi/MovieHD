@@ -15,7 +15,7 @@ function Home() {
   return (
     <>
       <Header />
-      <Movies items={movie} />
+      {/* <Movies items={movie} /> */}
     </>
   );
 }
