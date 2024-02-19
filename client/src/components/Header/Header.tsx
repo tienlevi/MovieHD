@@ -11,6 +11,9 @@ import "./style.scss";
 
 function Header() {
   const [genres, setGenres] = useState<MovieGenre[]>([]);
+  const middleIndex = Math.floor(genres.length / 2);
+  const firstHalf = genres.slice(0, middleIndex);
+  const secondHalf = genres.slice(middleIndex);
 
   useEffect(() => {
     const getData = async () => {
@@ -39,11 +42,20 @@ function Header() {
             <KeyboardArrowDownRoundedIcon />
           </div>
           <ul className="menu-children">
-            {genres.map((genre) => (
-              <li key={genre.id}>
-                <Link to="/">{genre.name}</Link>
-              </li>
-            ))}
+            <div className="menu-children-inside">
+              {firstHalf.map((genre) => (
+                <li key={genre.id}>
+                  <Link to="/">{genre.name}</Link>
+                </li>
+              ))}
+            </div>
+            <div className="menu-children-inside">
+              {secondHalf.map((genre) => (
+                <li key={genre.id}>
+                  <Link to="/">{genre.name}</Link>
+                </li>
+              ))}
+            </div>
           </ul>
         </li>
         <li>

@@ -34,18 +34,29 @@ header {
       }
 
       .menu-children {
-        display: none;
+        display: flex;
         position: absolute;
-        top: 100%;
         background-color: $themeBg;
+        border-top: 3px solid $blue;
+        top: 75%;
         padding: 10px 0px;
-        flex: 0 0 auto;
-        width: 100%;
+        opacity: 0;
+        transform-origin: top;
+        transform: scaleY(0);
+        transition: 0.3s;
 
         li {
           font-size: 16px;
           font-weight: 400;
           color: $white;
+        }
+
+        .menu-children-inside {
+          padding: 0px 15px;
+          li {
+            flex: 0 0 auto;
+            width: 150px;
+          }
         }
       }
 
@@ -63,7 +74,9 @@ header {
         }
 
         > .menu-children {
-          display: block;
+          opacity: 1;
+          transform: scaleY(1);
+          visibility: visible;
         }
       }
     }
