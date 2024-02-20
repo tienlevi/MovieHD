@@ -25,12 +25,7 @@ function Header() {
   return (
     <header className="header">
       <div>
-        <img
-          src={require("../../assets/Img/logo.png")}
-          alt=""
-          width={175}
-          height={37}
-        />
+        <img src="../../assets/Img/logo.png" alt="" width={175} height={37} />
       </div>
       <nav>
         <li>
