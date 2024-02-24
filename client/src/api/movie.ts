@@ -21,10 +21,21 @@ export const DetailMovie = async () => {
   }
 };
 
-export const Genre = async () => {
+export const getGenre = async () => {
   try {
     const response = dataUrl.get(
       `/genre/movie/list?api_key=${ApiKey}&language=en-US`
+    );
+    return response;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const getCountry = async () => {
+  try {
+    const response = dataUrl.get(
+      `/configuration/countries?api_key=${ApiKey}&language=en-US`
     );
     return response;
   } catch (err) {

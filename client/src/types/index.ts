@@ -21,6 +21,8 @@ export interface MovieLanguages {
   name: string;
 }
 
+export interface MovieCountry {}
+
 export interface MovieTopRate {
   adult: boolean;
   backdrop_path: string;
