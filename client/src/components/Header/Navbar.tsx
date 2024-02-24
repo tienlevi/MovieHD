@@ -1,18 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getGenre } from "../../api/movie";
-import { MovieGenre } from "../../types";
-import { getCountry } from "../../api/movie";
-
+import { getGenre, getCountry } from "../../api/movie";
+import { MovieCountry, MovieGenre } from "../../types";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import "./style.scss";
 
 function Navbar() {
   const [genres, setGenres] = useState<MovieGenre[]>([]);
-  const [country, setCountry] = useState<[]>([]);
-  const middleIndex = Math.floor(genres.length / 2);
-  const firstHalf = genres.slice(0, middleIndex);
-  const secondHalf = genres.slice(middleIndex);
+  const [country, setCountry] = useState<MovieCountry[]>([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -25,8 +20,8 @@ function Navbar() {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getCountry();
-      console.log(response);
-      setGenres(response.data);
+      console.log(response.data);
+      setCountry(response.data);
     };
     getData();
   }, []);
@@ -37,35 +32,39 @@ function Navbar() {
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/">Genre</Link>
-        <div className="header-arrow-down">
-          <KeyboardArrowDownRoundedIcon />
-        </div>
-        <ul className="menu-children">
-          <div className="menu-children-inside">
-            {firstHalf.map((genre) => (
-              <li key={genre.id}>
-                <Link to="/">{genre.name}</Link>
-              </li>
-            ))}
-          </div>
-          <div className="menu-children-inside">
-            {secondHalf.map((genre) => (
-              <li key={genre.id}>
-                <Link to="/">{genre.name}</Link>
-              </li>
-            ))}
-          </div>
-        </ul>
-      </li>
-      <li>
         <Link to="/">Country</Link>
       </li>
       <li>
         <Link to="/">TV Shows</Link>
       </li>
       <li>
-        <Link to="/">About us</Link>
+        <Link to="/">Genre</Link>
+        <div className="header-arrow-down">
+          <KeyboardArrowDownRoundedIcon />
+        </div>
+        <ul className="menu-children">
+          <div className="menu-children-inside">
+            {genres.slice(0, 6).map((genre, index) => (
+              <li key={index}>
+                <Link to="/">{genre.name}</Link>
+              </li>
+            ))}
+          </div>
+          <div className="menu-children-inside">
+            {genres.slice(7, 13).map((genre, index) => (
+              <li key={index}>
+                <Link to="/">{genre.name}</Link>
+              </li>
+            ))}
+          </div>
+          <div className="menu-children-inside">
+            {genres.slice(14).map((genre, index) => (
+              <li key={index}>
+                <Link to="/">{genre.name}</Link>
+              </li>
+            ))}
+          </div>
+        </ul>
       </li>
     </nav>
   );
