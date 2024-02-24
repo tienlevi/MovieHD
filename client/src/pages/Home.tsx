@@ -1,7 +1,8 @@
-import Movies from "../components/Movies/Movies";
-import Header from "../components/Header/Header";
 import { useState, useEffect } from "react";
 import { newMovie } from "../api/movie";
+import Movies from "../components/Movies/Movies";
+import Header from "../components/Header/Header";
+import SlideShow from "../components/Banner/SlideShow";
 
 function Home() {
   const [movie, setMovie] = useState<[]>([]);
@@ -16,6 +17,7 @@ function Home() {
     <>
       <Header />
       {/* <Movies items={movie} /> */}
+      <SlideShow />
     </>
   );
 }

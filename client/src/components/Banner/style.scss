@@ -2,13 +2,20 @@
 
 .banner {
   width: 100%;
+  position: relative;
+  border-bottom: 3px solid $blue;
 
-  .banner-img img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
+  .banner-img {
+    position: relative;
+    margin-top: 80px;
 
-    ::before {
+    img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    &::after {
       content: "";
       position: absolute;
       top: 0;
@@ -16,6 +23,36 @@
       right: 0;
       bottom: 0;
       background-color: $black;
+      opacity: 0.7;
+      z-index: 10;
+    }
+  }
+
+  .banner-text {
+    position: absolute;
+    color: $white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+  }
+}
+
+.slideshow {
+  max-width: 1200px;
+  margin: auto;
+  margin-top: 80px;
+  border-radius: 15px;
+
+  .slideshow-content {
+    width: 1200px;
+    height: 550px;
+    // position: absolute;
+
+    img {
+      width: 1200px;
+      height: 550px;
+      object-fit: cover;
     }
   }
 }

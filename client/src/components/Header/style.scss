@@ -9,6 +9,7 @@ header {
   width: 100%;
   height: 80px;
   background-color: $headerBg;
+  z-index: 100;
 
   nav {
     display: flex;
