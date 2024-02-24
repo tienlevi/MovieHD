@@ -43,16 +43,42 @@
   margin: auto;
   margin-top: 80px;
   border-radius: 15px;
+  position: relative;
 
   .slideshow-content {
     width: 1200px;
     height: 550px;
-    // position: absolute;
+    position: relative;
 
-    img {
-      width: 1200px;
-      height: 550px;
-      object-fit: cover;
+    .slideshow-img {
+      position: relative;
+      img {
+        width: 1200px;
+        height: 550px;
+        object-fit: cover;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $black;
+        opacity: 0.3;
+        z-index: 10;
+      }
+    }
+
+    .slideshow-text {
+      width: 50%;
+      flex: 0 0 auto;
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      transform: translateY(-50%);
+      color: $white;
+      z-index: 20;
     }
   }
 }
