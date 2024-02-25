@@ -1,5 +1,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import { Link } from "react-router-dom";
+import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -24,15 +27,28 @@ function SlideShow() {
             Ant Man and the Wasp Quantaumania
           </h1>
           <div className="slideshow-text-other">
-            <p className="slideshow-text-top-rate">9.2</p>
+            <p className="slideshow-text-top-rate">
+              <StarBorderRoundedIcon />
+              <span>9.2</span>
+            </p>
             <p className="slideshow-text-year">2023</p>
             <p className="slideshow-text-time">3h 15min</p>
           </div>
+          <p className="slideshow-text-genre">Action</p>
+
           <p className="slideshow-text-description">
             There are many variations of passages orem psum available but the
             majority have suffered alteration in some repeat predefined chunks
             form injected humour.
           </p>
+          <div className="slideshow-watch-detail">
+            <Link to="/" className="slideshow-play-now">
+              <PlayArrowRoundedIcon /> <span>Watch Now</span>
+            </Link>
+            <Link to="/" className="slideshow-detail">
+              <span>Detail</span>
+            </Link>
+          </div>
         </div>
       </SwiperSlide>
       <SwiperSlide className="slideshow-content">
@@ -44,15 +60,27 @@ function SlideShow() {
             Ant Man and the Wasp Quantaumania
           </h1>
           <div className="slideshow-text-other">
-            <p className="slideshow-text-top-rate">9.2</p>
+            <p className="slideshow-text-top-rate">
+              <StarBorderRoundedIcon />
+              <span>9.2</span>
+            </p>
             <p className="slideshow-text-year">2023</p>
             <p className="slideshow-text-time">3h 15min</p>
           </div>
+          <p className="slideshow-text-genre">Action</p>
           <p className="slideshow-text-description">
             There are many variations of passages orem psum available but the
             majority have suffered alteration in some repeat predefined chunks
             form injected humour.
           </p>
+          <div className="slideshow-watch-detail">
+            <Link to="/" className="slideshow-play-now">
+              <PlayArrowRoundedIcon /> <span>Watch Now</span>
+            </Link>
+            <Link to="/" className="slideshow-detail">
+              <span>Detail</span>
+            </Link>
+          </div>
         </div>
       </SwiperSlide>
       <SwiperSlide className="slideshow-content">
@@ -64,15 +92,28 @@ function SlideShow() {
             Ant Man and the Wasp Quantaumania
           </h1>
           <div className="slideshow-text-other">
-            <p className="slideshow-text-top-rate">9.2</p>
+            <p className="slideshow-text-top-rate">
+              <StarBorderRoundedIcon />
+              <span>9.2</span>
+            </p>
             <p className="slideshow-text-year">2023</p>
             <p className="slideshow-text-time">3h 15min</p>
           </div>
+          <p className="slideshow-text-genre">Action</p>
+
           <p className="slideshow-text-description">
             There are many variations of passages orem psum available but the
             majority have suffered alteration in some repeat predefined chunks
             form injected humour.
           </p>
+          <div className="slideshow-watch-detail">
+            <Link to="/" className="slideshow-play-now">
+              <PlayArrowRoundedIcon /> <span>Watch Now</span>
+            </Link>
+            <Link to="/" className="slideshow-detail">
+              <span>Detail</span>
+            </Link>
+          </div>
         </div>
       </SwiperSlide>
     </Swiper>
