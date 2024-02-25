@@ -1,11 +1,10 @@
-import React from "react";
-
 interface Props {
   className: string;
+  children: any;
 }
 
-function Section({ className }: Props) {
-  return <div>Section</div>;
+function Section({ className, children }: Props) {
+  return <div className={`container ${className}`}>{children}</div>;
 }
 
 export default Section;
