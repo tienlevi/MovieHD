@@ -3,19 +3,32 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
+import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { imageSrc } from "../../constants";
 import "./style.scss";
 
 function SlideShow() {
+  const pagination = {
+    clickable: true,
+    renderBullet: (index: number, className: string) => {
+      return `<div class="swiper-pagination-button ${className}" key=${index}></div>`;
+    },
+    El: "swiper-pagination-button",
+  };
+
   return (
     <Swiper
       modules={[Pagination, Navigation, Autoplay]}
-      pagination={{ clickable: true }}
-      navigation={true}
+      pagination={pagination}
+      navigation={{
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      }}
       loop
+      // autoplay={{ delay: 3000, disableOnInteraction: false }}
       className="slideshow"
     >
       <SwiperSlide className="slideshow-content">
@@ -116,6 +129,14 @@ function SlideShow() {
           </div>
         </div>
       </SwiperSlide>
+      <div className="swiper-button">
+        <div className="swiper-button-next">
+          <ArrowForwardIosRoundedIcon />
+        </div>
+        <div className="swiper-button-prev">
+          <ArrowBackIosNewRoundedIcon />
+        </div>
+      </div>
     </Swiper>
   );
 }

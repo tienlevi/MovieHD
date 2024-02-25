@@ -44,6 +44,7 @@
   margin-top: 80px;
   border-radius: 15px;
   position: relative;
+  z-index: 100;
 
   .slideshow-content {
     width: 1200px;
@@ -194,6 +195,62 @@
           }
         }
       }
+    }
+  }
+  .swiper-button {
+    top: 50%;
+    position: absolute;
+    color: $white;
+    z-index: 10;
+    width: 100%;
+    font-size: 30px;
+
+    .swiper-button-prev {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      position: absolute;
+      left: 10px;
+      cursor: pointer;
+    }
+
+    .swiper-button-next {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+    }
+  }
+
+  .swiper-pagination {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    .swiper-pagination-button {
+      margin: 0px 10px;
+      border: 3px solid $white;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    .swiper-pagination-bullet-active {
+      background-color: $blue;
     }
   }
 }
