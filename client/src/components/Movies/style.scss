@@ -3,8 +3,10 @@
 .top-rate {
   display: block;
 
-  h1 {
+  .top-rate-title {
     color: $white;
+    margin-top: 20px;
+    padding: 0px 10px;
   }
 
   .top-rate-movie {
@@ -12,12 +14,22 @@
     flex-wrap: wrap;
 
     .top-rate-movie-children {
-      width: 23%;
-      padding: 0px 20px;
+      width: 25%;
+      padding: 0px 10px;
+      margin-top: 20px;
+      margin-bottom: 20px;
 
-      h2 {
+      .top-rate-movie-children {
+        width: 100%;
         color: $white;
         font-size: 18px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      img {
+        width: 100%;
       }
     }
   }
