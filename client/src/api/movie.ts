@@ -1,5 +1,10 @@
 import dataUrl from "./axios";
 import { ApiKey } from "../constants";
+import { posterPath } from "../constants";
+
+export const ImageMovie = (image: string) => {
+  return `${posterPath}/${image}`;
+};
 
 export const newMovie = async () => {
   try {
@@ -36,6 +41,17 @@ export const getCountry = async () => {
   try {
     const response = dataUrl.get(
       `/configuration/countries?api_key=${ApiKey}&language=en-US`
+    );
+    return response;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const getPopularMovies = async () => {
+  try {
+    const response = dataUrl.get(
+      `/movie/popular?api_key=${ApiKey}&language=en-US`
     );
     return response;
   } catch (err) {

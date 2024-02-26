@@ -11,6 +11,7 @@ function Home() {
   useEffect(() => {
     const getData = async () => {
       const response: any = await newMovie();
+      console.log(response.data);
       setMovie(response.data.results);
     };
     getData();
@@ -18,11 +19,8 @@ function Home() {
   return (
     <Title title="MoPlay - Watch Free Movies Online">
       <Header />
-      {/* <Movies items={movie} /> */}
       <SlideShow />
-      <Section className="">
-        <div></div>
-      </Section>
+      <Movies items={movie} />
     </Title>
   );
 }

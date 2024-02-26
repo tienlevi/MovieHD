@@ -1,3 +1,5 @@
+import "./style.scss";
+
 interface Props {
   className: string;
   children: any;

@@ -1,8 +1,24 @@
 @import "../../styles/theme.scss";
 
-.content {
+.top-rate {
   display: block;
-  .list-movie-text {
+
+  h1 {
     color: $white;
+  }
+
+  .top-rate-movie {
+    display: flex;
+    flex-wrap: wrap;
+
+    .top-rate-movie-children {
+      width: 23%;
+      padding: 0px 20px;
+
+      h2 {
+        color: $white;
+        font-size: 18px;
+      }
+    }
   }
 }

@@ -1,5 +1,36 @@
 @import "../../styles/theme.scss";
 
+@mixin button-style($backgroundColor, $color) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border-radius: 10px;
+  width: 140px;
+  height: 40px;
+  background-color: $backgroundColor;
+  color: $color;
+  text-transform: uppercase;
+  overflow: hidden;
+  vertical-align: middle;
+  z-index: 1;
+}
+
+@mixin button-style-before($color) {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  transition: 0.3s;
+  border-radius: 10px;
+  z-index: -1;
+  background-color: $color;
+}
+
 .banner {
   width: 100%;
   position: relative;
@@ -121,37 +152,15 @@
         display: flex;
 
         .slideshow-play-now {
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 140px;
-          height: 40px;
-          color: $white;
-          background-color: $blue;
-          font-size: 14px;
-          border-radius: 10px;
-          text-transform: uppercase;
-          z-index: 1;
+          @include button-style($blue, $white);
 
           &::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 0;
-            height: 0;
-            transition: 0.3s;
-            border-radius: 10px;
-            z-index: -1;
+            @include button-style-before($red);
           }
 
           &:hover::before {
-            width: 100%;
-            height: 100%;
-            background-color: $red;
-            color: $white;
+            width: 120%;
+            height: 120%;
           }
 
           span {
@@ -160,38 +169,16 @@
         }
 
         .slideshow-detail {
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 140px;
-          height: 40px;
+          @include button-style($red, $white);
           margin-left: 10px;
-          color: $white;
-          background-color: $red;
-          font-size: 14px;
-          border-radius: 10px;
-          text-transform: uppercase;
-          z-index: 1;
 
           &::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 0;
-            height: 0;
-            transition: 0.3s;
-            border-radius: 10px;
-            z-index: -1;
+            @include button-style-before($blue);
           }
 
           &:hover::before {
-            width: 100%;
-            height: 100%;
-            background-color: $blue;
-            color: $white;
+            width: 120%;
+            height: 120%;
           }
         }
       }
@@ -252,5 +239,12 @@
     .swiper-pagination-bullet-active {
       background-color: $blue;
     }
+  }
+}
+
+@media screen and (max-width: $breakpoint-xlarge) {
+  .slideshow {
+    max-width: 800px;
+    margin: auto;
   }
 }

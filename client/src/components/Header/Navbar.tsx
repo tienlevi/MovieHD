@@ -20,7 +20,6 @@ function Navbar() {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getCountry();
-      console.log(response.data);
       setCountry(response.data);
     };
     getData();
