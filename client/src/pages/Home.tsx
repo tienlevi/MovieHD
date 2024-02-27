@@ -11,7 +11,6 @@ function Home() {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getTopRateMovie();
-      console.log(response.data);
       setMovie(response.data.results);
     };
     getData();

@@ -1,9 +1,9 @@
 import "./style.scss";
-import { MovieDetail } from "../../types";
+import { MovieList } from "../../types";
 import Section from "../Section/Section";
 import { ImageMovie } from "../../api/movie";
 
-function Movies({ items }: { items: MovieDetail[] }) {
+function Movies({ items }: { items: MovieList[] }) {
   return (
     <>
       <Section className="movie">

@@ -10,10 +10,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "./style.scss";
 import { ImageMovie, getTopRateMovie, getGenre } from "../../api/movie";
-import { MovieDetail, MovieGenre } from "../../types";
+import { MovieList, MovieGenre } from "../../types";
 
 function SlideShow() {
-  const [topRateMovie, setTopRateMovie] = useState<MovieDetail[]>([]);
+  const [topRateMovie, setTopRateMovie] = useState<MovieList[]>([]);
   const [genres, setGenres] = useState<MovieGenre[]>([]);
   const topRateMovieLength = topRateMovie.slice(0, 5);
   useEffect(() => {
@@ -21,6 +21,7 @@ function SlideShow() {
       try {
         const response: any = await getTopRateMovie();
         setTopRateMovie(response.data.results);
+        console.log(response.data.results);
       } catch (error) {
         console.log(error);
       }
@@ -30,7 +31,7 @@ function SlideShow() {
     const getDataGenre = async () => {
       try {
         const response: any = await getGenre();
-        setGenres(response.data.results);
+        setGenres(response.data.genres);
       } catch (error) {
         console.log(error);
       }
@@ -45,7 +46,6 @@ function SlideShow() {
     },
     El: "swiper-pagination-button",
   };
-  console.log(topRateMovieLength);
 
   return (
     <Swiper
@@ -62,7 +62,7 @@ function SlideShow() {
       {topRateMovieLength.map((item) => (
         <SwiperSlide className="slideshow-content" key={item.id}>
           <div className="slideshow-img">
-            <img src={ImageMovie(item.poster_path)} alt="" />
+            <img src={ImageMovie(item.backdrop_path)} alt="" />
           </div>
           <div className="slideshow-text">
             <h1 className="slideshow-text-title">{item.title}</h1>
@@ -71,20 +71,15 @@ function SlideShow() {
                 <StarBorderRoundedIcon />
                 <span>{item.adult}</span>
               </p>
-              <p className="slideshow-text-year">{item.release_date}</p>
-              <p className="slideshow-text-time">{item.adult}</p>
+              <p className="slideshow-text-release-date">{item.release_date}</p>
             </div>
-            {/* {genres.map((genre) => ( */}
             <p className="slideshow-text-genre">
-              {/* {item.genres.map((genre) => genre.name)} */}
+              {genres
+                .filter((genre) => item.genre_ids.includes(genre.id))
+                .map((genre) => genre.name)
+                .join(", ")}
             </p>
-            {/* ))} */}
-
-            <p className="slideshow-text-description">
-              There are many variations of passages orem psum available but the
-              majority have suffered alteration in some repeat predefined chunks
-              form injected humour.
-            </p>
+            <p className="slideshow-text-description">{item.overview}</p>
             <div className="slideshow-watch-detail">
               <Link to="/" className="slideshow-play-now">
                 <PlayArrowRoundedIcon /> <span>Watch Now</span>

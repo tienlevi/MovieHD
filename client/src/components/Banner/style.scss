@@ -118,6 +118,7 @@
       .slideshow-text-title {
         font-size: 42px;
         text-transform: uppercase;
+        margin-bottom: 15px;
       }
 
       .slideshow-text-other {
@@ -131,19 +132,23 @@
           background-color: $blue;
           padding: 5px;
           border-radius: 10px;
+          margin-bottom: 15px;
         }
 
-        .slideshow-text-year {
+        .slideshow-text-release-date {
           margin-left: 10px;
+          margin-bottom: 15px;
         }
 
         .slideshow-text-time {
           margin-left: 10px;
+          margin-bottom: 15px;
         }
       }
 
       .slideshow-text-genre {
         font-size: 18px;
+        margin-bottom: 10px;
       }
 
       .slideshow-text-description {
@@ -153,6 +158,7 @@
 
       .slideshow-watch-detail {
         display: flex;
+        margin-top: 15px;
 
         .slideshow-play-now {
           @include button-style($blue, $white);
