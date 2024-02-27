@@ -1,18 +1,18 @@
 import "./style.scss";
-import { MovieTopRate } from "../../types";
+import { MovieDetail } from "../../types";
 import Section from "../Section/Section";
 import { ImageMovie } from "../../api/movie";
 
-function Movies({ items }: { items: MovieTopRate[] }) {
+function Movies({ items }: { items: MovieDetail[] }) {
   return (
     <>
-      <Section className="top-rate">
-        <h1 className="top-rate-title">Top rate</h1>
-        <div className="top-rate-movie">
+      <Section className="movie">
+        <h1 className="movie-title">Top rate</h1>
+        <div className="movie-detail">
           {items.map((item) => (
-            <div className="top-rate-movie-children" key={item?.id}>
+            <div className="movie-detail-children" key={item?.id}>
               <img src={ImageMovie(item.poster_path)} alt="" />
-              <h2 key={item?.id} className="top-rate-movie-children">
+              <h2 key={item?.id} className="movie-detail-title">
                 {item.title}
               </h2>
             </div>

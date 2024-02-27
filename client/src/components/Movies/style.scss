@@ -1,26 +1,25 @@
 @import "../../styles/theme.scss";
 
-.top-rate {
+.movie {
   display: block;
 
-  .top-rate-title {
+  .movie-title {
     color: $white;
     margin-top: 20px;
     padding: 0px 10px;
   }
 
-  .top-rate-movie {
+  .movie-detail {
     display: flex;
     flex-wrap: wrap;
 
-    .top-rate-movie-children {
+    .movie-detail-children {
       width: 25%;
       padding: 0px 10px;
       margin-top: 20px;
       margin-bottom: 20px;
 
-      .top-rate-movie-children {
-        width: 100%;
+      .movie-detail-title {
         color: $white;
         font-size: 18px;
         text-overflow: ellipsis;

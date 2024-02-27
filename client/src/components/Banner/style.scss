@@ -81,14 +81,15 @@
     width: 1200px;
     height: 550px;
     position: relative;
+    border-radius: 15px;
 
     .slideshow-img {
       position: relative;
+
       img {
         width: 1200px;
         height: 550px;
         object-fit: cover;
-        padding: 0px 10px;
         border-radius: 15px;
       }
       &::after {

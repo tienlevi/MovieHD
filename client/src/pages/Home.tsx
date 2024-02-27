@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { newMovie } from "../api/movie";
+import { getTopRateMovie } from "../api/movie";
 import Movies from "../components/Movies/Movies";
 import Header from "../components/Header/Header";
 import SlideShow from "../components/Banner/SlideShow";
@@ -10,7 +10,7 @@ function Home() {
   const [movie, setMovie] = useState<[]>([]);
   useEffect(() => {
     const getData = async () => {
-      const response: any = await newMovie();
+      const response: any = await getTopRateMovie();
       console.log(response.data);
       setMovie(response.data.results);
     };

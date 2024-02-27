@@ -6,7 +6,7 @@ export const ImageMovie = (image: string) => {
   return `${posterPath}/${image}`;
 };
 
-export const newMovie = async () => {
+export const getTopRateMovie = async () => {
   try {
     const response = dataUrl.get(
       `/movie/top_rated?api_key=${ApiKey}&language=en-US&page=1`
