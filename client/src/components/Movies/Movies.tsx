@@ -3,6 +3,7 @@ import { MovieList, MovieGenre } from "../../types";
 import Section from "../Section/Section";
 import { ImageMovie } from "../../api/movie";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import "./style.scss";
 
 function Movies({
@@ -15,7 +16,15 @@ function Movies({
   return (
     <>
       <Section className="movie">
-        <h1 className="movie-title">Top rate</h1>
+        <div className="movie-title-view">
+          <h1 className="movie-title">Top rate</h1>
+          <Link to="/" className="movie-view-more">
+            <p>View All</p>
+            <KeyboardDoubleArrowRightIcon
+              style={{ marginLeft: 5, marginBottom: 3 }}
+            />
+          </Link>
+        </div>
         <div className="movie-content">
           {items.map((item) => (
             <div className="movie-content-children" key={item?.id}>
