@@ -19,7 +19,7 @@ function SlideShow() {
   useEffect(() => {
     const getDataTopRateMovie = async () => {
       try {
-        const response: any = await getTopRateMovie();
+        const response: any = await getTopRateMovie(1);
         setTopRateMovie(response.data.results);
         console.log(response.data.results);
       } catch (error) {

@@ -26,6 +26,9 @@ function Movies({
                     style={{ fontSize: 35, color: "white" }}
                   />
                 </div>
+                <div className="movie-content-language">
+                  {item.original_language}
+                </div>
               </Link>
               <Link to="/" key={item?.id} className="movie-content-title">
                 <h2>{item.title}</h2>

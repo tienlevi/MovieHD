@@ -10,7 +10,7 @@ function Home() {
   const [genres, setGenres] = useState<[]>([]);
   useEffect(() => {
     const getData = async () => {
-      const response: any = await getTopRateMovie();
+      const response: any = await getTopRateMovie(1);
       setMovies(response.data.results);
     };
     getData();
