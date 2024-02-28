@@ -69,7 +69,7 @@ function SlideShow() {
             <div className="slideshow-text-other">
               <p className="slideshow-text-top-rate">
                 <StarBorderRoundedIcon />
-                <span>{item.adult}</span>
+                <span>{item.vote_average}</span>
               </p>
               <p className="slideshow-text-release-date">{item.release_date}</p>
             </div>
