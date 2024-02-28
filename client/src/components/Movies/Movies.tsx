@@ -1,20 +1,36 @@
-import "./style.scss";
-import { MovieList } from "../../types";
+import { Link } from "react-router-dom";
+import { MovieList, MovieGenre } from "../../types";
 import Section from "../Section/Section";
 import { ImageMovie } from "../../api/movie";
+import "./style.scss";
 
-function Movies({ items }: { items: MovieList[] }) {
+function Movies({
+  items,
+  genres,
+}: {
+  items: MovieList[];
+  genres: MovieGenre[];
+}) {
   return (
     <>
       <Section className="movie">
         <h1 className="movie-title">Top rate</h1>
-        <div className="movie-detail">
+        <div className="movie-content">
           {items.map((item) => (
-            <div className="movie-detail-children" key={item?.id}>
-              <img src={ImageMovie(item.poster_path)} alt="" />
-              <h2 key={item?.id} className="movie-detail-title">
-                {item.title}
-              </h2>
+            <div className="movie-content-children" key={item?.id}>
+              <Link to="/" className="movie-content-img">
+                <img src={ImageMovie(item.poster_path)} alt="" />
+              </Link>
+              <Link to="/" key={item?.id} className="movie-content-title">
+                <h2>{item.title}</h2>
+              </Link>
+              <p className="movie-content-genre">
+                {genres &&
+                  genres
+                    .filter((genre) => item.genre_ids.includes(genre.id))
+                    .map((genre) => genre.name)
+                    .join(", ")}
+              </p>
             </div>
           ))}
         </div>
