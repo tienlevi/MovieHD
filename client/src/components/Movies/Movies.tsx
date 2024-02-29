@@ -7,10 +7,10 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import "./style.scss";
 
 function Movies({
-  items,
+  movies,
   genres,
 }: {
-  items: MovieList[];
+  movies: MovieList[];
   genres: MovieGenre[];
 }) {
   return (
@@ -18,7 +18,7 @@ function Movies({
       <Section className="movie">
         <div className="movie-title-view">
           <h1 className="movie-title">Top rate</h1>
-          <Link to="/" className="movie-view-more">
+          <Link to={`/view-all/top-rate`} className="movie-view-more">
             <p>View All</p>
             <KeyboardDoubleArrowRightIcon
               style={{ marginLeft: 5, marginBottom: 3 }}
@@ -26,26 +26,26 @@ function Movies({
           </Link>
         </div>
         <div className="movie-content">
-          {items.map((item) => (
-            <div className="movie-content-children" key={item?.id}>
+          {movies.map((movie) => (
+            <div className="movie-content-children" key={movie?.id}>
               <Link to="/" className="movie-content-img">
-                <img src={ImageMovie(item.poster_path)} alt="" />
+                <img src={ImageMovie(movie.poster_path)} alt="" />
                 <div className="movie-content-play-icon">
                   <PlayArrowRoundedIcon
                     style={{ fontSize: 35, color: "white" }}
                   />
                 </div>
                 <div className="movie-content-language">
-                  {item.original_language}
+                  {movie.original_language}
                 </div>
               </Link>
-              <Link to="/" key={item?.id} className="movie-content-title">
-                <h2>{item.title}</h2>
+              <Link to="/" key={movie?.id} className="movie-content-title">
+                <h2>{movie.title}</h2>
               </Link>
               <p className="movie-content-genre">
                 {genres &&
                   genres
-                    .filter((genre) => item.genre_ids.includes(genre.id))
+                    .filter((genre) => movie.genre_ids.includes(genre.id))
                     .map((genre) => genre.name)
                     .join(", ")}
               </p>
