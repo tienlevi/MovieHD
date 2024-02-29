@@ -27,7 +27,7 @@ function Home() {
     <Title title="MoPlay - Watch Free Movies Online">
       <Header />
       <SlideShow />
-      <Movies items={movies} genres={genres} />
+      <Movies movies={movies} genres={genres} />
     </Title>
   );
 }

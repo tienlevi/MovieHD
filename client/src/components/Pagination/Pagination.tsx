@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { MovieList } from "../../types";
-
-function Pagination({ movies }: { movies: MovieList[] }) {
-  return <div className="pagination">{movies.map(item)}</div>;
+function Pagination({ pages }: { pages: number }) {
+  return (
+    <div className="pagination">
+      <div className="pagination-children">{pages}</div>
+    </div>
+  );
 }
 
 export default Pagination;
