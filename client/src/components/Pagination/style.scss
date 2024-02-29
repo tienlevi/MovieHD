@@ -1,0 +1,12 @@
+@import "../../styles/theme.scss";
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 0px 15px;
+
+  .pagination-children {
+    background-color: $blue;
+    color: $white;
+  }
+}

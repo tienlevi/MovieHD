@@ -4,7 +4,6 @@ import { getGenre, getTopRateMovie } from "../api/movie";
 import Movies from "../components/Movies/Movies";
 import Header from "../components/Header/Header";
 import Title from "../components/Title/Title";
-import Section from "../components/Section/Section";
 import Pagination from "../components/Pagination/Pagination";
 
 function ViewAll() {
@@ -12,7 +11,8 @@ function ViewAll() {
 
   const [movies, setMovies] = useState<[]>([]);
   const [genres, setGenres] = useState<[]>([]);
-  const [page, setPage] = useState<number>(1);
+  const [pages, setPages] = useState<[]>([]);
+  const [tab, setTab] = useState<number>(1);
   useEffect(() => {
     const getData = async () => {
       const response: any = await getTopRateMovie(1);
@@ -23,9 +23,9 @@ function ViewAll() {
 
   useEffect(() => {
     const getDataPage = async () => {
-      const response: any = await getTopRateMovie(page);
-      setPage(page);
-      console.log(response);
+      const response: any = await getTopRateMovie(tab);
+      setPages(response.data.total_pages);
+      console.log(response.data);
     };
     getDataPage();
   }, []);
@@ -40,10 +40,10 @@ function ViewAll() {
   return (
     <Title title="Top Rate Movie">
       <Header />
-      <Section className="view-all-title">
-        <h1>{type}</h1>
-      </Section>
-      <Movies movies={movies} genres={genres} />
+      <div className="view-all" style={{ marginTop: 95 }}>
+        <Movies movies={movies} genres={genres} />
+      </div>
+      <Pagination pages={1} currentPage={1} />
     </Title>
   );
 }
