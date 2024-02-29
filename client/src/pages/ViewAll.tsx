@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { getGenre, getTopRateMovie } from "../api/movie";
 import Movies from "../components/Movies/Movies";
 import Header from "../components/Header/Header";
@@ -8,26 +8,20 @@ import Pagination from "../components/Pagination/Pagination";
 
 function ViewAll() {
   const { type } = useParams();
-
+  const location = useLocation();
+  const searchParams = new URLSearchParams();
+  const getParams = new URLSearchParams(location.search).get("page");
   const [movies, setMovies] = useState<[]>([]);
   const [genres, setGenres] = useState<[]>([]);
-  const [pages, setPages] = useState<[]>([]);
-  const [tab, setTab] = useState<number>(1);
+  const [page, setPage] = useState<number>(1);
+
   useEffect(() => {
+    console.log(getParams);
     const getData = async () => {
-      const response: any = await getTopRateMovie(1);
+      const response: any = await getTopRateMovie(Number(getParams));
       setMovies(response.data.results);
     };
     getData();
-  }, []);
-
-  useEffect(() => {
-    const getDataPage = async () => {
-      const response: any = await getTopRateMovie(tab);
-      setPages(response.data.total_pages);
-      console.log(response.data);
-    };
-    getDataPage();
   }, []);
 
   useEffect(() => {
@@ -37,13 +31,19 @@ function ViewAll() {
     };
     getData();
   }, []);
+
+  const handleClickPage = (page: number) => {
+    searchParams.set("page", page.toString());
+    const url = `${location.pathname}?${searchParams}`;
+    console.log(url);
+  };
   return (
     <Title title="Top Rate Movie">
       <Header />
       <div className="view-all" style={{ marginTop: 95 }}>
         <Movies movies={movies} genres={genres} />
       </div>
-      <Pagination pages={1} currentPage={1} />
+      <Pagination currentPage={page} pages={20} clickPage={handleClickPage} />
     </Title>
   );
 }

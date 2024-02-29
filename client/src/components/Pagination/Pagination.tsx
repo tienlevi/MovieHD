@@ -1,17 +1,25 @@
+import ReactPaginate from "react-paginate";
 import "./style.scss";
-// import
 
 interface Page {
-  pages: number;
   currentPage: number;
+  pages: number;
+  clickPage: (currentPage: number) => void;
 }
 
-function Pagination({ pages, currentPage }: Page) {
+function Pagination({ currentPage, pages, clickPage }: Page) {
   return (
     <div className="pagination">
-      <div className="pagination-children">
-        {pages},{currentPage}
-      </div>
+      <ReactPaginate
+        className="page"
+        nextLabel=">"
+        onPageChange={() => clickPage(currentPage)}
+        pageRangeDisplayed={5}
+        marginPagesDisplayed={0}
+        pageCount={pages}
+        previousLabel="<"
+        activeLinkClassName="select"
+      />
     </div>
   );
 }

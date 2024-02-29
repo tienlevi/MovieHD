@@ -3,10 +3,25 @@
 .pagination {
   display: flex;
   justify-content: center;
-  margin: 0px 15px;
+  margin: 10px 0px;
 
-  .pagination-children {
-    background-color: $blue;
-    color: $white;
+  ul {
+    display: flex;
+    list-style: none;
+
+    li {
+      margin: 0px 10px;
+
+      a {
+        cursor: pointer;
+        padding: 10px;
+        background-color: $blue;
+        color: $white;
+      }
+
+      .select {
+        background-color: $red;
+      }
+    }
   }
 }
