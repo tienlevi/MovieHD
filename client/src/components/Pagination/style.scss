@@ -5,23 +5,15 @@
   justify-content: center;
   margin: 10px 0px;
 
-  ul {
-    display: flex;
-    list-style: none;
+  .pagination-children {
+    margin: 0px 10px;
+    padding: 10px;
+    cursor: pointer;
+    color: $white;
+    background-color: $blue;
+  }
 
-    li {
-      margin: 0px 10px;
-
-      a {
-        cursor: pointer;
-        padding: 10px;
-        background-color: $blue;
-        color: $white;
-      }
-
-      .select {
-        background-color: $red;
-      }
-    }
+  .pagination-children-active {
+    background-color: $red;
   }
 }

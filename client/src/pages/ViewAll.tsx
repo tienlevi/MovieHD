@@ -9,16 +9,17 @@ import Pagination from "../components/Pagination/Pagination";
 function ViewAll() {
   const { type } = useParams();
   const location = useLocation();
-  const searchParams = new URLSearchParams();
-  const getParams = new URLSearchParams(location.search).get("page");
   const [movies, setMovies] = useState<[]>([]);
   const [genres, setGenres] = useState<[]>([]);
-  const [page, setPage] = useState<number>(1);
+  const searchParams = new URLSearchParams();
+  const getParams = new URLSearchParams(location.search).get("page");
+  const params = Number(getParams);
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
-    console.log(getParams);
     const getData = async () => {
-      const response: any = await getTopRateMovie(Number(getParams));
+      const response: any = await getTopRateMovie(params || 1);
       setMovies(response.data.results);
     };
     getData();
@@ -35,7 +36,8 @@ function ViewAll() {
   const handleClickPage = (page: number) => {
     searchParams.set("page", page.toString());
     const url = `${location.pathname}?${searchParams}`;
-    console.log(url);
+    window.history.pushState(null, "", url);
+    window.location.reload();
   };
   return (
     <Title title="Top Rate Movie">
@@ -43,7 +45,7 @@ function ViewAll() {
       <div className="view-all" style={{ marginTop: 95 }}>
         <Movies movies={movies} genres={genres} />
       </div>
-      <Pagination currentPage={page} pages={20} clickPage={handleClickPage} />
+      <Pagination currentPage={params || 1} clickPage={handleClickPage} />
     </Title>
   );
 }
