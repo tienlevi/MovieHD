@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getGenre, getCountry } from "../../api/movie";
+import { getGenres, getCountry } from "../../api/movie";
 import { MovieCountry, MovieGenre } from "../../types";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import "./style.scss";
@@ -11,7 +11,7 @@ function Navbar() {
 
   useEffect(() => {
     const getData = async () => {
-      const response: any = await getGenre();
+      const response: any = await getGenres();
       setGenres(response.data.genres);
     };
     getData();

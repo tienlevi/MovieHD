@@ -6,10 +6,10 @@ export const ImageMovie = (image: string) => {
   return `${posterPath}/${image}`;
 };
 
-export const getTopRateMovie = async (page: number) => {
+export const getMovies = async (type: string, page: number) => {
   try {
     const response = dataUrl.get(
-      `/movie/top_rated?api_key=${ApiKey}&language=en-US&page=${page}`
+      `/movie/${type}?api_key=${ApiKey}&language=en-US&page=${page}`
     );
     return response;
   } catch (err) {
@@ -26,7 +26,7 @@ export const DetailMovie = async () => {
   }
 };
 
-export const getGenre = async () => {
+export const getGenres = async () => {
   try {
     const response = dataUrl.get(
       `/genre/movie/list?api_key=${ApiKey}&language=en-US`

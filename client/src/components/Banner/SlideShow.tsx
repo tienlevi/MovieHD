@@ -9,7 +9,7 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 import "swiper/css";
 import "swiper/css/pagination";
 import "./style.scss";
-import { ImageMovie, getTopRateMovie, getGenre } from "../../api/movie";
+import { ImageMovie, getMovies, getGenres } from "../../api/movie";
 import { MovieList, MovieGenre } from "../../types";
 
 function SlideShow() {
@@ -19,7 +19,7 @@ function SlideShow() {
   useEffect(() => {
     const getDataTopRateMovie = async () => {
       try {
-        const response: any = await getTopRateMovie(1);
+        const response: any = await getMovies("top_rated", 1);
         setTopRateMovie(response.data.results);
         console.log(response.data.results);
       } catch (error) {
@@ -30,7 +30,7 @@ function SlideShow() {
 
     const getDataGenre = async () => {
       try {
-        const response: any = await getGenre();
+        const response: any = await getGenres();
         setGenres(response.data.genres);
       } catch (error) {
         console.log(error);
