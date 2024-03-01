@@ -7,7 +7,7 @@ import Title from "../components/Title/Title";
 import Pagination from "../components/Pagination/Pagination";
 
 function ViewAll() {
-  const { type } = useParams();
+  const { type }: any = useParams();
   const location = useLocation();
   const [movies, setMovies] = useState<[]>([]);
   const [genres, setGenres] = useState<[]>([]);
@@ -40,7 +40,7 @@ function ViewAll() {
     window.location.reload();
   };
   return (
-    <Title title={type as string}>
+    <Title title={`${type[0]?.toUpperCase() + type?.substring(1)} Movie`}>
       <Header />
       <div className="view-all" style={{ marginTop: 95 }}>
         <Movies movies={movies} genres={genres} />

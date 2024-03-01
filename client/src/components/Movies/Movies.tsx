@@ -19,8 +19,8 @@ function Movies({
     <>
       <Section className="movie">
         <div className="movie-title-view">
-          <h1 className="movie-title">Top rate</h1>
-          <Link to={`/view-all/top-rate`} className="movie-view-more">
+          <h1 className="movie-title">Trending</h1>
+          <Link to={`/view-all/trending`} className="movie-view-more">
             <p>View All</p>
             <KeyboardDoubleArrowRightIcon
               style={{ marginLeft: 5, marginBottom: 3 }}
