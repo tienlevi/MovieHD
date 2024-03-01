@@ -64,7 +64,7 @@ export interface MovieDetail {
     {
       iso_3166_1: string;
       name: string;
-    }
+    },
   ];
   release_date: string;
   revenue: number;
@@ -89,7 +89,7 @@ export interface MovieDetail {
         official: boolean;
         published_at: string;
         id: string;
-      }
+      },
     ];
   };
 }

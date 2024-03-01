@@ -40,7 +40,7 @@ function ViewAll() {
     window.location.reload();
   };
   return (
-    <Title title="Top Rate Movie">
+    <Title title={type as string}>
       <Header />
       <div className="view-all" style={{ marginTop: 95 }}>
         <Movies movies={movies} genres={genres} />

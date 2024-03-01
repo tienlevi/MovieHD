@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MovieList, MovieGenre } from "../../types";
 import Section from "../Section/Section";
@@ -13,6 +14,7 @@ function Movies({
   movies: MovieList[];
   genres: MovieGenre[];
 }) {
+  const [products, setProduct] = useState<any>([]);
   return (
     <>
       <Section className="movie">
@@ -26,7 +28,7 @@ function Movies({
           </Link>
         </div>
         <div className="movie-content">
-          {movies.map((movie) => (
+          {movies.map((movie: MovieList) => (
             <div className="movie-content-children" key={movie?.id}>
               <Link to="/" className="movie-content-img">
                 <img src={ImageMovie(movie.poster_path)} alt="" />
@@ -43,11 +45,12 @@ function Movies({
                 <h2>{movie.title}</h2>
               </Link>
               <p className="movie-content-genre">
-                {genres &&
-                  genres
-                    .filter((genre) => movie.genre_ids.includes(genre.id))
-                    .map((genre) => genre.name)
-                    .join(", ")}
+                {genres
+                  .filter((genre: MovieGenre) =>
+                    movie.genre_ids.includes(genre.id)
+                  )
+                  .map((genre: MovieGenre) => genre.name)
+                  .join(", ")}
               </p>
             </div>
           ))}

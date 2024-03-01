@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getGenre, getCountry } from "../../api/movie";
 import { MovieCountry, MovieGenre } from "../../types";
@@ -43,21 +43,21 @@ function Navbar() {
         </div>
         <ul className="menu-children">
           <div className="menu-children-inside">
-            {genres.slice(0, 6).map((genre, index) => (
+            {genres.slice(0, 6).map((genre: MovieGenre, index: number) => (
               <li key={index}>
                 <Link to="/">{genre.name}</Link>
               </li>
             ))}
           </div>
           <div className="menu-children-inside">
-            {genres.slice(7, 13).map((genre, index) => (
+            {genres.slice(7, 13).map((genre: MovieGenre, index: number) => (
               <li key={index}>
                 <Link to="/">{genre.name}</Link>
               </li>
             ))}
           </div>
           <div className="menu-children-inside">
-            {genres.slice(14).map((genre, index) => (
+            {genres.slice(14).map((genre: MovieGenre, index: number) => (
               <li key={index}>
                 <Link to="/">{genre.name}</Link>
               </li>
