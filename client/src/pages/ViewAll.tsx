@@ -1,4 +1,4 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import Movies from "../components/Movies/Movies";
 import Header from "../components/Header/Header";
 import Title from "../components/Title/Title";
@@ -6,15 +6,13 @@ import Pagination from "../components/Pagination/Pagination";
 
 function ViewAll() {
   const { type }: any = useParams();
-  const location = useLocation();
-  const searchParams = new URLSearchParams();
-  const getParams = new URLSearchParams(location.search).get("page");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const getParams = searchParams.get("page");
   const params = Number(getParams);
 
   const handleClickPage = (page: number) => {
     searchParams.set("page", page.toString());
-    const url = `${location.pathname}?${searchParams}`;
-    window.history.pushState(null, "", url);
+    setSearchParams(searchParams);
     window.location.reload();
   };
   const checkTypeApi = type === "popular" ? "top_rated" : "now_playing";
