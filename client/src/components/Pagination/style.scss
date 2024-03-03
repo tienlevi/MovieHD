@@ -6,15 +6,21 @@
   margin: 10px 0px;
 
   .pagination-children {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0px 10px;
-    padding: 10px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
-    color: $white;
-    background-color: $blue;
+    color: $bodyTextColor;
+    background-color: $themeBg;
+    border-radius: 12px;
   }
 
   .pagination-children-active {
-    background-color: $red;
+    color: $white;
+    background-color: $blue;
   }
 
   .pagination-arrow {
@@ -22,8 +28,11 @@
     align-items: center;
     justify-content: center;
     margin: 0px 10px;
+    width: 40px;
+    height: 40px;
+    color: $bodyTextColor;
+    background-color: $themeBg;
+    border-radius: 12px;
     cursor: pointer;
-    color: $white;
-    background-color: $blue;
   }
 }

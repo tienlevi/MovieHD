@@ -2,6 +2,7 @@ import Movies from "../components/Movies/Movies";
 import Header from "../components/Header/Header";
 import SlideShow from "../components/Banner/SlideShow";
 import Title from "../components/Title/Title";
+import Footer from "../components/Footer/Footer";
 
 function Home() {
   return (
@@ -15,6 +16,7 @@ function Home() {
         typeApi="top_rated"
         page={1}
       />
+      <Footer />
     </Title>
   );
 }
