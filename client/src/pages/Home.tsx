@@ -3,6 +3,7 @@ import Header from "../components/Header/Header";
 import SlideShow from "../components/Banner/SlideShow";
 import Title from "../components/Title/Title";
 import Footer from "../components/Footer/Footer";
+import Partner from "../components/Partner/Partner";
 
 function Home() {
   return (
@@ -16,6 +17,7 @@ function Home() {
         typeApi="top_rated"
         page={1}
       />
+      <Partner />
       <Footer />
     </Title>
   );

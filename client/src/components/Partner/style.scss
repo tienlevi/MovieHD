@@ -1,0 +1,45 @@
+@import "../../styles/theme.scss";
+
+.partner {
+  background-color: $themeBg;
+  padding: 60px 0px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+
+  .partner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 35px;
+    color: $headingColor;
+    margin-top: 15px;
+  }
+
+  h2 {
+    font-size: 18px;
+    color: $blue;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  span {
+    color: $blue;
+  }
+
+  .partner-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+
+    .partner-wrapper-children {
+      margin: 0px 18px;
+      padding: 15px;
+      border: 1px solid rgba(117, 127, 149, 0.25);
+      border-radius: 15px;
+    }
+  }
+}
