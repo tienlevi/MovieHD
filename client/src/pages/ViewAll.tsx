@@ -29,7 +29,11 @@ function ViewAll() {
           page={params || 1}
         />
       </div>
-      <Pagination currentPage={params || 1} clickPage={handleClickPage} />
+      <Pagination
+        currentPage={params || 1}
+        maxPageLimit={100}
+        clickPage={handleClickPage}
+      />
     </Title>
   );
 }
