@@ -21,6 +21,7 @@ function Navbar() {
     const getData = async () => {
       const response: any = await getCountry();
       setCountry(response.data);
+      console.log(response);
     };
     getData();
   }, []);
@@ -31,7 +32,7 @@ function Navbar() {
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/">Country</Link>
+        <Link to="/country">Country</Link>
       </li>
       <li>
         <Link to="/">TV Shows</Link>

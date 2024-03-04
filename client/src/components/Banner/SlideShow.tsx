@@ -21,7 +21,6 @@ function SlideShow() {
       try {
         const response: any = await getMovies("top_rated", 1);
         setTopRateMovie(response.data.results);
-        console.log(response.data.results);
       } catch (error) {
         console.log(error);
       }

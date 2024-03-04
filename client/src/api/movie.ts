@@ -48,6 +48,17 @@ export const getCountry = async () => {
   }
 };
 
+export const getCountryFilter = async (country: string) => {
+  try {
+    const response = dataUrl.get(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&with_origin_country=${country}`
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getPopularMovies = async () => {
   try {
     const response = dataUrl.get(
