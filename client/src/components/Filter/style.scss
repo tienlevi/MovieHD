@@ -1,0 +1,77 @@
+@import "../../styles/theme.scss";
+
+.select-type-movie {
+  position: relative;
+  margin-top: 20px;
+  width: 25%;
+
+  .movie-selected {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 13px;
+    border: 1px solid $blue;
+    color: $bodyTextColor;
+    background-color: $themeBg;
+    border: 1px solid $borderInfor;
+    border-radius: 10px;
+    height: 50px;
+    cursor: pointer;
+
+    .movie-selected-icon {
+      transition: 0.3s;
+      margin-right: 13px;
+    }
+
+    .movie-selected-icon-active {
+      transform: rotate(180deg);
+      margin-top: -5px;
+    }
+  }
+
+  .movie-select {
+    position: absolute;
+    z-index: 10;
+    margin-top: 10px;
+    padding: 10px;
+    height: 200px;
+    border: 1px solid $blue;
+    color: $bodyTextColor;
+    background-color: $themeBg;
+    border: 1px solid $borderInfor;
+    border-radius: 10px;
+    opacity: 0;
+    transform: scaleY(0);
+    visibility: visible;
+    overflow-y: scroll;
+    transition: 0.3s;
+    transform-origin: top;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+      background-color: $white;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $blue;
+    }
+
+    p {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 10px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(41, 182, 232, 0.1);
+        color: $blue;
+      }
+    }
+  }
+
+  .movie-select-active {
+    opacity: 1;
+    transform: scaleY(1);
+    visibility: visible;
+  }
+}

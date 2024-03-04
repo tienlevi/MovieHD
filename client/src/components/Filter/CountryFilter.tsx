@@ -1,19 +1,28 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
-import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import Section from "../Section/Section";
-import { getCountryFilter, getGenres, ImageMovie } from "../../api/movie";
-import { MovieGenre } from "../../types";
+import {
+  getCountryFilter,
+  getCountry,
+  getGenres,
+  ImageMovie,
+} from "../../api/movie";
+import { MovieGenre, MovieCountry, MovieList } from "../../types";
+import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
+import "./style.scss";
 
 function CountryFilter({ name }: { name: string }) {
-  const [country, setCountry] = useState([]);
+  const [countryFilter, setCountryFilter] = useState<MovieList[]>([]);
+  const [countries, setCountries] = useState<MovieCountry[]>([]);
   const [genres, setGenres] = useState<MovieGenre[]>([]);
+  const [toggle, setToggle] = useState<boolean>(false);
 
   useEffect(() => {
     const getData = async () => {
       const response: any = await getCountryFilter("IT");
-      setCountry(response.data.results);
+      setCountryFilter(response.data.results);
+      console.log(response);
     };
     getData();
   }, []);
@@ -25,11 +34,42 @@ function CountryFilter({ name }: { name: string }) {
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response: any = await getCountry();
+      setCountries(response.data);
+    };
+    getData();
+  }, []);
+
+  const handleToggle = () => {
+    setToggle(!toggle);
+  };
+
   return (
-    <div>
+    <>
       <Section className="movie">
+        <div className="select-type-movie">
+          <div className="movie-selected" onClick={handleToggle}>
+            Select Type
+            <div
+              className={`movie-selected-icon${toggle ? " movie-selected-icon-active" : ""}`}
+            >
+              <KeyboardArrowDownRoundedIcon />
+            </div>
+          </div>
+
+          <div
+            className={`movie-select${toggle ? " movie-select-active" : ""}`}
+          >
+            {countries.map((country: MovieCountry) => (
+              <p>{country.english_name}</p>
+            ))}
+          </div>
+        </div>
         <div className="movie-content">
-          {country.map((movie: any) => (
+          {countryFilter.map((movie: MovieList) => (
             <div className="movie-content-children" key={movie?.id}>
               <Link to="/" className="movie-content-img">
                 <img src={ImageMovie(movie.poster_path)} alt="" />
@@ -55,7 +95,7 @@ function CountryFilter({ name }: { name: string }) {
           ))}
         </div>
       </Section>
-    </div>
+    </>
   );
 }
 
