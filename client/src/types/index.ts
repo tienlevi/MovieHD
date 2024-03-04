@@ -21,8 +21,9 @@ export interface MovieGenre {
 }
 
 export interface MovieCountry {
-  id: number;
-  name: string;
+  iso_3166_1: string;
+  english_name: string;
+  native_name: string;
 }
 
 export interface MovieCompanies {

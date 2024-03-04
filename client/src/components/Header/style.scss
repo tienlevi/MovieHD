@@ -20,26 +20,31 @@ header {
       display: flex;
       align-items: center;
 
-      a {
+      .menu-parent {
         color: $white;
         font-size: 17px;
         margin: 0px 17px;
-        padding: 26px 0px;
+        padding: 30px 0px;
         font-weight: 500;
       }
 
       .header-arrow-down {
         color: $white;
         margin-left: -15px;
+        margin-top: 5px;
         cursor: pointer;
       }
 
       .menu-children {
-        display: flex;
+        display: grid;
         position: absolute;
         background-color: $themeBg;
         border-top: 3px solid $blue;
-        top: 105%;
+        row-gap: 10px;
+        column-gap: 15px;
+        grid-template-columns: auto auto auto auto;
+        width: max-content;
+        top: 100%;
         padding: 10px 0px;
         opacity: 0;
         transform-origin: top;
@@ -47,15 +52,28 @@ header {
         transition: 0.3s;
 
         li {
-          font-size: 16px;
+          font-size: 14px;
           font-weight: 400;
           color: $white;
         }
 
         .menu-children-inside {
-          li {
-            flex: 0 0 auto;
-            width: 150px;
+          flex: 0 0 auto;
+          width: 100%;
+
+          a {
+            color: $white;
+            font-size: 14px;
+            padding: 10px 20px;
+            font-weight: 500;
+
+            &:hover {
+              color: $blue;
+              transition:
+                color 0.15s ease-in-out,
+                background-color 0.15s ease-in-out,
+                border-color 0.15s ease-in-out;
+            }
           }
         }
       }
@@ -63,14 +81,18 @@ header {
       &:hover {
         > a {
           color: $blue;
-          transition: color 0.15s ease-in-out,
-            background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+          transition:
+            color 0.15s ease-in-out,
+            background-color 0.15s ease-in-out,
+            border-color 0.15s ease-in-out;
         }
 
         > .header-arrow-down {
           color: $blue;
-          transition: color 0.15s ease-in-out,
-            background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+          transition:
+            color 0.15s ease-in-out,
+            background-color 0.15s ease-in-out,
+            border-color 0.15s ease-in-out;
         }
 
         > .menu-children {
