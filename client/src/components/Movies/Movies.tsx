@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getMovies, getGenres } from "../../api/movie";
+import { getMovies, getGenres, ImageMovie } from "../../api/movie";
 import { MovieList, MovieGenre } from "../../types";
 import Section from "../Section/Section";
-import { ImageMovie } from "../../api/movie";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import "./style.scss";
