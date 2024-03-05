@@ -11,21 +11,27 @@ import {
 import { MovieGenre, MovieCountry, MovieList } from "../../types";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import "./style.scss";
+import "../Movies/style.scss";
 
 interface CountryFilterProps {
+  id: string;
   name: string;
-  handleSelect: (name: string) => void;
+  handleSelect: (id: string, name: string) => void;
 }
 
-function CountryFilter({ name, handleSelect }: CountryFilterProps) {
+function CountryFilter({ id, name, handleSelect }: CountryFilterProps) {
   const [countryFilter, setCountryFilter] = useState<MovieList[]>([]);
   const [countries, setCountries] = useState<MovieCountry[]>([]);
   const [genres, setGenres] = useState<MovieGenre[]>([]);
   const [toggle, setToggle] = useState<boolean>(false);
 
+  const checkSelect = countries.find(
+    (item: MovieCountry) => item.english_name === name
+  );
+
   useEffect(() => {
     const getData = async () => {
-      const response: any = await getCountryFilter("IT");
+      const response: any = await getCountryFilter(id || "US");
       setCountryFilter(response.data.results);
     };
     getData();
@@ -51,19 +57,13 @@ function CountryFilter({ name, handleSelect }: CountryFilterProps) {
     setToggle(!toggle);
   };
 
-  const checkSelect = countries.filter(
-    (item: MovieCountry) => item.iso_3166_1 === name
-  );
-
-  // console.log(checkSelect);
-
   return (
     <>
       <Section className="movie">
         <div className="select-type-movie">
           <div className="movie-selected" onClick={handleToggle}>
-            {checkSelect && checkSelect.map((item) => item.english_name)}
-            {checkSelect.length === 0 && "Select Country"}
+            {checkSelect && checkSelect.english_name}
+            {!checkSelect && "Select Country"}
             <div
               className={`movie-selected-icon${toggle ? " movie-selected-icon-active" : ""}`}
             >
@@ -78,7 +78,9 @@ function CountryFilter({ name, handleSelect }: CountryFilterProps) {
               <p
                 key={index}
                 className="movie-select-href"
-                onClick={() => handleSelect(country.iso_3166_1)}
+                onClick={() =>
+                  handleSelect(country.iso_3166_1, country.english_name)
+                }
               >
                 {country.english_name}
               </p>

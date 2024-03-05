@@ -1,26 +1,32 @@
+import { useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Banner from "../components/Banner/Banner";
 import CountryFilter from "../components/Filter/CountryFilter";
 import Footer from "../components/Footer/Footer";
 import Title from "../components/Title/Title";
-import Pagination from "../components/Pagination/Pagination";
 
 function Country() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const params = searchParams.get("name");
+  const paramsName: any = searchParams.get("name");
+  const paramsId: any = searchParams.get("id");
 
-  const handleSelect = (name: string) => {
+  const handleSelect = useCallback((id: string, name: string) => {
     searchParams.set("name", name);
+    searchParams.set("id", id);
     setSearchParams(searchParams);
     window.location.reload();
-  };
+  }, []);
 
   return (
-    <Title title="">
+    <Title title={`${paramsName ? paramsName : "Country"} Movie`}>
       <Header />
-      <Banner text={params as string} />
-      <CountryFilter name={params as string} handleSelect={handleSelect} />
+      <Banner text={paramsName} />
+      <CountryFilter
+        id={paramsId}
+        name={paramsName}
+        handleSelect={handleSelect}
+      />
       <Footer />
     </Title>
   );

@@ -74,6 +74,11 @@
         overflow: hidden;
         border-radius: 15px;
 
+        img {
+          height: 350px;
+          object-fit: cover;
+        }
+
         &:hover {
           > img {
             transform: scale(1.2);
