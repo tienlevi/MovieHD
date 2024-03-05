@@ -12,7 +12,12 @@ import { MovieGenre, MovieCountry, MovieList } from "../../types";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import "./style.scss";
 
-function CountryFilter({ name }: { name: string }) {
+interface CountryFilterProps {
+  name: string;
+  handleSelect: (name: string) => void;
+}
+
+function CountryFilter({ name, handleSelect }: CountryFilterProps) {
   const [countryFilter, setCountryFilter] = useState<MovieList[]>([]);
   const [countries, setCountries] = useState<MovieCountry[]>([]);
   const [genres, setGenres] = useState<MovieGenre[]>([]);
@@ -22,7 +27,6 @@ function CountryFilter({ name }: { name: string }) {
     const getData = async () => {
       const response: any = await getCountryFilter("IT");
       setCountryFilter(response.data.results);
-      console.log(response);
     };
     getData();
   }, []);
@@ -47,12 +51,19 @@ function CountryFilter({ name }: { name: string }) {
     setToggle(!toggle);
   };
 
+  const checkSelect = countries.filter(
+    (item: MovieCountry) => item.iso_3166_1 === name
+  );
+
+  // console.log(checkSelect);
+
   return (
     <>
       <Section className="movie">
         <div className="select-type-movie">
           <div className="movie-selected" onClick={handleToggle}>
-            Select Type
+            {checkSelect && checkSelect.map((item) => item.english_name)}
+            {checkSelect.length === 0 && "Select Country"}
             <div
               className={`movie-selected-icon${toggle ? " movie-selected-icon-active" : ""}`}
             >
@@ -63,8 +74,14 @@ function CountryFilter({ name }: { name: string }) {
           <div
             className={`movie-select${toggle ? " movie-select-active" : ""}`}
           >
-            {countries.map((country: MovieCountry) => (
-              <p>{country.english_name}</p>
+            {countries.map((country: MovieCountry, index) => (
+              <p
+                key={index}
+                className="movie-select-href"
+                onClick={() => handleSelect(country.iso_3166_1)}
+              >
+                {country.english_name}
+              </p>
             ))}
           </div>
         </div>
