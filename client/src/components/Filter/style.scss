@@ -34,6 +34,7 @@
     position: absolute;
     z-index: 10;
     margin-top: 10px;
+    margin-left: 10px;
     padding: 10px;
     height: 200px;
     border: 1px solid $blue;
@@ -50,6 +51,7 @@
 
     &::-webkit-scrollbar {
       width: 5px;
+      overflow: hidden;
       background-color: $white;
     }
 

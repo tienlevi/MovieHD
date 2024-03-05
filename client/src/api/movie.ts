@@ -59,10 +59,10 @@ export const getCountryFilter = async (country: string) => {
   }
 };
 
-export const getMovieByGenre = async () => {
+export const getMovieByGenre = async (id: number, page: number) => {
   try {
     const response = dataUrl.get(
-      `/discover/movie?api_key=${ApiKey}&with_genres=10749`
+      `/discover/movie?api_key=${ApiKey}&with_genres=${id}&page=${page}`
     );
     return response;
   } catch (err) {

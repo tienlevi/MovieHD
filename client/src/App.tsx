@@ -11,7 +11,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/detail" element={<Detail />} />
       <Route path="/country" element={<Country />} />
-      <Route path="/genre" element={<Genre />} />
+      <Route path="/genre/:id" element={<Genre />} />
       <Route path="/view-all/:type" element={<ViewAll />} />
     </Routes>
   );

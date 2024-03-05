@@ -7,15 +7,19 @@ import Section from "../Section/Section";
 import "./style.scss";
 import "../Movies/style.scss";
 
-function GenreFilter() {
+interface GenreFilterProps {
+  id: number;
+  page: number;
+}
+
+function GenreFilter({ id, page }: GenreFilterProps) {
   const [movies, setMovies] = useState<MovieList[]>([]);
   const [genres, setGenres] = useState<MovieGenre[]>([]);
 
   useEffect(() => {
     const getData = async () => {
-      const response: any = await getMovieByGenre();
+      const response: any = await getMovieByGenre(id, page);
       setMovies(response.data.results);
-      console.log(response.data.results);
     };
     getData();
   }, []);
@@ -24,7 +28,6 @@ function GenreFilter() {
     const getData = async () => {
       const response: any = await getGenres();
       setGenres(response.data.genres);
-      console.log(response.data);
     };
     getData();
   }, []);

@@ -39,28 +39,28 @@ function Navbar() {
           <div className="menu-children-inside">
             {genres.slice(0, 5).map((genre: MovieGenre, index: number) => (
               <li key={index}>
-                <Link to="/">{genre.name}</Link>
+                <Link to={`/genre/${genre.id}`}>{genre.name}</Link>
               </li>
             ))}
           </div>
           <div className="menu-children-inside">
             {genres.slice(5, 10).map((genre: MovieGenre, index: number) => (
               <li key={index}>
-                <Link to="/">{genre.name}</Link>
+                <Link to={`/genre/${genre.id}`}>{genre.name}</Link>
               </li>
             ))}
           </div>
           <div className="menu-children-inside">
             {genres.slice(10, 15).map((genre: MovieGenre, index: number) => (
               <li key={index}>
-                <Link to="/">{genre.name}</Link>
+                <Link to={`/genre/${genre.id}`}>{genre.name}</Link>
               </li>
             ))}
           </div>
           <div className="menu-children-inside">
             {genres.slice(16).map((genre: MovieGenre, index: number) => (
               <li key={index}>
-                <Link to="/">{genre.name}</Link>
+                <Link to={`/genre/${genre.id}`}>{genre.name}</Link>
               </li>
             ))}
           </div>
