@@ -16,6 +16,11 @@ function Header() {
     setToggle(!toggle);
   };
 
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    window.location.href = `/search?name=${search}`;
+  };
+
   return (
     <header className="header">
       <div>
@@ -33,16 +38,19 @@ function Header() {
           <LoginIcon />
           <p>Sign In</p>
         </Link>
-        <form className={`search-bar${toggle ? " search-bar-active" : ""}`}>
+        <form
+          onSubmit={handleSearch}
+          className={`search-bar${toggle ? " search-bar-active" : ""}`}
+        >
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search movie..."
           />
-          <div className="search-bar-icon">
+          <button type="submit" className="search-bar-icon">
             <SearchIcon />
-          </div>
+          </button>
         </form>
       </div>
     </header>

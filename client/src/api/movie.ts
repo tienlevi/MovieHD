@@ -70,6 +70,17 @@ export const getMovieByGenre = async (id: number, page: number) => {
   }
 };
 
+export const searchMovie = (name: string, page: number) => {
+  try {
+    const response = dataUrl.get(
+      `https://api.themoviedb.org/3/search/movie?query=${name}&api_key=${ApiKey}&page=${page}`
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getPopularMovies = async () => {
   try {
     const response = dataUrl.get(

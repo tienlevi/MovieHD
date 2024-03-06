@@ -1,28 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getMovieByGenre, getGenres, ImageMovie } from "../../api/movie";
-import { MovieList, MovieGenre } from "../../types";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import Section from "../Section/Section";
+import { searchMovie, getGenres, ImageMovie } from "../../api/movie";
+import { MovieList, MovieGenre } from "../../types";
 import "./style.scss";
 import "../Movies/style.scss";
 
-interface GenreFilterProps {
-  id: number;
+interface SearchProps {
+  name: string;
   page: number;
 }
 
-function GenreFilter({ id, page }: GenreFilterProps) {
-  const [movies, setMovies] = useState<MovieList[]>([]);
+function SearchFilter({ name, page }: SearchProps) {
+  const [searchFilter, setSearchFilter] = useState<MovieList[]>([]);
   const [genres, setGenres] = useState<MovieGenre[]>([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      const response: any = await getMovieByGenre(id, page);
-      setMovies(response.data.results);
-    };
-    getData();
-  }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -31,11 +23,23 @@ function GenreFilter({ id, page }: GenreFilterProps) {
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response: any = await searchMovie(name, page);
+      setSearchFilter(response.data.results);
+    };
+    getData();
+  }, []);
+
   return (
     <>
       <Section className="movie">
+        <div className="search-movie">
+          <h1>Search results for "{name}"</h1>
+        </div>
         <div className="movie-content">
-          {movies.map((movie: any) => (
+          {searchFilter.map((movie: MovieList) => (
             <div className="movie-content-children" key={movie?.id}>
               <Link to="/" className="movie-content-img">
                 <img src={ImageMovie(movie.poster_path)} alt="" />
@@ -53,8 +57,8 @@ function GenreFilter({ id, page }: GenreFilterProps) {
               </Link>
               <p className="movie-content-genre">
                 {genres
-                  .filter((genre: any) => movie.genre_ids.includes(genre.id))
-                  .map((genre: any) => genre.name)
+                  .filter((genre) => movie.genre_ids.includes(genre.id))
+                  .map((genre) => genre.name)
                   .join(", ")}
               </p>
             </div>
@@ -65,4 +69,4 @@ function GenreFilter({ id, page }: GenreFilterProps) {
   );
 }
 
-export default GenreFilter;
+export default SearchFilter;

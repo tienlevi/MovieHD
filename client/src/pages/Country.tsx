@@ -8,8 +8,8 @@ import Title from "../components/Title/Title";
 
 function Country() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const paramsName: any = searchParams.get("name");
-  const paramsId: any = searchParams.get("id");
+  const paramName: any = searchParams.get("name");
+  const paramId: any = searchParams.get("id");
 
   const handleSelect = useCallback((id: string, name: string) => {
     searchParams.set("name", name);
@@ -19,12 +19,12 @@ function Country() {
   }, []);
 
   return (
-    <Title title={`${paramsName ? paramsName : "Country"} Movie`}>
+    <Title title={`${paramName ? paramName : "Country"} Movie`}>
       <Header />
-      <Banner text={paramsName} />
+      <Banner text={paramName} />
       <CountryFilter
-        id={paramsId}
-        name={paramsName}
+        id={paramId}
+        name={paramName}
         handleSelect={handleSelect}
       />
       <Footer />
