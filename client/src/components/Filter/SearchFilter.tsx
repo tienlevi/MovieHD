@@ -2,32 +2,23 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import Section from "../Section/Section";
-import { searchMovie, getGenres, ImageMovie } from "../../api/movie";
+import { getGenres, ImageMovie } from "../../api/movie";
 import { MovieList, MovieGenre } from "../../types";
 import "./style.scss";
 import "../Movies/style.scss";
 
 interface SearchProps {
+  movies: MovieList[];
   name: string;
-  page: number;
 }
 
-function SearchFilter({ name, page }: SearchProps) {
-  const [searchFilter, setSearchFilter] = useState<MovieList[]>([]);
+function SearchFilter({ movies, name }: SearchProps) {
   const [genres, setGenres] = useState<MovieGenre[]>([]);
 
   useEffect(() => {
     const getData = async () => {
       const response: any = await getGenres();
       setGenres(response.data.genres);
-    };
-    getData();
-  }, []);
-
-  useEffect(() => {
-    const getData = async () => {
-      const response: any = await searchMovie(name, page);
-      setSearchFilter(response.data.results);
     };
     getData();
   }, []);
@@ -39,7 +30,7 @@ function SearchFilter({ name, page }: SearchProps) {
           <h1>Search results for "{name}"</h1>
         </div>
         <div className="movie-content">
-          {searchFilter.map((movie: MovieList) => (
+          {movies.map((movie: MovieList) => (
             <div className="movie-content-children" key={movie?.id}>
               <Link to="/" className="movie-content-img">
                 <img src={ImageMovie(movie.poster_path)} alt="" />

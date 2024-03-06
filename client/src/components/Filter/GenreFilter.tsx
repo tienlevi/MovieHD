@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getMovieByGenre, getGenres, ImageMovie } from "../../api/movie";
+import { getGenres, ImageMovie } from "../../api/movie";
 import { MovieList, MovieGenre } from "../../types";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import Section from "../Section/Section";
@@ -8,21 +8,11 @@ import "./style.scss";
 import "../Movies/style.scss";
 
 interface GenreFilterProps {
-  id: number;
-  page: number;
+  movies: MovieList[];
 }
 
-function GenreFilter({ id, page }: GenreFilterProps) {
-  const [movies, setMovies] = useState<MovieList[]>([]);
+function GenreFilter({ movies }: GenreFilterProps) {
   const [genres, setGenres] = useState<MovieGenre[]>([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      const response: any = await getMovieByGenre(id, page);
-      setMovies(response.data.results);
-    };
-    getData();
-  }, []);
 
   useEffect(() => {
     const getData = async () => {

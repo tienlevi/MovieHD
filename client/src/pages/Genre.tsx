@@ -7,12 +7,14 @@ import GenreFilter from "../components/Filter/GenreFilter";
 import Title from "../components/Title/Title";
 import Banner from "../components/Banner/Banner";
 import Pagination from "../components/Pagination/Pagination";
-import { getGenres } from "../api/movie";
+import { getMovieByGenre, getGenres } from "../api/movie";
 import { MovieGenre } from "../types";
 
 function Genre() {
   const [loading, setLoading] = useState<boolean>(true);
   const [genre, setGenre] = useState<MovieGenre[]>([]);
+  const [movieByGenre, setMovieByGenre] = useState([]);
+  const [pages, setPages] = useState<any>();
   const { id }: any = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const getParams = searchParams.get("page");
@@ -31,6 +33,16 @@ function Genre() {
     left: "50%",
     transform: "translate(-50%, -50%)",
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      const response: any = await getMovieByGenre(id, params || 1);
+      setMovieByGenre(response.data.results);
+      setPages(response.data.total_pages);
+      console.log(response.data);
+    };
+    getData();
+  }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -60,10 +72,10 @@ function Genre() {
         <>
           <Header />
           <Banner text={genreName?.name} />
-          <GenreFilter id={id} page={params || 1} />
+          <GenreFilter movies={movieByGenre} />
           <Pagination
             currentPage={params || 1}
-            maxPageLimit={100}
+            maxPageLimit={pages}
             clickPage={handleClickPage}
           />
           <Footer />

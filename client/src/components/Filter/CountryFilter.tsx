@@ -2,25 +2,19 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import Section from "../Section/Section";
-import {
-  getCountryFilter,
-  getCountry,
-  getGenres,
-  ImageMovie,
-} from "../../api/movie";
+import { getCountry, getGenres, ImageMovie } from "../../api/movie";
 import { MovieGenre, MovieCountry, MovieList } from "../../types";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import "./style.scss";
 import "../Movies/style.scss";
 
 interface CountryFilterProps {
-  id: string;
+  movies: MovieList[];
   name: string;
   handleSelect: (id: string, name: string) => void;
 }
 
-function CountryFilter({ id, name, handleSelect }: CountryFilterProps) {
-  const [countryFilter, setCountryFilter] = useState<MovieList[]>([]);
+function CountryFilter({ movies, name, handleSelect }: CountryFilterProps) {
   const [countries, setCountries] = useState<MovieCountry[]>([]);
   const [genres, setGenres] = useState<MovieGenre[]>([]);
   const [toggle, setToggle] = useState<boolean>(false);
@@ -28,14 +22,6 @@ function CountryFilter({ id, name, handleSelect }: CountryFilterProps) {
   const checkSelect = countries.find(
     (item: MovieCountry) => item.english_name === name
   );
-
-  useEffect(() => {
-    const getData = async () => {
-      const response: any = await getCountryFilter(id || "US");
-      setCountryFilter(response.data.results);
-    };
-    getData();
-  }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -88,7 +74,7 @@ function CountryFilter({ id, name, handleSelect }: CountryFilterProps) {
           </div>
         </div>
         <div className="movie-content">
-          {countryFilter.map((movie: MovieList) => (
+          {movies.map((movie: MovieList) => (
             <div className="movie-content-children" key={movie?.id}>
               <Link to="/" className="movie-content-img">
                 <img src={ImageMovie(movie.poster_path)} alt="" />
