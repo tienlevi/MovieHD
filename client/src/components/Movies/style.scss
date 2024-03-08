@@ -186,3 +186,55 @@
   margin-top: 100px;
   margin-bottom: 20px;
 }
+
+.container-detail {
+  background-color: $themeBg;
+  margin-top: 30px;
+  padding: 30px;
+
+  .movie-detail {
+    display: flex;
+
+    .movie-detail-img img {
+      width: 200px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .movie-detail-text {
+      width: 65%;
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+    }
+
+    .movie-detail-title {
+      margin-bottom: 20px;
+
+      h1 {
+        color: $white;
+        font-size: 22px;
+      }
+    }
+
+    .movie-detail-description {
+      color: $bodyTextColor;
+      line-height: 25px;
+    }
+
+    .movie-detail-info {
+      color: $white;
+      font-weight: 600;
+      margin-top: 12px;
+
+      p {
+        padding: 6px 0px;
+      }
+
+      span {
+        font-weight: 500;
+        color: $blue;
+      }
+    }
+  }
+}
