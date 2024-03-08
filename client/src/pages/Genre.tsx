@@ -39,7 +39,6 @@ function Genre() {
       const response: any = await getMovieByGenre(id, params || 1);
       setMovieByGenre(response.data.results);
       setPages(response.data.total_pages);
-      console.log(response.data);
     };
     getData();
   }, []);

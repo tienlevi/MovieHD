@@ -49,7 +49,7 @@ function Movies({ type, typeHref, typeApi, page }: MoviesProps) {
         <div className="movie-content">
           {movies.map((movie) => (
             <div className="movie-content-children" key={movie?.id}>
-              <Link to="/" className="movie-content-img">
+              <Link to={`/detail/${movie?.id}`} className="movie-content-img">
                 <img src={ImageMovie(movie.poster_path)} alt="" />
                 <div className="movie-content-play-icon">
                   <PlayArrowRoundedIcon
@@ -60,7 +60,11 @@ function Movies({ type, typeHref, typeApi, page }: MoviesProps) {
                   {movie.original_language}
                 </div>
               </Link>
-              <Link to="/" key={movie?.id} className="movie-content-title">
+              <Link
+                to={`/detail/${movie?.id}`}
+                key={movie?.id}
+                className="movie-content-title"
+              >
                 <h2>{movie.title}</h2>
               </Link>
               <p className="movie-content-genre">
