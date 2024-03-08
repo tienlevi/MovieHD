@@ -1,28 +1,30 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { DetailMovie } from "../api/movie";
+import { MovieId } from "../types";
+import MovieDetail from "../components/Movies/MovieDetail";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import Title from "../components/Title/Title";
+import Embed from "../components/Movies/Embed";
 
 function Detail() {
-  const [detail, setDetail] = useState<{}>({});
+  const { id }: any = useParams();
+  const [detail, setDetail] = useState<MovieId>();
 
   useEffect(() => {
-    const API = async () => {
+    const getData = async () => {
       const response: any = await DetailMovie();
-      console.log(response);
       setDetail(response.data);
+      console.log(detail);
     };
-    API();
+    getData();
   }, []);
   return (
     <>
-      {/* {detail.map((item) => (
-        <iframe
-          key={item}
-          src={item}
-          title="a"
-          width={300}
-          height={300}
-        ></iframe>
-      ))} */}
+      <Header />
+      <Embed />
+      <MovieDetail />
     </>
   );
 }

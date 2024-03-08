@@ -32,7 +32,7 @@ function ViewAll() {
       </div>
       <Pagination
         currentPage={params || 1}
-        maxPageLimit={100}
+        maxPageLimit={10000}
         clickPage={handleClickPage}
       />
     </Title>

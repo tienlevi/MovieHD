@@ -41,7 +41,7 @@ export interface MovieLanguages {
 
 export interface MovieCountry {}
 
-export interface MovieDetail {
+export interface MovieId {
   adult: boolean;
   backdrop_path: string;
   belongs_to_collection: {

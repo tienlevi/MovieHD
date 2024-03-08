@@ -19,7 +19,9 @@ export const getMovies = async (type: string, page: number) => {
 
 export const DetailMovie = async () => {
   try {
-    const response = dataUrl.get("/phim/fast-five");
+    const response = dataUrl.get(
+      `/movie/198663?api_key=e9e9d8da18ae29fc430845952232787c&append_to_response=videos`
+    );
     return response;
   } catch (err) {
     return err;
