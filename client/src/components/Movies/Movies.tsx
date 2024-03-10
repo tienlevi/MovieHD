@@ -5,7 +5,7 @@ import { MovieList, MovieGenre } from "../../types";
 import Section from "../Section/Section";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import "./style.scss";
+import "./variabales.scss";
 
 interface MoviesProps {
   type: string;

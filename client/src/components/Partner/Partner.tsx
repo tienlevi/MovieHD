@@ -1,5 +1,5 @@
 import Section from "../Section/Section";
-import "./style.scss";
+import "./variabales.scss";
 
 function Partner() {
   return (
