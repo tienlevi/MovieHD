@@ -5,6 +5,7 @@ import Country from "./pages/Country";
 import Genre from "./pages/Genre";
 import Search from "./pages/Search";
 import ViewAll from "./pages/ViewAll";
+import SignInPage from "./pages/SignInPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/genre/:id" element={<Genre />} />
       <Route path="/search" element={<Search />} />
       <Route path="/view-all/:type" element={<ViewAll />} />
+      <Route path="/signin" element={<SignInPage />} />
     </Routes>
   );
 }
