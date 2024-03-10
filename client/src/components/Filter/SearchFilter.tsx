@@ -4,8 +4,8 @@ import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import Section from "../Section/Section";
 import { getGenres, ImageMovie } from "../../api/movie";
 import { MovieList, MovieGenre } from "../../types";
-import "./style.scss";
-import "../Movies/style.scss";
+import "./variabales.scss";
+import "../Movies/variabales.scss";
 
 interface SearchProps {
   movies: MovieList[];

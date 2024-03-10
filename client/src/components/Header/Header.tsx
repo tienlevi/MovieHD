@@ -4,7 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LoginIcon from "@mui/icons-material/Login";
-import "./style.scss";
+import "./variabales.scss";
 import Navbar from "./Navbar";
 import { imageSrc } from "../../constants";
 

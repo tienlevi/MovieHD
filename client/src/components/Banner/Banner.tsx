@@ -1,5 +1,5 @@
 import { imageSrc } from "../../constants";
-import "./style.scss";
+import "./variabales.scss";
 
 function Banner({ text }: { text: string }) {
   return (
