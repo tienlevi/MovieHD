@@ -1,7 +1,7 @@
 import { ImageMovie } from "../../api/movie";
 import { MovieId } from "../../types";
 import Section from "../Section/Section";
-import "./variabales.scss";
+import "./style.scss";
 
 function MovieDetail({ movie }: { movie: MovieId }) {
   return (

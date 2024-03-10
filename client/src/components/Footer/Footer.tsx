@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Section from "../Section/Section";
 import { imageSrc } from "../../constants";
-import "./variabales.scss";
+import "./style.scss";
 
 function Footer() {
   const [value, setValue] = useState("");

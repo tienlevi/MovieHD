@@ -1,4 +1,4 @@
-import "./variabales.scss";
+import "./style.scss";
 
 interface Props {
   className: string;

@@ -8,7 +8,7 @@ import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRound
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import "swiper/css";
 import "swiper/css/pagination";
-import "./variabales.scss";
+import "./style.scss";
 import { ImageMovie, getMovies, getGenres } from "../../api/movie";
 import { MovieList, MovieGenre } from "../../types";
 

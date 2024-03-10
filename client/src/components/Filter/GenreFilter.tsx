@@ -4,8 +4,8 @@ import { getGenres, ImageMovie } from "../../api/movie";
 import { MovieList, MovieGenre } from "../../types";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import Section from "../Section/Section";
-import "./variabales.scss";
-import "../Movies/variabales.scss";
+import "./style.scss";
+import "../Movies/style.scss";
 
 interface GenreFilterProps {
   movies: MovieList[];

@@ -5,8 +5,8 @@ import Section from "../Section/Section";
 import { getCountry, getGenres, ImageMovie } from "../../api/movie";
 import { MovieGenre, MovieCountry, MovieList } from "../../types";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
-import "./variabales.scss";
-import "../Movies/variabales.scss";
+import "./style.scss";
+import "../Movies/style.scss";
 
 interface CountryFilterProps {
   movies: MovieList[];
