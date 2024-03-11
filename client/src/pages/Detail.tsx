@@ -4,12 +4,12 @@ import { DetailMovie } from "../api/movie";
 import MovieDetail from "../components/Movies/MovieDetail";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import Title from "../components/Title/Title";
 import Embed from "../components/Movies/Embed";
+import { MovieId } from "../types";
 
 function Detail() {
   const { id }: any = useParams();
-  const [detail, setDetail] = useState<any>();
+  const [detail, setDetail] = useState<MovieId>();
 
   useEffect(() => {
     const getData = async () => {
@@ -22,7 +22,8 @@ function Detail() {
     <>
       <Header />
       <Embed id={id} />
-      <MovieDetail movie={detail} />
+      {detail && <MovieDetail movie={detail} />}
+      <Footer />
     </>
   );
 }

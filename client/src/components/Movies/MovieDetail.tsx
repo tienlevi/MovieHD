@@ -1,9 +1,13 @@
+import { useEffect } from "react";
 import { ImageMovie } from "../../api/movie";
 import { MovieId } from "../../types";
 import Section from "../Section/Section";
 import "./style.scss";
 
 function MovieDetail({ movie }: { movie: MovieId }) {
+  useEffect(() => {
+    document.title = `Watch ${movie?.original_title}`;
+  }, [document.title]);
   return (
     <Section className="container-detail">
       <div className="movie-detail">
@@ -29,19 +33,17 @@ function MovieDetail({ movie }: { movie: MovieId }) {
               </span>
             </p>
             <p>
-              {/* Country: <span>{movie?.production_countries[0]?.name}</span> */}
+              Country: {""}
+              <span>
+                {movie?.production_countries
+                  .map((country: any) => {
+                    return country.name;
+                  })
+                  .join(", ")}
+              </span>
             </p>
             <p>
-              Duration: <span></span>
-            </p>
-            <p>
-              Quanlity: <button>HD</button>
-            </p>
-            <p>
-              Release: <span>2023</span>
-            </p>
-            <p>
-              IMDB: <button></button>
+              Release: <span>{movie?.release_date}</span>
             </p>
           </div>
         </div>

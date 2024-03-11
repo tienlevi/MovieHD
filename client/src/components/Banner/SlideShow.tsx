@@ -19,7 +19,7 @@ function SlideShow() {
   useEffect(() => {
     const getDataTopRateMovie = async () => {
       try {
-        const response: any = await getMovies("top_rated", 1);
+        const response: any = await getMovies("now_playing", 1);
         setTopRateMovie(response.data.results);
       } catch (error) {
         console.log(error);
@@ -80,10 +80,10 @@ function SlideShow() {
             </p>
             <p className="slideshow-text-description">{item.overview}</p>
             <div className="slideshow-watch-detail">
-              <Link to="/" className="slideshow-play-now">
+              <Link to={`/detail/${item.id}`} className="slideshow-play-now">
                 <PlayArrowRoundedIcon /> <span>Watch Now</span>
               </Link>
-              <Link to="/" className="slideshow-detail">
+              <Link to={`/detail/${item.id}`} className="slideshow-detail">
                 <span>Detail</span>
               </Link>
             </div>

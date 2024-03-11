@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { DetailMovie } from "../../api/movie";
-import { MovieId } from "../../types";
 import Section from "../Section/Section";
 import "./style.scss";
 
