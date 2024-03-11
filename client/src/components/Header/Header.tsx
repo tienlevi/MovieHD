@@ -34,7 +34,7 @@ function Header() {
         <div className="header-icon">
           <LightModeOutlinedIcon />
         </div>
-        <Link to="/" className="header-btn">
+        <Link to="/singin" className="header-btn">
           <LoginIcon />
           <p>Sign In</p>
         </Link>
