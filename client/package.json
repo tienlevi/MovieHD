@@ -28,10 +28,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "vite build",
+    "test": "vite test",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warning 0",
-    "eject": "react-scripts eject"
+    "eject": "vite eject"
   },
   "eslintConfig": {
     "extends": [
