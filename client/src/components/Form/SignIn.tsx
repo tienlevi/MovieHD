@@ -1,8 +1,12 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { signInWithPopup, signOut, GoogleAuthProvider } from "firebase/auth";
+import {
+  signInWithPopup,
+  signOut,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+} from "firebase/auth";
 import { useForm } from "react-hook-form";
-import auth from "../../config/firebase";
+import { auth } from "../../config/firebase";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import Section from "../Section/Section";
@@ -15,9 +19,19 @@ function SignIn() {
     register,
     formState: { errors },
   } = useForm({ defaultValues: { email: "", password: "" } });
+
   const signInWithGoggle = async () => {
     try {
       await signInWithPopup(auth, new GoogleAuthProvider());
+      console.log(auth);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const signInWithFacebook = async () => {
+    try {
+      await signInWithPopup(auth, new FacebookAuthProvider());
       console.log(auth);
     } catch (error) {
       console.log(error);
@@ -48,7 +62,7 @@ function SignIn() {
           <span>Or</span>
         </div>
         <div className="form-icon">
-          <div className="form-icon-facebook" onClick={signInWithGoggle}>
+          <div className="form-icon-facebook" onClick={signInWithFacebook}>
             <FacebookIcon style={{ fontSize: 30 }} />
           </div>
           <div className="form-icon-google" onClick={signInWithGoggle}>
