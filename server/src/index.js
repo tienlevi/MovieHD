@@ -2,7 +2,6 @@ import express from "express";
 import axios from "axios";
 import cors from "cors";
 import router from "./routers/router.js";
-import admin from "./config/firebase.js";
 
 const app = express();
 

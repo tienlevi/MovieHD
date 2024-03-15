@@ -8,6 +8,4 @@ router.get("/list", (req, res) => {
   return res.json({ title: "Maze runner" });
 });
 
-router.get("/user", Token, AccessToken);
-
 export default router;
