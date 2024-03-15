@@ -22,8 +22,8 @@ function SignIn() {
 
   const signInWithGoggle = async () => {
     try {
-      await signInWithPopup(auth, new GoogleAuthProvider());
-      console.log(auth);
+      const user: any = await signInWithPopup(auth, new GoogleAuthProvider());
+      console.log(user);
     } catch (error) {
       console.log(error);
     }
