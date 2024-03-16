@@ -1,11 +1,7 @@
-import SideBar from "../components/Profile/SideBar";
+import Overview from "../components/Profile/Overview";
 
 function Profile() {
-  return (
-    <div>
-      <SideBar />
-    </div>
-  );
+  return <Overview />;
 }
 
 export default Profile;

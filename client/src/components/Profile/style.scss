@@ -1,0 +1,79 @@
+@import "../../styles/theme.scss";
+
+.header-profile {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: absolute;
+  right: 0;
+  width: 75%;
+  height: 85px;
+
+  h2 {
+    color: $white;
+    padding-left: 12px;
+  }
+}
+
+.sidebar {
+  position: absolute;
+  left: 0;
+  width: 25%;
+  height: 100%;
+  z-index: 10;
+  background-color: $bgForm;
+
+  .sidebar-logo {
+    border-bottom: 1px solid $headingColor;
+    padding: 20px 30px;
+
+    img {
+      width: 200px;
+      height: auto;
+    }
+  }
+
+  .sidebar-profile {
+    display: flex;
+    align-items: center;
+    padding: 20px 30px;
+    border-bottom: 1px solid $headingColor;
+
+    p {
+      color: $white;
+      padding-left: 12px;
+    }
+  }
+
+  .sidebar-menu {
+    padding: 20px 30px;
+    border-bottom: 1px solid $headingColor;
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 0px;
+      color: $white;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        color: $blue;
+      }
+
+      .sidebar-item-text {
+        padding-left: 10px;
+      }
+    }
+  }
+}
+
+.footer-profile {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: $white;
+  background-color: $bgForm;
+  width: 75%;
+  padding: 10px 12px;
+}
