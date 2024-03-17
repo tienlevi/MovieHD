@@ -1,35 +1,5 @@
 @import "../../styles/theme.scss";
-
-@mixin button-style($backgroundColor, $color) {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  border-radius: 10px;
-  width: 140px;
-  height: 40px;
-  background-color: $backgroundColor;
-  color: $color;
-  text-transform: uppercase;
-  overflow: hidden;
-  vertical-align: middle;
-  z-index: 1;
-}
-
-@mixin button-style-before($color) {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 0;
-  height: 0;
-  transition: 0.3s;
-  border-radius: 10px;
-  z-index: -1;
-  background-color: $color;
-}
+@import "../../styles/mixin.scss";
 
 .banner {
   width: 100%;

@@ -1,25 +1,5 @@
 @import "../../styles/theme.scss";
-
-@mixin icon($color, $bgColor, $hoverColor) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: $color;
-  font-size: 20px;
-  border-radius: 16px;
-  height: 60px;
-  width: 30%;
-  margin: 0px 15px;
-  background-color: $bgColor;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $white;
-    color: $hoverColor;
-  }
-}
+@import "../../styles/mixin.scss";
 
 .form {
   display: block;
