@@ -1,7 +1,10 @@
 import Overview from "../components/Profile/Overview";
+import Update from "../components/Profile/Update";
 
-function Profile() {
+export const UpdateProfile = () => {
+  return <Update />;
+};
+
+export const Profile = () => {
   return <Overview />;
-}
-
-export default Profile;
+};
