@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   signInWithPopup,
   signOut,
@@ -13,6 +13,7 @@ import Section from "../Section/Section";
 import "./style.scss";
 
 function SignIn() {
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -24,6 +25,8 @@ function SignIn() {
     try {
       const user: any = await signInWithPopup(auth, new GoogleAuthProvider());
       console.log(user);
+      navigate("/profile");
+      localStorage.setItem("User", JSON.stringify(user));
     } catch (error) {
       console.log(error);
     }

@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getDatabase, ref, set } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,6 +18,12 @@ const firebaseConfig = {
   measurementId: "G-22BCVNYLQY",
 };
 
+// function userData(id: any, name: any, email: any, imageUrl: any) {
+//   const db = getDatabase();
+//   const reference = ref(db, "/profile/" + id);
+//   set(reference, { username: name, email: email, imageUrl: imageUrl });
+// }
+// userData("", "tien", "nguyentreachtien2401@gmail.com", "1");
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const database = getFirestore(app);

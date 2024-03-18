@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import ScrollToTop from "./utils/ScrollToTop";
-import { AuthProvider } from "./context/AuthProvider";
 import Detail from "./pages/Detail";
 import Home from "./pages/Home";
 import Country from "./pages/Country";
@@ -10,25 +9,26 @@ import ViewAll from "./pages/ViewAll";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import { Profile, UpdateProfile } from "./pages/Profile";
+import ProtectRoute from "./Auth/ProtectRoute";
 
 function App() {
   return (
     <>
-      <AuthProvider>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/country" element={<Country />} />
-          <Route path="/genre/:id" element={<Genre />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/view-all/:type" element={<ViewAll />} />
-          <Route path="/signin" element={<SignInPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/country" element={<Country />} />
+        <Route path="/genre/:id" element={<Genre />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/view-all/:type" element={<ViewAll />} />
+        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route element={<ProtectRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/update" element={<UpdateProfile />} />
-        </Routes>
-      </AuthProvider>
+        </Route>
+      </Routes>
     </>
   );
 }
