@@ -20,7 +20,7 @@ export const getMovies = async (type: string, page: number) => {
 export const DetailMovie = async (id: number) => {
   try {
     const response = dataUrl.get(
-      `/movie/${id}?api_key=e9e9d8da18ae29fc430845952232787c&append_to_response=videos`
+      `/movie/${id}?api_key=${ApiKey}&append_to_response=videos`
     );
     return response;
   } catch (err) {
@@ -50,10 +50,10 @@ export const getCountry = async () => {
   }
 };
 
-export const getCountryFilter = async (country: string) => {
+export const getCountryFilter = async (country: string, page: number) => {
   try {
     const response = dataUrl.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&with_origin_country=${country}`
+      `/discover/movie?api_key=${ApiKey}&region=${country}&page=${page}`
     );
     return response;
   } catch (error) {

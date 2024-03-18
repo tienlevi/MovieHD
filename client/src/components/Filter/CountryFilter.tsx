@@ -48,8 +48,7 @@ function CountryFilter({ movies, name, handleSelect }: CountryFilterProps) {
       <Section className="movie">
         <div className="select-type-movie">
           <div className="movie-selected" onClick={handleToggle}>
-            {checkSelect && checkSelect.english_name}
-            {!checkSelect && "Select Country"}
+            {!checkSelect ? "Select Country" : checkSelect?.english_name}
             <div
               className={`movie-selected-icon${toggle ? " movie-selected-icon-active" : ""}`}
             >

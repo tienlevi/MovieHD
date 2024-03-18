@@ -13,8 +13,6 @@ import { MovieGenre } from "../types";
 import { database } from "../config/firebase";
 
 function Genre() {
-  const [movieList, setMovieList] = useState([]);
-
   const [loading, setLoading] = useState<boolean>(true);
   const [genre, setGenre] = useState<MovieGenre[]>([]);
   const [movieByGenre, setMovieByGenre] = useState([]);
@@ -38,19 +36,19 @@ function Genre() {
     transform: "translate(-50%, -50%)",
   };
 
-  const movieCollectionRef = collection(database, "movies");
-  useEffect(() => {
-    const getMovieLists = async () => {
-      try {
-        const response = await getDocs(movieCollectionRef);
-        const filterData = response.docs.map((item) => item.data());
-        console.log(filterData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getMovieLists();
-  }, []);
+  // const movieCollectionRef = collection(database, "movies");
+  // useEffect(() => {
+  //   const getMovieLists = async () => {
+  //     try {
+  //       const response = await getDocs(movieCollectionRef);
+  //       const filterData = response.docs.map((item) => item.data());
+  //       console.log(filterData);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getMovieLists();
+  // }, []);
 
   useEffect(() => {
     const getData = async () => {
