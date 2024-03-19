@@ -161,7 +161,7 @@ header {
       position: absolute;
       display: flex;
       align-items: center;
-      left: -25%;
+      left: -80%;
       top: 100px;
       background-color: $themeBg;
       padding: 15px;
@@ -195,6 +195,41 @@ header {
     }
 
     .search-bar-active {
+      opacity: 1;
+      visibility: visible;
+      top: 60px;
+    }
+
+    .dropdown-profile {
+      position: absolute;
+      top: 130%;
+      right: 0;
+      background-color: $blue;
+      padding: 10px 50px;
+      opacity: 0;
+      visibility: hidden;
+      border-radius: 10px;
+      transition: 0.3s;
+
+      .dropdown-profile-item {
+        display: flex;
+        align-items: center;
+        color: $white;
+        margin: 15px 0px;
+        cursor: pointer;
+
+        span {
+          font-size: 17px;
+          margin-left: 8px;
+        }
+
+        svg {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .dropdown-profile-active {
       opacity: 1;
       visibility: visible;
       top: 60px;

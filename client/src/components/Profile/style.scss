@@ -1,23 +1,103 @@
 @import "../../styles/theme.scss";
 @import "../../styles/mixin.scss";
 
-.header-profile {
-  display: flex;
-  align-items: center;
-  justify-content: start;
+main {
   position: absolute;
   right: 0;
   width: 75%;
-  height: 85px;
+  height: 100%;
 
-  h2 {
-    color: $white;
-    padding-left: 12px;
+  .header-profile {
+    display: flex;
+    justify-content: start;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: $bgForm;
+
+    h2 {
+      color: $white;
+      padding-left: 12px;
+    }
+  }
+
+  .footer-profile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: $black;
+    background-color: $bgForm;
+    padding: 10px 0px;
+    padding-left: 12rem;
+  }
+
+  .overview-profile {
+    margin-top: 100px;
+    padding-left: 10px;
+
+    img {
+      margin-top: 15px;
+    }
+
+    h1 {
+      color: $white;
+      font-size: 36px;
+    }
+
+    p {
+      color: $white;
+      margin: 14px 0px;
+      font-size: 17px;
+    }
+
+    .overview-profile-btn {
+      @include button-style($blue, $white);
+      cursor: pointer;
+      text-transform: capitalize;
+
+      &::before {
+        @include button-style-before($red);
+      }
+
+      &:hover::before {
+        width: 120%;
+        height: 120%;
+      }
+    }
+
+    .overview-input {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+
+      input {
+        margin: 14px 0px;
+        height: 40px;
+        padding-left: 15px;
+        font-size: 15px;
+        background-color: $bgForm;
+        border: none;
+        color: $white;
+        border-radius: 5px;
+
+        &::placeholder {
+          color: $white;
+        }
+
+        &:focus {
+          outline: none;
+          border: 2px solid $blue;
+        }
+      }
+    }
   }
 }
 
 .sidebar {
   position: absolute;
+  top: 0;
   left: 0;
   width: 25%;
   height: 100%;
@@ -41,7 +121,7 @@
     border-bottom: 1px solid $headingColor;
 
     p {
-      color: $white;
+      color: $blue;
       padding-left: 12px;
     }
   }
@@ -54,7 +134,7 @@
       display: flex;
       align-items: center;
       padding: 10px 0px;
-      color: $white;
+      color: $blue;
       cursor: pointer;
       transition: all 0.3s ease-in-out;
 
@@ -64,80 +144,6 @@
 
       .sidebar-item-text {
         padding-left: 10px;
-      }
-    }
-  }
-}
-
-.footer-profile {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  color: $white;
-  background-color: $bgForm;
-  width: 75%;
-  padding: 10px 12px;
-}
-
-.overview-profile {
-  width: 75%;
-  position: absolute;
-  top: 100px;
-  right: 0;
-  padding-left: 10px;
-
-  img {
-    margin-top: 15px;
-  }
-
-  h1 {
-    color: $white;
-    font-size: 36px;
-  }
-
-  p {
-    color: $white;
-    margin: 14px 0px;
-    font-size: 17px;
-  }
-
-  .overview-profile-btn {
-    @include button-style($blue, $white);
-    cursor: pointer;
-    text-transform: capitalize;
-
-    &::before {
-      @include button-style-before($red);
-    }
-
-    &:hover::before {
-      width: 120%;
-      height: 120%;
-    }
-  }
-
-  .overview-input {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-
-    input {
-      margin: 14px 0px;
-      height: 40px;
-      padding-left: 15px;
-      font-size: 15px;
-      background-color: $bgForm;
-      border: none;
-      color: $white;
-      border-radius: 5px;
-
-      &::placeholder {
-        color: $white;
-      }
-
-      &:focus {
-        outline: none;
-        border: 2px solid $blue;
       }
     }
   }

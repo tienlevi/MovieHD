@@ -7,10 +7,12 @@ import LoginIcon from "@mui/icons-material/Login";
 import "./style.scss";
 import Navbar from "./Navbar";
 import { imageSrc } from "../../constants";
+import Avatar from "./Avatar";
 
 function Header() {
   const [search, setSearch] = useState<string>("");
   const [toggle, setToggle] = useState<boolean>(false);
+  const { user } = JSON.parse(localStorage.getItem("User") as any);
 
   const handleToggle = () => {
     setToggle(!toggle);
@@ -34,10 +36,14 @@ function Header() {
         <div className="header-icon">
           <LightModeOutlinedIcon />
         </div>
-        <Link to="/signin" className="header-btn">
-          <LoginIcon />
-          <p>Sign In</p>
-        </Link>
+        {user ? (
+          <Avatar img={user.photoURL} />
+        ) : (
+          <Link to="/signin" className="header-btn">
+            <LoginIcon />
+            <p>Sign In</p>
+          </Link>
+        )}
         <form
           onSubmit={handleSearch}
           className={`search-bar${toggle ? " search-bar-active" : ""}`}

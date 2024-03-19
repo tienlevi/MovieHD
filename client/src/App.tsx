@@ -24,10 +24,10 @@ function App() {
         <Route path="/view-all/:type" element={<ViewAll />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route element={<ProtectRoute />}>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/profile/update" element={<UpdateProfile />} />
-        </Route>
+        {/* <Route element={<ProtectRoute />}> */}
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/update" element={<UpdateProfile />} />
+        {/* </Route> */}
       </Routes>
     </>
   );

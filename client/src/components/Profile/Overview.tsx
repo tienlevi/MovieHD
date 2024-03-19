@@ -18,25 +18,27 @@ function Overview() {
       console.log(error);
     }
   };
+
   return (
     <>
-      <header className="header-profile">
-        <h2>Dashboard</h2>
-      </header>
       <SideBar />
-      <div className="overview-profile">
-        <h1>Overview</h1>
-        <img src={user.photoURL} alt="" />
-        <p>Name: {user.displayName}</p>
-        <p>Email: {user.email}</p>
-        <p>Phone Number: 0123456789</p>
-        <div className="overview-profile-btn" onClick={handleLogOut}>
-          <p>Logout</p>
+      <main>
+        <header className="header-profile">
+          <h2>Dashboard</h2>
+        </header>
+        <div className="overview-profile">
+          <h1>Trang chủ</h1>
+          <img src={user?.photoURL} alt="" />
+          <p>Name: {user?.displayName}</p>
+          <p>Email: {user?.email}</p>
+          <div className="overview-profile-btn" onClick={handleLogOut}>
+            <p>Đăng xuất</p>
+          </div>
         </div>
-      </div>
-      <footer className="footer-profile">
-        © FlixTV.template, 2021. Create by Dmitry Volkov
-      </footer>
+        <footer className="footer-profile">
+          © FlixTV.template, 2021. Create by Dmitry Volkov
+        </footer>
+      </main>
     </>
   );
 }

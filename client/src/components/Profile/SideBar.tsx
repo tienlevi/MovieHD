@@ -1,9 +1,9 @@
+import { Link } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ModeCommentIcon from "@mui/icons-material/ModeComment";
 import { imageSrc } from "../../constants";
-import Update from "./Update";
 import "./style.scss";
 
 function SideBar() {
@@ -11,7 +11,9 @@ function SideBar() {
     <>
       <div className="sidebar">
         <div className="sidebar-logo">
-          <img src={imageSrc.logo} alt="" />
+          <Link to="/">
+            <img src={imageSrc.logo} alt="" />
+          </Link>
         </div>
         <div className="sidebar-profile">
           <img
