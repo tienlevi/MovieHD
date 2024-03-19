@@ -6,7 +6,7 @@ import "./style.scss";
 
 function Overview() {
   const navigate = useNavigate();
-  const { user } = JSON.parse(localStorage.getItem("User") as any);
+  const user = JSON.parse(localStorage.getItem("User") as any);
   console.log(user);
 
   const handleLogOut = async () => {

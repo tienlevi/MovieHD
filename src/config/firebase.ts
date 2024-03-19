@@ -26,6 +26,6 @@ const firebaseConfig = {
 // userData("", "tien", "nguyentreachtien2401@gmail.com", "1");
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const database = getFirestore(app);
+export const db = getFirestore(app);
 
 export const auth = getAuth(app);

@@ -10,7 +10,7 @@ import Banner from "../components/Banner/Banner";
 import Pagination from "../components/Pagination/Pagination";
 import { getMovieByGenre, getGenres } from "../api/movie";
 import { MovieGenre } from "../types";
-import { database } from "../config/firebase";
+import { db } from "../config/firebase";
 
 function Genre() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -35,20 +35,6 @@ function Genre() {
     left: "50%",
     transform: "translate(-50%, -50%)",
   };
-
-  // const movieCollectionRef = collection(database, "movies");
-  // useEffect(() => {
-  //   const getMovieLists = async () => {
-  //     try {
-  //       const response = await getDocs(movieCollectionRef);
-  //       const filterData = response.docs.map((item) => item.data());
-  //       console.log(filterData);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getMovieLists();
-  // }, []);
 
   useEffect(() => {
     const getData = async () => {
