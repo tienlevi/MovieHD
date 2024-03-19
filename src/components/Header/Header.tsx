@@ -12,7 +12,7 @@ import Avatar from "./Avatar";
 function Header() {
   const [search, setSearch] = useState<string>("");
   const [toggle, setToggle] = useState<boolean>(false);
-  const { user } = JSON.parse(localStorage.getItem("User") as any);
+  const user: any = localStorage.getItem("User");
 
   const handleToggle = () => {
     setToggle(!toggle);
