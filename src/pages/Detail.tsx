@@ -6,7 +6,7 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Embed from "../components/Movies/Embed";
 import Comment from "../components/Comment/Comment";
-import { MovieId } from "../types";
+import { MovieId } from "../interface";
 
 function Detail() {
   const { id }: any = useParams();

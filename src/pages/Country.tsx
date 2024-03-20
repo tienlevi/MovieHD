@@ -8,7 +8,7 @@ import Footer from "../components/Footer/Footer";
 import Title from "../components/Title/Title";
 import Pagination from "../components/Pagination/Pagination";
 import { getCountryFilter } from "../api/movie";
-import { MovieList } from "../types";
+import { MovieList } from "../interface";
 
 function Country() {
   const [loading, setLoading] = useState<boolean>(true);

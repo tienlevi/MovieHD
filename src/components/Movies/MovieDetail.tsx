@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { ImageMovie } from "../../api/movie";
-import { MovieId } from "../../types";
+import { MovieId } from "../../interface";
 import Section from "../Section/Section";
 import "./style.scss";
 

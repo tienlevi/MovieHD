@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getGenres } from "../../api/movie";
-import { MovieGenre } from "../../types";
+import { MovieGenre } from "../../interface";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import "./style.scss";
 

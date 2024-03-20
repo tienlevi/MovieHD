@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getGenres, ImageMovie } from "../../api/movie";
-import { MovieList, MovieGenre } from "../../types";
+import { MovieList, MovieGenre } from "../../interface";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import Section from "../Section/Section";
 import "./style.scss";
