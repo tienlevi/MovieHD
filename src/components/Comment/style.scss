@@ -1,0 +1,84 @@
+@import "../../styles/theme.scss";
+@import "../../styles/mixin.scss";
+
+.comment-title {
+  color: $white;
+  margin-bottom: 12px;
+}
+
+.comment-input {
+  display: block;
+  margin-bottom: 15px;
+
+  textarea {
+    resize: none;
+    width: 100%;
+    height: 100px;
+    padding: 8px;
+    font-size: 17px;
+    background-color: $bgForm;
+    border: none;
+    border-radius: 10px;
+    color: $bodyTextColor;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  input {
+    width: 150px;
+    height: 50px;
+    margin-top: 15px;
+    background-color: $blue;
+    border: none;
+    font-size: 18px;
+    color: $white;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}
+
+.list-comment {
+  display: block;
+  margin-bottom: 15px;
+
+  .comment-item {
+    margin: 17px 0px;
+    padding: 14px;
+    background-color: $bgForm;
+    border-radius: 10px;
+
+    .comment-item-user {
+      display: flex;
+
+      .comment-item-img img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+      }
+
+      .content-item-name-date {
+        margin-left: 15px;
+
+        .comment-item-name {
+          font-size: 22px;
+          color: $white;
+        }
+
+        .comment-item-date {
+          font-size: 17px;
+          color: $blue;
+          margin-top: 5px;
+        }
+      }
+    }
+
+    .comment-item-content {
+      margin-top: 8px;
+      color: $white;
+      font-size: 15px;
+      line-height: 33px;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ModeCommentIcon from "@mui/icons-material/ModeComment";
+import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import { imageSrc } from "../../constants";
 import "./style.scss";
 
@@ -41,10 +42,10 @@ function SideBar() {
           </div>
           <div className="sidebar-item">
             <div className="sidebar-item-icon">
-              <ModeCommentIcon />
+              <StarRateRoundedIcon />
             </div>
             <div className="sidebar-item-text">
-              <p>Comments</p>
+              <p>Favorite Movies</p>
             </div>
           </div>
           <div className="sidebar-item">

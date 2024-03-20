@@ -5,6 +5,7 @@ import MovieDetail from "../components/Movies/MovieDetail";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Embed from "../components/Movies/Embed";
+import Comment from "../components/Comment/Comment";
 import { MovieId } from "../types";
 
 function Detail() {
@@ -23,6 +24,7 @@ function Detail() {
       <Header />
       <Embed id={id} />
       {detail && <MovieDetail movie={detail} />}
+      <Comment />
       <Footer />
     </>
   );

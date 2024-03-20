@@ -31,3 +31,17 @@ export const addUser = async (user: any) => {
     console.log(error);
   }
 };
+
+export const postComment = async (uid: any, comment: any) => {
+  try {
+    const data = {
+      uid: uid,
+      comment: comment,
+      create_at: Timestamp.fromDate(new Date(Date.now())),
+    };
+    const response = await addDoc(collection(db, "comments"), data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
