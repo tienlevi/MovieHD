@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, CSSProperties } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import BounceLoader from "react-spinners/BounceLoader";
 import Header from "../components/Header/Header";
@@ -11,23 +11,19 @@ import { getCountryFilter } from "../api/movie";
 import { MovieList } from "../interface";
 
 function Country() {
-  const [loading, setLoading] = useState<boolean>(true);
   const [countryFilter, setCountryFilter] = useState<MovieList[]>([]);
   const [pages, setPages] = useState<any>();
   const [searchParams, setSearchParams] = useSearchParams();
-  const getParams = searchParams.get("page");
-  const params = Number(getParams);
   const paramName: any = searchParams.get("name");
-  const paramId: any = searchParams.get("id");
+  const paramPage: any = parseInt(searchParams.get("page") as string);
 
   const handleSelect = useCallback(
-    (id: string, name: string) => {
+    (name: string) => {
       searchParams.set("name", name);
-      searchParams.set("id", id);
       setSearchParams(searchParams);
       window.location.reload();
     },
-    [paramName]
+    [paramName, paramPage]
   );
 
   const handleClickPage = useCallback((page: number) => {
@@ -36,56 +32,33 @@ function Country() {
     window.location.reload();
   }, []);
 
-  const override: CSSProperties = {
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-  };
-
   useEffect(() => {
     const getData = async () => {
-      const response: any = await getCountryFilter(paramId || "US", params);
+      const response: any = await getCountryFilter(
+        paramName || "US",
+        paramPage || 1
+      );
       setCountryFilter(response.data.results);
       setPages(response.data.total_pages);
-      console.log(response.data);
     };
     getData();
   }, []);
 
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
-
   return (
     <Title title={`${paramName ? paramName : "Country"} Movie`}>
-      {loading ? (
-        <BounceLoader
-          color={"#29b6f6"}
-          loading={loading}
-          cssOverride={override}
-          size={50}
-        />
-      ) : (
-        <>
-          <Header />
-          <Banner text={paramName} />
-          <CountryFilter
-            movies={countryFilter}
-            name={paramName}
-            handleSelect={handleSelect}
-          />
-          <Pagination
-            currentPage={params || 1}
-            maxPageLimit={pages}
-            clickPage={handleClickPage}
-          />
-          <Footer />
-        </>
-      )}
+      <Header />
+      <Banner text={paramName} />
+      <CountryFilter
+        movies={countryFilter}
+        name={paramName}
+        handleSelect={handleSelect}
+      />
+      <Pagination
+        currentPage={paramPage || 1}
+        maxPageLimit={pages}
+        clickPage={handleClickPage}
+      />
+      <Footer />
     </Title>
   );
 }
