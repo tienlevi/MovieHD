@@ -46,6 +46,8 @@ function Detail() {
         user?.photoURL,
         comment
       );
+      alert("Post success");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -54,7 +56,7 @@ function Detail() {
   return (
     <>
       <Header />
-      {/* <Embed id={id} /> */}
+      <Embed id={id} />
       {detail && <MovieDetail movie={detail} />}
       <Comment
         ListComment={list}
