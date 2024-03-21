@@ -1,14 +1,10 @@
 import {
   collection,
   addDoc,
-  query,
-  where,
   getDocs,
-  getDoc,
   deleteDoc,
   doc,
   Timestamp,
-  orderBy,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -32,12 +28,32 @@ export const addUser = async (user: any) => {
   }
 };
 
-export const postComment = async (uid: any, comment: any) => {
+export const getComments = async (MovieId: string) => {
+  try {
+    const lists = collection(db, "comments");
+    const response = (await getDocs(lists)).docs.map((item) => item.data());
+    const data = response.filter((item) => item.MovieId === MovieId);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const postComment = async (
+  MovieId: any,
+  uid: any,
+  displayName: string,
+  photoURL: string,
+  comment: string
+) => {
   try {
     const data = {
+      MovieId: MovieId,
       uid: uid,
+      displayName: displayName,
+      photoURL: photoURL,
       comment: comment,
-      create_at: Timestamp.fromDate(new Date(Date.now())),
+      create_at: new Date().toLocaleString(),
     };
     const response = await addDoc(collection(db, "comments"), data);
     return response;
