@@ -6,7 +6,7 @@ export const ImageMovie = (image: string) => {
   return `${posterPath}/${image}`;
 };
 
-export const getMovies = async (type: string, page: number) => {
+export const getMovies = async (type: string, page: number | string) => {
   try {
     const response = dataUrl.get(
       `/movie/${type}?api_key=${ApiKey}&language=en-US&page=${page}`
@@ -17,7 +17,7 @@ export const getMovies = async (type: string, page: number) => {
   }
 };
 
-export const DetailMovie = async (id: number) => {
+export const DetailMovie = async (id: number | string) => {
   try {
     const response = dataUrl.get(
       `/movie/${id}?api_key=${ApiKey}&append_to_response=videos`
@@ -50,7 +50,10 @@ export const getCountry = async () => {
   }
 };
 
-export const getCountryFilter = async (country: string, page: number) => {
+export const getCountryFilter = async (
+  country: string,
+  page: number | string
+) => {
   try {
     const response = dataUrl.get(
       `/discover/movie?api_key=${ApiKey}&with_origin_country=${country}&page=${page}`
@@ -61,7 +64,10 @@ export const getCountryFilter = async (country: string, page: number) => {
   }
 };
 
-export const getMovieByGenre = async (id: number, page: number) => {
+export const getMovieByGenre = async (
+  id: number | string,
+  page: number | string
+) => {
   try {
     const response = dataUrl.get(
       `/discover/movie?api_key=${ApiKey}&with_genres=${id}&page=${page}`
@@ -72,7 +78,7 @@ export const getMovieByGenre = async (id: number, page: number) => {
   }
 };
 
-export const searchMovie = (name: string, page: number) => {
+export const searchMovie = (name: string, page: number | string) => {
   try {
     const response = dataUrl.get(
       `/search/movie?query=${name}&api_key=${ApiKey}&page=${page}`

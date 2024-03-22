@@ -19,11 +19,10 @@ function Genre() {
   const [pages, setPages] = useState<any>();
   const { id }: any = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const getParams = searchParams.get("page");
-  const params = Number(getParams);
-  const genreName: any = genre.find((item: any) => item.id === parseInt(id));
+  const params: any = searchParams.get("page") ?? 1;
+  const genreName: any = genre.find((item: any) => item.id === id);
 
-  const handleClickPage = useCallback((page: number) => {
+  const handleClickPage = useCallback((page: number | string) => {
     searchParams.set("page", page.toString());
     setSearchParams(searchParams);
     window.location.reload();

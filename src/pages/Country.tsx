@@ -15,11 +15,13 @@ function Country() {
   const [pages, setPages] = useState<any>();
   const [searchParams, setSearchParams] = useSearchParams();
   const paramName: any = searchParams.get("name");
+  const paramTitle: any = searchParams.get("title");
   const paramPage: any = parseInt(searchParams.get("page") as string);
 
   const handleSelect = useCallback(
-    (name: string) => {
+    (name: string, title: string) => {
       searchParams.set("name", name);
+      searchParams.set("title", title);
       setSearchParams(searchParams);
       window.location.reload();
     },
@@ -45,12 +47,12 @@ function Country() {
   }, []);
 
   return (
-    <Title title={`${paramName ? paramName : "Country"} Movie`}>
+    <Title title={`${paramTitle ? paramTitle : "Country"} Movie`}>
       <Header />
-      <Banner text={paramName} />
+      <Banner text={paramTitle} />
       <CountryFilter
         movies={countryFilter}
-        name={paramName}
+        title={paramTitle}
         handleSelect={handleSelect}
       />
       <Pagination

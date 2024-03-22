@@ -10,18 +10,15 @@ import "../Movies/style.scss";
 
 interface CountryFilterProps {
   movies: MovieList[];
-  name: string;
-  handleSelect: (name: string) => void;
+  name?: string;
+  title: string;
+  handleSelect: (name: string, title: string) => void;
 }
 
-function CountryFilter({ movies, name, handleSelect }: CountryFilterProps) {
+function CountryFilter({ movies, title, handleSelect }: CountryFilterProps) {
   const [countries, setCountries] = useState<MovieCountry[]>([]);
   const [genres, setGenres] = useState<MovieGenre[]>([]);
   const [toggle, setToggle] = useState<boolean>(false);
-
-  const checkSelect = countries.find(
-    (item: MovieCountry) => item.iso_3166_1 === name
-  );
 
   useEffect(() => {
     const getData = async () => {
@@ -48,9 +45,7 @@ function CountryFilter({ movies, name, handleSelect }: CountryFilterProps) {
       <Section className="movie">
         <div className="select-type-movie">
           <div className="movie-selected" onClick={handleToggle}>
-            {checkSelect === undefined
-              ? "Select Country"
-              : checkSelect?.english_name}
+            {title ? title : "Select Country"}
             <div
               className={`movie-selected-icon${toggle ? " movie-selected-icon-active" : ""}`}
             >
@@ -65,7 +60,9 @@ function CountryFilter({ movies, name, handleSelect }: CountryFilterProps) {
               <p
                 key={index}
                 className="movie-select-href"
-                onClick={() => handleSelect(country.iso_3166_1)}
+                onClick={() =>
+                  handleSelect(country.iso_3166_1, country.english_name)
+                }
               >
                 {country.english_name}
               </p>
