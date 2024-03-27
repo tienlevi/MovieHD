@@ -1,41 +1,27 @@
 @import "../../styles/theme.scss";
 @import "../../styles/mixin.scss";
 
-main {
+.header-profile {
+  display: flex;
+  justify-content: start;
   position: absolute;
+  top: 0;
+  left: 0;
   right: 0;
-  width: 75%;
-  height: 100%;
+  background-color: $bgForm;
 
-  .header-profile {
-    display: flex;
-    justify-content: start;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: $bgForm;
-
-    h2 {
-      color: $white;
-      padding-left: 12px;
-    }
+  h2 {
+    color: $white;
+    padding-left: 12px;
   }
+}
 
-  .footer-profile {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    color: $black;
-    background-color: $bgForm;
-    padding: 10px 0px;
-    padding-left: 12rem;
-  }
+main {
+  margin-left: 280px;
+  padding: 0px 10px;
 
   .overview-profile {
     margin-top: 100px;
-    padding-left: 10px;
 
     img {
       margin-top: 15px;
@@ -99,7 +85,7 @@ main {
   position: absolute;
   top: 0;
   left: 0;
-  width: 25%;
+  width: 250px;
   height: 100%;
   z-index: 10;
   background-color: $bgForm;
