@@ -71,8 +71,8 @@ function Navbar() {
         </ul>
       </li>
       <li>
-        <Link className="menu-parent" to="/">
-          TV Shows
+        <Link className="menu-parent" to="/tv-show">
+          TV Show
         </Link>
       </li>
     </nav>

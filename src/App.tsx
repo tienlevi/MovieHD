@@ -10,6 +10,7 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import { Profile, UpdateProfile } from "./pages/Profile";
 import ProtectRoute from "./Auth/ProtectRoute";
+import TvShow from "./pages/TvShow";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/update" element={<UpdateProfile />} />
         </Route>
+        <Route path="/tv-show" element={<TvShow />} />
       </Routes>
     </>
   );
