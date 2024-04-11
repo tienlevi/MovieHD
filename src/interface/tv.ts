@@ -1,4 +1,4 @@
-export interface TvList {
+export interface TvShowList {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -15,7 +15,7 @@ export interface TvList {
   vote_count: number;
 }
 
-export interface TvDetail {
+export interface TvShowDetail {
   adult: false;
   backdrop_path: string;
   created_by: [];

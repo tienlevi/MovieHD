@@ -11,6 +11,7 @@ import SignUpPage from "./pages/SignUpPage";
 import { Profile, UpdateProfile } from "./pages/Profile";
 import ProtectRoute from "./Auth/ProtectRoute";
 import TvShow from "./pages/TvShow";
+import DetailTvShow from "./pages/DetailTvShow";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/profile/update" element={<UpdateProfile />} />
         </Route>
         <Route path="/tv-show" element={<TvShow />} />
+        <Route path="/detail-tv-show/:id" element={<DetailTvShow />} />
       </Routes>
     </>
   );

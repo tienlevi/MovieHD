@@ -7,19 +7,19 @@ import "./style.scss";
 import { getTvShow, ImageTv } from "../../api/tv";
 import { MovieGenre } from "../../interface/movie";
 import { getGenres } from "../../api/movie";
-import { TvList } from "../../interface/tv";
+import { TvShowList } from "../../interface/tv";
 interface TvProps {
   page: string | number;
 }
 
 function TV({ page }: TvProps) {
-  const [list, setList] = useState<TvList[]>([]);
+  const [lists, setLists] = useState<TvShowList[]>([]);
   const [genres, setGenres] = useState<MovieGenre[]>([]);
 
   useEffect(() => {
     const getData = async () => {
       const response: any = await getTvShow(page);
-      setList(response.data.results);
+      setLists(response.data.results);
     };
     getData();
   }, []);
@@ -44,29 +44,32 @@ function TV({ page }: TvProps) {
         </Link>
       </div>
       <div className="movie-content">
-        {list.map((movie: any) => (
-          <div className="movie-content-children" key={movie?.id}>
-            <Link to={`/detail/${movie?.id}`} className="movie-content-img">
-              <img src={ImageTv(movie.poster_path)} alt="" />
+        {lists.map((list: TvShowList) => (
+          <div className="movie-content-children" key={list?.id}>
+            <Link
+              to={`/detail-tv-show/${list?.id}`}
+              className="movie-content-img"
+            >
+              <img src={ImageTv(list.poster_path)} alt="" />
               <div className="movie-content-play-icon">
                 <PlayArrowRoundedIcon
                   style={{ fontSize: 35, color: "white" }}
                 />
               </div>
               <div className="movie-content-language">
-                {movie.original_language}
+                {list.original_language}
               </div>
             </Link>
             <Link
-              to={`/detail/${movie?.id}`}
-              key={movie?.id}
+              to={`/detail/${list?.id}`}
+              key={list?.id}
               className="movie-content-title"
             >
-              <h2>{movie.name}</h2>
+              <h2>{list.name}</h2>
             </Link>
             <p className="movie-content-genre">
               {genres
-                .filter((genre) => movie.genre_ids.includes(genre.id))
+                .filter((genre) => list.genre_ids.includes(genre.id))
                 .map((genre) => genre.name)
                 .join(", ")}
             </p>
