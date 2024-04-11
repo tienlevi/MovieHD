@@ -10,7 +10,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "./style.scss";
 import { ImageMovie, getMovies, getGenres } from "../../api/movie";
-import { MovieList, MovieGenre } from "../../interface";
+import { MovieList, MovieGenre } from "../../interface/movie";
 
 function SlideShow() {
   const [topRateMovie, setTopRateMovie] = useState<MovieList[]>([]);

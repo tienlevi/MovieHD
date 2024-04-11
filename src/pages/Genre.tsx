@@ -9,7 +9,7 @@ import Title from "../components/Title/Title";
 import Banner from "../components/Banner/Banner";
 import Pagination from "../components/Pagination/Pagination";
 import { getMovieByGenre, getGenres } from "../api/movie";
-import { MovieGenre } from "../interface";
+import { MovieGenre } from "../interface/movie";
 import { db } from "../config/firebase";
 
 function Genre() {

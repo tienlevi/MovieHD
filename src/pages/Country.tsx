@@ -8,7 +8,7 @@ import Footer from "../components/Footer/Footer";
 import Title from "../components/Title/Title";
 import Pagination from "../components/Pagination/Pagination";
 import { getCountryFilter } from "../api/movie";
-import { MovieList } from "../interface";
+import { MovieList } from "../interface/movie";
 
 function Country() {
   const [countryFilter, setCountryFilter] = useState<MovieList[]>([]);

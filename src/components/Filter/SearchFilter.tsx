@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import Section from "../Section/Section";
 import { getGenres, ImageMovie } from "../../api/movie";
-import { MovieList, MovieGenre } from "../../interface";
+import { MovieList, MovieGenre } from "../../interface/movie";
 import "./style.scss";
 import "../Movies/style.scss";
 

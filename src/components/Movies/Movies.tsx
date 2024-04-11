@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getMovies, getGenres, ImageMovie } from "../../api/movie";
-import { MovieList, MovieGenre } from "../../interface";
+import { MovieList, MovieGenre } from "../../interface/movie";
 import Section from "../Section/Section";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
@@ -17,6 +17,7 @@ interface MoviesProps {
 function Movies({ type, typeHref, typeApi, page }: MoviesProps) {
   const [movies, setMovies] = useState<MovieList[]>([]);
   const [genres, setGenres] = useState<MovieGenre[]>([]);
+  const location = useLocation();
 
   useEffect(() => {
     const getData = async () => {
@@ -39,12 +40,14 @@ function Movies({ type, typeHref, typeApi, page }: MoviesProps) {
       <Section className="movie">
         <div className="movie-title-view">
           <h1 className="movie-title">{type}</h1>
-          <Link to={`/view-all/${typeHref}`} className="movie-view-more">
-            <p>View All</p>
-            <KeyboardDoubleArrowRightIcon
-              style={{ marginLeft: 5, marginBottom: 3 }}
-            />
-          </Link>
+          {location.pathname === "/" && (
+            <Link to={`/view-all/${typeHref}`} className="movie-view-more">
+              <p>View All</p>
+              <KeyboardDoubleArrowRightIcon
+                style={{ marginLeft: 5, marginBottom: 3 }}
+              />
+            </Link>
+          )}
         </div>
         <div className="movie-content">
           {movies.map((movie) => (
