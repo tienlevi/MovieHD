@@ -14,6 +14,7 @@ function EmbedTv({ id, season, episode }: Props) {
           src={`https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`}
           width={"100%"}
           height={"550px"}
+          allowFullScreen
         ></iframe>
       </Section>
     </div>

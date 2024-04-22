@@ -4,7 +4,7 @@ import "./style.scss";
 
 interface Props {
   tv: TvShowDetail;
-  handleClick: (value: string) => void;
+  handleClick: (seasonName: string, season: string) => void;
   paramName: string;
 }
 
@@ -15,7 +15,7 @@ function Season({ tv, handleClick, paramName }: Props) {
         {tv.seasons.map((item: any, index: number) => (
           <p
             key={index}
-            onClick={() => handleClick(item.name)}
+            onClick={() => handleClick(item.name, item.season_number)}
             className={`season-children${item.name === paramName ? " season-children-active" : ""}`}
           >
             {item.name}

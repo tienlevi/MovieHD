@@ -8,6 +8,7 @@ function Embed({ id }: any) {
         src={`https://www.2embed.cc/embed/${id}`}
         width={"100%"}
         height={"550px"}
+        allowFullScreen
       ></iframe>
     </Section>
   );

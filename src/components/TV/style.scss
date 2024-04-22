@@ -20,3 +20,132 @@
     background-color: $blue;
   }
 }
+
+.episode {
+  display: block;
+  .episode-content {
+    display: flex;
+    flex-wrap: wrap;
+
+    .episode-content-children {
+      position: relative;
+      width: 25%;
+      padding: 0px 10px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      vertical-align: middle;
+      border-radius: 15px;
+
+      .episode-content-img {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 15px;
+
+        img {
+          height: 200px;
+          object-fit: cover;
+        }
+
+        &:hover {
+          > img {
+            transform: scale(1.2);
+          }
+
+          > .episode-content-play-icon::before {
+            opacity: 1;
+            visibility: visible;
+          }
+
+          > .episode-content-play-icon > svg {
+            opacity: 1;
+          }
+        }
+
+        img {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          border-radius: 15px;
+          transition: all 0.3s ease-in-out;
+          vertical-align: middle;
+        }
+
+        .episode-content-play-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          height: 100%;
+          transition: all 0.3s ease-in-out;
+
+          svg {
+            width: 50px;
+            height: 50px;
+            background-color: $blue;
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+          }
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            visibility: hidden;
+            border-radius: 15px;
+            background-color: rgb(0 0 0 / 0.3);
+            backdrop-filter: blur(5px);
+            z-index: -1;
+          }
+        }
+
+        .episode-content-language {
+          position: absolute;
+          right: 10px;
+          top: 10px;
+          background-color: $blue;
+          color: $white;
+          border-radius: 10px;
+          padding: 5px 10px;
+          text-transform: uppercase;
+        }
+      }
+
+      .episode-content-title {
+        color: $white;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        h2 {
+          font-size: 18px;
+          margin-top: 8px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+
+        &:hover {
+          color: $blue;
+        }
+      }
+
+      .episode-content-time {
+        color: $bodyTextColor;
+        font-size: 16px;
+        margin-top: 8px;
+        cursor: pointer;
+      }
+    }
+  }
+}

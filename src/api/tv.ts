@@ -27,7 +27,7 @@ export const DetailTv = async (id: string | number) => {
   }
 };
 
-export const getSeasonTv = async (id: string | number, season: number) => {
+export const getSeasonTv = async (id: number, season: number | string) => {
   try {
     const response = await dataUrl.get(
       `/tv/${id}/season/${season}?api_key=${ApiKey}`

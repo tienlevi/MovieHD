@@ -104,3 +104,21 @@ export interface TvShowDetail {
   vote_average: number;
   vote_count: number;
 }
+
+export interface EpisodeList {
+  air_date: string;
+  crew: [];
+  episode_number: number;
+  episode_type: string;
+  guest_stars: [];
+  id: number;
+  name: string;
+  overview: string;
+  production: string;
+  runtime: number;
+  season_number: number;
+  show_id: number;
+  still_path: string;
+  vote_average: number;
+  vote_count: number;
+}

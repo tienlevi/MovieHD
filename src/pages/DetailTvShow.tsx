@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import TvDetail from "../components/TV/TvDetail";
-import { TvShowDetail } from "../interface/tv";
-import { DetailTv } from "../api/tv";
+import { EpisodeList, TvShowDetail } from "../interface/tv";
+import { DetailTv, getSeasonTv } from "../api/tv";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import EmbedTv from "../components/TV/EmbedTv";
 import Season from "../components/TV/Season";
+import Espisode from "../components/TV/Espisode";
 
 function DetailTvShow() {
   const { id }: any = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const [detail, setDetail] = useState<TvShowDetail>();
-  const paramName: any = searchParams.get("name-season");
+  const paramName: any = searchParams.get("q");
   const paramSeason: any = searchParams.get("season") || 1;
-  const paramEspisode: any = searchParams.get("espisode") || 1;
+  const paramEspisode: any = searchParams.get("episode") || 1;
 
   useEffect(() => {
     const getData = async () => {
@@ -24,9 +25,18 @@ function DetailTvShow() {
     getData();
   }, []);
 
-  const handleClickSeason = (season: string) => {
-    searchParams.set("name-season", season);
+  const handleClickSeason = (seasonName: string, season: string) => {
+    searchParams.set("q", seasonName);
+    searchParams.set("season", season);
     setSearchParams(searchParams);
+    window.location.reload();
+  };
+
+  const handleClickEpisode = (season: number, episode: number) => {
+    searchParams.set("season", season.toString());
+    searchParams.set("episode", episode.toString());
+    setSearchParams(searchParams);
+    window.location.reload();
   };
   return (
     <>
@@ -40,6 +50,7 @@ function DetailTvShow() {
           handleClick={handleClickSeason}
         />
       )}
+      <Espisode id={id} season={paramSeason} handleClick={handleClickEpisode} />
       <Footer />
     </>
   );
