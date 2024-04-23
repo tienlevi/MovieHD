@@ -20,7 +20,7 @@ function Header() {
 
   const handleSearch = (e: any) => {
     e.preventDefault();
-    window.location.href = `/search?name=${search}`;
+    window.location.href = `/search?q=${search}`;
   };
 
   return (

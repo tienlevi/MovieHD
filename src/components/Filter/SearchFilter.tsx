@@ -6,9 +6,10 @@ import { getGenres, ImageMovie } from "../../api/movie";
 import { MovieList, MovieGenre } from "../../interface/movie";
 import "./style.scss";
 import "../Movies/style.scss";
+import { MovieQuery } from "../../interface/query";
 
 interface SearchProps {
-  movies: MovieList[];
+  movies: MovieQuery[];
   name: string;
 }
 
@@ -30,7 +31,7 @@ function SearchFilter({ movies, name }: SearchProps) {
           <h1>Search results for "{name}"</h1>
         </div>
         <div className="movie-content">
-          {movies.map((movie: MovieList) => (
+          {movies.map((movie: MovieQuery) => (
             <div className="movie-content-children" key={movie?.id}>
               <Link to={`/detail/${movie?.id}`} className="movie-content-img">
                 <img src={ImageMovie(movie.poster_path)} alt="" />
@@ -48,7 +49,7 @@ function SearchFilter({ movies, name }: SearchProps) {
                 key={movie?.id}
                 className="movie-content-title"
               >
-                <h2>{movie.title}</h2>
+                <h2>{movie.title || movie?.name}</h2>
               </Link>
               <p className="movie-content-genre">
                 {genres

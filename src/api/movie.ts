@@ -78,17 +78,6 @@ export const getMovieByGenre = async (
   }
 };
 
-export const searchMovie = (name: string, page: number | string) => {
-  try {
-    const response = dataUrl.get(
-      `/search/movie?query=${name}&api_key=${ApiKey}&page=${page}`
-    );
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const getPopularMovies = async () => {
   try {
     const response = dataUrl.get(
