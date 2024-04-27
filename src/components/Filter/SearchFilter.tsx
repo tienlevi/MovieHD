@@ -15,7 +15,6 @@ interface SearchProps {
 
 function SearchFilter({ movies, name }: SearchProps) {
   const [genres, setGenres] = useState<MovieGenre[]>([]);
-  console.log(movies);
 
   useEffect(() => {
     const getData = async () => {
