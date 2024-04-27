@@ -6,10 +6,10 @@ import { getGenres, ImageMovie } from "../../api/movie";
 import { MovieList, MovieGenre } from "../../interface/movie";
 import "./style.scss";
 import "../Movies/style.scss";
-import { MovieQuery } from "../../interface/query";
+import { SeacrhQuery } from "../../interface/query";
 
 interface SearchProps {
-  movies: MovieQuery[];
+  movies: SeacrhQuery[];
   name: string;
 }
 
@@ -31,9 +31,12 @@ function SearchFilter({ movies, name }: SearchProps) {
           <h1>Search results for "{name}"</h1>
         </div>
         <div className="movie-content">
-          {movies.map((movie: MovieQuery) => (
+          {movies.map((movie: SeacrhQuery) => (
             <div className="movie-content-children" key={movie?.id}>
-              <Link to={`/detail/${movie?.id}`} className="movie-content-img">
+              <Link
+                to={`${movie.media_type === "movie" ? `/detail/${movie?.id}` : `/detail-tv-show/${movie?.id}`}`}
+                className="movie-content-img"
+              >
                 <img src={ImageMovie(movie.poster_path)} alt="" />
                 <div className="movie-content-play-icon">
                   <PlayArrowRoundedIcon
@@ -49,7 +52,7 @@ function SearchFilter({ movies, name }: SearchProps) {
                 key={movie?.id}
                 className="movie-content-title"
               >
-                <h2>{movie.title || movie?.name}</h2>
+                <h2>{movie?.name}</h2>
               </Link>
               <p className="movie-content-genre">
                 {genres

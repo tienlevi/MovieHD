@@ -6,10 +6,10 @@ import Footer from "../components/Footer/Footer";
 import Title from "../components/Title/Title";
 import Pagination from "../components/Pagination/Pagination";
 import { searchQuery } from "../api/search";
-import { MovieQuery } from "../interface/query";
+import { SeacrhQuery } from "../interface/query";
 
 function Search() {
-  const [searchFilter, setSearchFilter] = useState<MovieQuery[]>([]);
+  const [searchFilter, setSearchFilter] = useState<SeacrhQuery[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [pages, setPages] = useState<any>();
   const paramName: any = searchParams.get("q");
