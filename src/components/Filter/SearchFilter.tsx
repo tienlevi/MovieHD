@@ -15,6 +15,7 @@ interface SearchProps {
 
 function SearchFilter({ movies, name }: SearchProps) {
   const [genres, setGenres] = useState<MovieGenre[]>([]);
+  console.log(movies);
 
   useEffect(() => {
     const getData = async () => {
@@ -52,11 +53,11 @@ function SearchFilter({ movies, name }: SearchProps) {
                 key={movie?.id}
                 className="movie-content-title"
               >
-                <h2>{movie?.name}</h2>
+                <h2>{movie?.name || movie?.title}</h2>
               </Link>
               <p className="movie-content-genre">
                 {genres
-                  .filter((genre) => movie.genre_ids.includes(genre.id))
+                  .filter((genre) => movie.genre_ids?.includes(genre.id))
                   .map((genre) => genre.name)
                   .join(", ")}
               </p>

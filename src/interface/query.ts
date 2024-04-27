@@ -13,6 +13,7 @@ export interface SeacrhQuery {
   poster_path: string;
   release_date: string;
   name: string;
+  title: string;
   vote_average: number;
   vote_count: number;
 }
