@@ -1,13 +1,13 @@
 import { signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../config/firebase";
 import SideBar from "./SideBar";
+import { imageSrc } from "../../constants";
 import "./style.scss";
 
 function Overview() {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("User") as any);
-  console.log(user);
 
   const handleLogOut = async () => {
     try {
@@ -22,7 +22,9 @@ function Overview() {
   return (
     <>
       <header className="header-profile">
-        <h2>Dashboard</h2>
+        <Link to="/">
+          <img src={imageSrc.logo} alt="" width={175} height={37} />
+        </Link>
       </header>
       <SideBar />
       <main>
