@@ -239,3 +239,39 @@
     }
   }
 }
+
+@media screen and (max-width: $breakpoint-large) {
+  .movie {
+    display: block;
+
+    .movie-content {
+      .movie-content-children {
+        width: 25%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $breakpoint-medium) {
+  .movie {
+    display: block;
+
+    .movie-content {
+      .movie-content-children {
+        width: 33.33%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $breakpoint-small) {
+  .movie {
+    display: block;
+
+    .movie-content {
+      .movie-content-children {
+        width: 100%;
+      }
+    }
+  }
+}

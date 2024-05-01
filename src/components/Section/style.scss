@@ -1,5 +1,31 @@
+@import "../../styles/theme.scss";
+
 .container {
   display: block;
   max-width: 1300px;
   margin: auto;
+}
+
+@media screen and (max-width: $breakpoint-large) {
+  .container {
+    display: block;
+    max-width: 800px;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: $breakpoint-medium) {
+  .container {
+    display: block;
+    max-width: 600px;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: $breakpoint-small) {
+  .container {
+    display: block;
+    max-width: 350px;
+    margin: auto;
+  }
 }
