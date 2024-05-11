@@ -4,22 +4,24 @@ import "./style.scss";
 
 interface Props {
   tv: TvShowDetail;
-  handleClick: (seasonName: string, season: string) => void;
-  paramName: string;
+  handleClick: (query: string, season: string) => void;
+  season: string | number;
 }
 
-function Season({ tv, handleClick, paramName }: Props) {
+function Season({ tv, handleClick, season }: Props) {
+  console.log(season);
+
   return (
     <Section className="">
       <div className="season">
         {tv.seasons.map((item: any, index: number) => (
-          <p
-            key={index}
+          <div
             onClick={() => handleClick(item.name, item.season_number)}
-            className={`season-children${item.name === paramName ? " season-children-active" : ""}`}
+            key={index}
+            className={`season-children${item.season_number.toString() === season ? " season-children-active" : ""}`}
           >
-            {item.name}
-          </p>
+            <p>{item.name}</p>
+          </div>
         ))}
       </div>
     </Section>

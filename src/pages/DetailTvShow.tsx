@@ -13,8 +13,7 @@ function DetailTvShow() {
   const { id }: any = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const [detail, setDetail] = useState<TvShowDetail>();
-  const paramName: any = searchParams.get("q");
-  const paramSeason: any = searchParams.get("season") || 1;
+  const paramSeason: any = searchParams.get("season") || "1";
   const paramEspisode: any = searchParams.get("episode") || 1;
 
   useEffect(() => {
@@ -25,15 +24,15 @@ function DetailTvShow() {
     getData();
   }, []);
 
-  const handleClickSeason = (seasonName: string, season: string) => {
-    searchParams.set("q", seasonName);
+  const handleClickSeason = (query: string, season: string) => {
+    searchParams.set("q", query);
     searchParams.set("season", season);
     setSearchParams(searchParams);
     window.location.reload();
   };
 
-  const handleClickEpisode = (season: number, episode: number) => {
-    searchParams.set("season", season.toString());
+  const handleClickEpisode = (season: string, episode: number) => {
+    searchParams.set("season", season);
     searchParams.set("episode", episode.toString());
     setSearchParams(searchParams);
     window.location.reload();
@@ -46,7 +45,7 @@ function DetailTvShow() {
       {detail && (
         <Season
           tv={detail}
-          paramName={paramName}
+          season={paramSeason}
           handleClick={handleClickSeason}
         />
       )}

@@ -6,17 +6,24 @@
   margin: 30px 0;
 
   .season-children {
-    margin-right: 15px;
+    width: 25%;
     margin-top: 10px;
     margin-bottom: 10px;
-    padding: 15px 60px;
-    color: $white;
-    background-color: $bgForm;
-    border-radius: 10px;
+    padding: 0px 10px;
     font-size: 17px;
     cursor: pointer;
+
+    p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      color: $white;
+      background-color: $bgForm;
+      border-radius: 10px;
+    }
   }
-  .season-children-active {
+  .season-children-active p {
     background-color: $blue;
   }
 }
@@ -146,6 +153,60 @@
         margin-top: 8px;
         cursor: pointer;
       }
+    }
+  }
+}
+
+@media screen and (max-width: $breakpoint-large) {
+  .episode {
+    display: block;
+
+    .episode-content {
+      .episode-content-children {
+        width: 33.33%;
+      }
+    }
+  }
+
+  .season {
+    .season-children {
+      width: 33.33%;
+    }
+  }
+}
+
+@media screen and (max-width: $breakpoint-medium) {
+  .episode {
+    display: block;
+
+    .episode-content {
+      .episode-content-children {
+        width: 50%;
+      }
+    }
+  }
+
+  .season {
+    .season-children {
+      width: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: $breakpoint-small) {
+  .episode {
+    display: block;
+
+    .episode-content {
+      .episode-content-children {
+        width: 100%;
+      }
+    }
+  }
+
+  .season {
+    .season-children {
+      width: 100%;
     }
   }
 }

@@ -9,7 +9,7 @@ import "./style.scss";
 interface Props {
   id: number;
   season: number | string;
-  handleClick: (season: number, espisode: number) => void;
+  handleClick: (season: any, espisode: any) => void;
 }
 
 function Espisode({ id, season, handleClick }: Props) {

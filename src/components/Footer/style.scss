@@ -93,6 +93,10 @@ footer {
         width: 100%;
         flex-direction: column;
 
+        .footer-children {
+          margin: 0;
+        }
+
         .about-us {
           width: 100%;
         }

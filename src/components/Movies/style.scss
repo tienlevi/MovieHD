@@ -185,16 +185,18 @@
 .container-embed {
   margin-top: 100px;
   margin-bottom: 20px;
+  padding: 0px 10px;
 }
 
 .container-detail {
-  background-color: $themeBg;
   margin-top: 30px;
   margin-bottom: 30px;
-  padding: 30px;
+  padding: 0px 10px;
 
   .movie-detail {
+    background-color: $themeBg;
     display: flex;
+    padding: 30px;
 
     .movie-detail-img img {
       width: 200px;
@@ -259,6 +261,37 @@
     .movie-content {
       .movie-content-children {
         width: 33.33%;
+      }
+    }
+  }
+
+  .container-detail {
+    .movie-detail {
+      display: flex;
+      flex-direction: column;
+
+      .movie-detail-img img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 20px;
+      }
+
+      .movie-detail-text {
+        width: 100%;
+        margin: 10px 0px;
+      }
+
+      .movie-detail-title {
+        h1 {
+          color: $white;
+          font-size: 22px;
+        }
+      }
+
+      .movie-detail-description {
+        color: $bodyTextColor;
+        line-height: 25px;
       }
     }
   }
