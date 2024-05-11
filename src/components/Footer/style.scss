@@ -85,3 +85,22 @@ footer {
     }
   }
 }
+
+@media screen and (max-width: $breakpoint-large) {
+  footer {
+    .container-footer {
+      .footer-wrapper {
+        width: 100%;
+        flex-direction: column;
+
+        .about-us {
+          width: 100%;
+        }
+
+        .footer-menu {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

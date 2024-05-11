@@ -115,6 +115,10 @@ header {
       cursor: pointer;
     }
 
+    .header-icon-menu {
+      display: none;
+    }
+
     .header-btn {
       position: relative;
       display: flex;
@@ -233,6 +237,54 @@ header {
       opacity: 1;
       visibility: visible;
       top: 60px;
+    }
+  }
+}
+
+@media screen and (max-width: $breakpoint-large) {
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    background-color: $headerBg;
+    z-index: 900;
+    padding: 0px 25px;
+
+    nav {
+      display: block;
+      position: absolute;
+      overflow: hidden;
+      top: 100%;
+      left: 0;
+      height: 0;
+      background-color: $themeBg;
+      width: 100%;
+      transition: 0.3s;
+
+      li {
+        .header-arrow-down {
+          display: none;
+        }
+
+        .menu-children {
+          display: none;
+        }
+      }
+    }
+
+    .nav-dropdown {
+      height: 330px;
+      transition: 0.3s;
+    }
+
+    .header-icon-btn {
+      .header-icon-menu {
+        display: block;
+      }
     }
   }
 }

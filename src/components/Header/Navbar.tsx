@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getGenres } from "../../api/movie";
 import { MovieGenre } from "../../interface/movie";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import "./style.scss";
 
-function Navbar() {
+interface Props {
+  active: boolean;
+}
+
+function Navbar({ active }: Props) {
   const [genres, setGenres] = useState<MovieGenre[]>([]);
 
   useEffect(() => {
@@ -20,8 +24,7 @@ function Navbar() {
     window.location.reload();
   };
   return (
-    <nav>
-      <img src="" alt="" />
+    <nav className={active ? "nav-dropdown" : ""}>
       <li>
         <Link className="menu-parent" to="/">
           Home
