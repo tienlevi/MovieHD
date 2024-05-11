@@ -23,7 +23,7 @@ function CountryFilter({ movies, title, handleSelect }: CountryFilterProps) {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getGenres();
-      setGenres(response.data.genres);
+      setGenres(response.genres);
     };
     getData();
   }, []);
@@ -31,7 +31,7 @@ function CountryFilter({ movies, title, handleSelect }: CountryFilterProps) {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getCountry();
-      setCountries(response.data);
+      setCountries(response);
     };
     getData();
   }, []);

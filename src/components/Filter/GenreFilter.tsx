@@ -17,7 +17,7 @@ function GenreFilter({ movies }: GenreFilterProps) {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getGenres();
-      setGenres(response.data.genres);
+      setGenres(response?.genres);
     };
     getData();
   }, []);

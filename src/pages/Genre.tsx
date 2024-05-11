@@ -20,7 +20,7 @@ function Genre() {
   const { id }: any = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const params: any = searchParams.get("page") ?? 1;
-  const genreName: any = genre.find((item: any) => item.id === id);
+  const genreName: any = genre.find((item: any) => item.id === Number(id));
 
   const handleClickPage = useCallback((page: number | string) => {
     searchParams.set("page", page.toString());
@@ -38,8 +38,8 @@ function Genre() {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getMovieByGenre(id, params || 1);
-      setMovieByGenre(response.data.results);
-      setPages(response.data.total_pages);
+      setMovieByGenre(response.results);
+      setPages(response.total_pages);
     };
     getData();
   }, []);
@@ -47,7 +47,7 @@ function Genre() {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getGenres();
-      setGenre(response.data.genres);
+      setGenre(response.genres);
     };
     getData();
   }, []);

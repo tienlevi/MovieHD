@@ -19,7 +19,7 @@ function Detail() {
   useEffect(() => {
     const getData = async () => {
       const response: any = await DetailMovie(id);
-      setDetail(response.data);
+      setDetail(response);
     };
     getData();
   }, []);
@@ -56,7 +56,7 @@ function Detail() {
   return (
     <>
       <Header />
-      <Embed id={id} />
+      {/* <Embed id={id} /> */}
       {detail && <MovieDetail movie={detail} />}
       <Comment
         ListComment={list}

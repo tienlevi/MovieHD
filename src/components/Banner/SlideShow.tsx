@@ -15,12 +15,12 @@ import { MovieList, MovieGenre } from "../../interface/movie";
 function SlideShow() {
   const [topRateMovie, setTopRateMovie] = useState<MovieList[]>([]);
   const [genres, setGenres] = useState<MovieGenre[]>([]);
-  const topRateMovieLength = topRateMovie.slice(0, 5);
+  const topRateMovieLength = topRateMovie?.slice(0, 5);
   useEffect(() => {
     const getDataTopRateMovie = async () => {
       try {
         const response: any = await getMovies("now_playing", 1);
-        setTopRateMovie(response.data.results);
+        setTopRateMovie(response.results);
       } catch (error) {
         console.log(error);
       }
@@ -30,7 +30,7 @@ function SlideShow() {
     const getDataGenre = async () => {
       try {
         const response: any = await getGenres();
-        setGenres(response.data.genres);
+        setGenres(response?.genres);
       } catch (error) {
         console.log(error);
       }
@@ -58,7 +58,7 @@ function SlideShow() {
       autoplay={{ delay: 3000, disableOnInteraction: false }}
       className="slideshow"
     >
-      {topRateMovieLength.map((item) => (
+      {topRateMovieLength?.map((item) => (
         <SwiperSlide className="slideshow-content" key={item.id}>
           <div className="slideshow-img">
             <img src={ImageMovie(item.backdrop_path)} alt="" />

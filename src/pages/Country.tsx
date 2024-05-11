@@ -40,8 +40,8 @@ function Country() {
         paramName || "US",
         paramPage || 1
       );
-      setCountryFilter(response.data.results);
-      setPages(response.data.total_pages);
+      setCountryFilter(response.results);
+      setPages(response.total_pages);
     };
     getData();
   }, []);

@@ -19,7 +19,7 @@ function SearchFilter({ movies, name }: SearchProps) {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getGenres();
-      setGenres(response.data.genres);
+      setGenres(response.genres);
     };
     getData();
   }, []);

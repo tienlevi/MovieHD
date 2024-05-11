@@ -9,8 +9,6 @@ interface Props {
 }
 
 function Season({ tv, handleClick, season }: Props) {
-  console.log(season);
-
   return (
     <Section className="">
       <div className="season">

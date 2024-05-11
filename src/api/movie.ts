@@ -8,10 +8,10 @@ export const ImageMovie = (image: string) => {
 
 export const getMovies = async (type: string, page: number | string) => {
   try {
-    const response = dataUrl.get(
+    const response = await dataUrl.get(
       `/movie/${type}?api_key=${ApiKey}&language=en-US&page=${page}`
     );
-    return response;
+    return response.data;
   } catch (err) {
     return err;
   }
@@ -19,10 +19,10 @@ export const getMovies = async (type: string, page: number | string) => {
 
 export const DetailMovie = async (id: number | string) => {
   try {
-    const response = dataUrl.get(
+    const response = await dataUrl.get(
       `/movie/${id}?api_key=${ApiKey}&append_to_response=videos`
     );
-    return response;
+    return response.data;
   } catch (err) {
     return err;
   }
@@ -30,10 +30,10 @@ export const DetailMovie = async (id: number | string) => {
 
 export const getGenres = async () => {
   try {
-    const response = dataUrl.get(
+    const response = await dataUrl.get(
       `/genre/movie/list?api_key=${ApiKey}&language=en-US`
     );
-    return response;
+    return response.data;
   } catch (err) {
     return err;
   }
@@ -41,10 +41,10 @@ export const getGenres = async () => {
 
 export const getCountry = async () => {
   try {
-    const response = dataUrl.get(
+    const response = await dataUrl.get(
       `/configuration/countries?api_key=${ApiKey}&language=en-US`
     );
-    return response;
+    return response.data;
   } catch (err) {
     return err;
   }
@@ -55,10 +55,10 @@ export const getCountryFilter = async (
   page: number | string
 ) => {
   try {
-    const response = dataUrl.get(
+    const response = await dataUrl.get(
       `/discover/movie?api_key=${ApiKey}&with_origin_country=${country}&page=${page}`
     );
-    return response;
+    return response.data;
   } catch (error) {
     return error;
   }
@@ -69,10 +69,10 @@ export const getMovieByGenre = async (
   page: number | string
 ) => {
   try {
-    const response = dataUrl.get(
+    const response = await dataUrl.get(
       `/discover/movie?api_key=${ApiKey}&with_genres=${id}&page=${page}`
     );
-    return response;
+    return response.data;
   } catch (err) {
     return err;
   }
@@ -80,10 +80,10 @@ export const getMovieByGenre = async (
 
 export const getPopularMovies = async () => {
   try {
-    const response = dataUrl.get(
+    const response = await dataUrl.get(
       `/movie/popular?api_key=${ApiKey}&language=en-US`
     );
-    return response;
+    return response.data;
   } catch (err) {
     return err;
   }

@@ -22,7 +22,7 @@ function Movies({ type, typeHref, typeApi, page }: MoviesProps) {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getMovies(typeApi, page);
-      setMovies(response.data.results);
+      setMovies(response?.results);
     };
     getData();
   }, []);
@@ -30,7 +30,7 @@ function Movies({ type, typeHref, typeApi, page }: MoviesProps) {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getGenres();
-      setGenres(response.data.genres);
+      setGenres(response?.genres);
     };
     getData();
   }, []);
@@ -50,7 +50,7 @@ function Movies({ type, typeHref, typeApi, page }: MoviesProps) {
           )}
         </div>
         <div className="movie-content">
-          {movies.map((movie) => (
+          {movies?.map((movie) => (
             <div className="movie-content-children" key={movie?.id}>
               <Link to={`/detail/${movie?.id}`} className="movie-content-img">
                 <img src={ImageMovie(movie.poster_path)} alt="" />

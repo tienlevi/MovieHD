@@ -21,7 +21,7 @@ function TvShow() {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getTvShow(paramPage || 1);
-      setPages(response?.data?.total_pages);
+      setPages(response?.total_pages);
     };
     getData();
   }, []);

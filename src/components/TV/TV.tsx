@@ -19,7 +19,7 @@ function TV({ page }: TvProps) {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getTvShow(page);
-      setLists(response.data.results);
+      setLists(response.results);
     };
     getData();
   }, []);
@@ -27,7 +27,7 @@ function TV({ page }: TvProps) {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getGenres();
-      setGenres(response.data.genres);
+      setGenres(response.genres);
     };
     getData();
   }, []);
@@ -44,7 +44,7 @@ function TV({ page }: TvProps) {
         </Link>
       </div>
       <div className="movie-content">
-        {lists.map((list: TvShowList) => (
+        {lists?.map((list: TvShowList) => (
           <div className="movie-content-children" key={list?.id}>
             <Link
               to={`/detail-tv-show/${list?.id}`}

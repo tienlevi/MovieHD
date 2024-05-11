@@ -19,7 +19,7 @@ function DetailTvShow() {
   useEffect(() => {
     const getData = async () => {
       const response: any = await DetailTv(id);
-      setDetail(response.data);
+      setDetail(response);
     };
     getData();
   }, []);
@@ -27,6 +27,7 @@ function DetailTvShow() {
   const handleClickSeason = (query: string, season: string) => {
     searchParams.set("q", query);
     searchParams.set("season", season);
+    searchParams.delete("episode");
     setSearchParams(searchParams);
     window.location.reload();
   };
@@ -40,7 +41,7 @@ function DetailTvShow() {
   return (
     <>
       <Header />
-      <EmbedTv id={id} season={paramSeason} episode={paramEspisode} />
+      {/* <EmbedTv id={id} season={paramSeason} episode={paramEspisode} /> */}
       {detail && <TvDetail tv={detail} />}
       {detail && (
         <Season

@@ -12,7 +12,7 @@ export const getTvShow = async (page: string | number) => {
     const response = await dataUrl.get(
       `/tv/top_rated?api_key=${ApiKey}&language=en-US&page=${page}`
     );
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -21,7 +21,7 @@ export const getTvShow = async (page: string | number) => {
 export const DetailTv = async (id: string | number) => {
   try {
     const response = await dataUrl.get(`/tv/${id}?api_key=${ApiKey}`);
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -32,7 +32,7 @@ export const getSeasonTv = async (id: number, season: number | string) => {
     const response = await dataUrl.get(
       `/tv/${id}/season/${season}?api_key=${ApiKey}`
     );
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
   }

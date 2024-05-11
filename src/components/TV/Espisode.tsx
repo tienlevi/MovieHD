@@ -18,7 +18,7 @@ function Espisode({ id, season, handleClick }: Props) {
   useEffect(() => {
     const getData = async () => {
       const response: any = await getSeasonTv(id, season);
-      setEpisodes(response.data?.episodes);
+      setEpisodes(response.episodes);
     };
     getData();
   }, []);
