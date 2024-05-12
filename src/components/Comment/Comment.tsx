@@ -13,11 +13,11 @@ interface User {
 
 interface Props extends User {
   ListComment: User[];
-  onPost: (data: any) => void;
+  onAdd: (data: any) => void;
   setComment: (value: any) => void;
 }
 
-function Comment({ ListComment, uid, onPost, setComment }: Props) {
+function Comment({ ListComment, uid, onAdd, setComment }: Props) {
   const {
     register,
     handleSubmit,
@@ -25,7 +25,7 @@ function Comment({ ListComment, uid, onPost, setComment }: Props) {
   } = useForm();
 
   const onSubmit = (data: any) => {
-    onPost(data);
+    onAdd(data);
   };
 
   return (

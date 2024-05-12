@@ -1,25 +1,53 @@
 import { useState, useEffect } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import TvDetail from "../components/TV/TvDetail";
-import { EpisodeList, TvShowDetail } from "../interface/tv";
-import { DetailTv, getSeasonTv } from "../api/tv";
+import { TvShowDetail } from "../interface/tv";
+import { DetailTv } from "../api/tv";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import EmbedTv from "../components/TV/EmbedTv";
 import Season from "../components/TV/Season";
 import Espisode from "../components/TV/Espisode";
+import Comment from "../components/Comment/Comment";
+import { getCommentTvShows, addCommentTvShow } from "../config/action";
 
 function DetailTvShow() {
   const { id }: any = useParams();
+  const [list, setList] = useState<[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [detail, setDetail] = useState<TvShowDetail>();
+  const [comment, setComment] = useState<string>("");
   const paramSeason: any = searchParams.get("season") || "1";
   const paramEspisode: any = searchParams.get("episode") || 1;
+  const user = JSON.parse(localStorage.getItem("User") as any);
 
+  const sortList = list.sort((a: any, b: any) => {
+    if (a.uid === user?.uid) {
+      return -1;
+    }
+    if (b.uid === user?.uid) {
+      return 1;
+    }
+    return 0;
+  });
   useEffect(() => {
     const getData = async () => {
       const response: any = await DetailTv(id);
       setDetail(response);
+    };
+    getData();
+  }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response: any = await getCommentTvShows(id);
+        setList(response);
+      } catch (error) {
+        console.log(error);
+      }
     };
     getData();
   }, []);
@@ -38,10 +66,45 @@ function DetailTvShow() {
     setSearchParams(searchParams);
     window.location.reload();
   };
+
+  const handleAdd = async () => {
+    try {
+      const add = {
+        id: id,
+        uid: user?.uid,
+        displayName: user?.displayName,
+        photoURL: user?.photoURL,
+        comment: comment,
+        create_at: new Date().toLocaleString(),
+      };
+      await addCommentTvShow(
+        id,
+        user?.uid,
+        user?.displayName,
+        user?.photoURL,
+        comment
+      );
+      toast.success("Add success");
+      setList((prev): any => {
+        return [...prev, add];
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Header />
-      {/* <EmbedTv id={id} season={paramSeason} episode={paramEspisode} /> */}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        newestOnTop={false}
+        theme="light"
+        pauseOnHover={false}
+        style={{ width: "300px", height: "50px" }}
+      />
+      <EmbedTv id={id} season={paramSeason} episode={paramEspisode} />
       {detail && <TvDetail tv={detail} />}
       {detail && (
         <Season
@@ -51,6 +114,12 @@ function DetailTvShow() {
         />
       )}
       <Espisode id={id} season={paramSeason} handleClick={handleClickEpisode} />
+      <Comment
+        ListComment={sortList}
+        uid={user?.uid}
+        onAdd={handleAdd}
+        setComment={setComment}
+      />
       <Footer />
     </>
   );

@@ -39,7 +39,18 @@ export const getComments = async (MovieId: string) => {
   }
 };
 
-export const postComment = async (
+export const getCommentTvShows = async (TvId: string) => {
+  try {
+    const lists = collection(db, "commentTvShows");
+    const response = (await getDocs(lists)).docs.map((item) => item.data());
+    const data = response.filter((item) => item.TvId === TvId);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addComment = async (
   MovieId: any,
   uid: any,
   displayName: string,
@@ -56,6 +67,29 @@ export const postComment = async (
       create_at: new Date().toLocaleString(),
     };
     const response = await addDoc(collection(db, "comments"), data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addCommentTvShow = async (
+  TvId: any,
+  uid: any,
+  displayName: string,
+  photoURL: string,
+  comment: string
+) => {
+  try {
+    const data = {
+      TvId: TvId,
+      uid: uid,
+      displayName: displayName,
+      photoURL: photoURL,
+      comment: comment,
+      create_at: new Date().toLocaleString(),
+    };
+    const response = await addDoc(collection(db, "commentTvShows"), data);
     return response;
   } catch (error) {
     console.log(error);
