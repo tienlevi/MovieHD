@@ -68,14 +68,14 @@ function DetailTvShow() {
     window.location.reload();
   };
 
-  const handleAdd = async () => {
+  const handleAdd = async (data: any) => {
     try {
       const add = {
         id: id,
         uid: user?.uid,
         displayName: user?.displayName,
         photoURL: user?.photoURL,
-        comment: comment,
+        comment: data.comment,
         create_at: new Date().toLocaleString(),
       };
       await addCommentTvShow(
@@ -83,7 +83,7 @@ function DetailTvShow() {
         user?.uid,
         user?.displayName,
         user?.photoURL,
-        comment
+        data.comment
       );
       toast.success("Add success");
       setList((prev): any => {
