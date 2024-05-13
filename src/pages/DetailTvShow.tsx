@@ -12,6 +12,7 @@ import Season from "../components/TV/Season";
 import Espisode from "../components/TV/Espisode";
 import Comment from "../components/Comment/Comment";
 import { getCommentTvShows, addCommentTvShow } from "../config/action";
+import useAuthStageChange from "../hooks/useAuthStageChange";
 
 function DetailTvShow() {
   const { id }: any = useParams();
@@ -21,7 +22,7 @@ function DetailTvShow() {
   const [comment, setComment] = useState<string>("");
   const paramSeason: any = searchParams.get("season") || "1";
   const paramEspisode: any = searchParams.get("episode") || 1;
-  const user = JSON.parse(localStorage.getItem("User") as any);
+  const { user } = useAuthStageChange();
 
   const sortList = list.sort((a: any, b: any) => {
     if (a.uid === user?.uid) {
@@ -114,12 +115,7 @@ function DetailTvShow() {
         />
       )}
       <Espisode id={id} season={paramSeason} handleClick={handleClickEpisode} />
-      <Comment
-        ListComment={sortList}
-        uid={user?.uid}
-        onAdd={handleAdd}
-        setComment={setComment}
-      />
+      <Comment ListComment={sortList} uid={user?.uid} onAdd={handleAdd} />
       <Footer />
     </>
   );

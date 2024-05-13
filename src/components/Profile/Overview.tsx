@@ -1,18 +1,19 @@
 import { signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
+import useAuthStageChange from "../../hooks/useAuthStageChange";
 import { auth } from "../../config/firebase";
 import SideBar from "./SideBar";
 import { imageSrc } from "../../constants";
 import "./style.scss";
 
 function Overview() {
+  const { user, setUser } = useAuthStageChange();
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("User") as any);
 
-  const handleLogOut = async () => {
+  const LogOut = async () => {
     try {
+      setUser({});
       await signOut(auth);
-      localStorage.removeItem("User");
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -33,7 +34,7 @@ function Overview() {
           <img src={user?.photoURL} alt="" />
           <p>Name: {user?.displayName}</p>
           <p>Email: {user?.email}</p>
-          <div className="overview-profile-btn" onClick={handleLogOut}>
+          <div className="overview-profile-btn" onClick={LogOut}>
             <p>Đăng xuất</p>
           </div>
         </div>

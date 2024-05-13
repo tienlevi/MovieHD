@@ -2,20 +2,22 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   signInWithPopup,
-  signOut,
   GoogleAuthProvider,
   FacebookAuthProvider,
 } from "firebase/auth";
 import { useForm } from "react-hook-form";
+import useAuthStageChange from "../../hooks/useAuthStageChange";
 import { auth } from "../../config/firebase";
+import { getUser, addUser } from "../../config/action";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import Section from "../Section/Section";
-import { getUser, addUser } from "../../config/action";
 import "./style.scss";
 
 function SignIn() {
+  const { user } = useAuthStageChange();
   const [data, setData] = useState<any>([]);
+
   const navigate = useNavigate();
   const {
     control,
@@ -24,6 +26,9 @@ function SignIn() {
     formState: { errors },
   } = useForm({ defaultValues: { email: "", password: "" } });
 
+  useEffect(() => {
+    user && navigate("/");
+  }, []);
   useEffect(() => {
     const getData = async () => {
       const response = await getUser();
@@ -38,13 +43,13 @@ function SignIn() {
         auth,
         new GoogleAuthProvider()
       );
+
       const { displayName, email, photoURL, uid } = user;
       const checkUser = data.find((item: any) => item.uid === uid);
       if (!checkUser) {
-        addUser({ displayName, email, photoURL, uid });
+        await addUser({ displayName, email, photoURL, uid });
       }
       navigate("/profile");
-      localStorage.setItem("User", JSON.stringify(user));
     } catch (error) {
       console.log(error);
     }

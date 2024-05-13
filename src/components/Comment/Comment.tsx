@@ -2,6 +2,7 @@ import { Timestamp } from "firebase/firestore";
 import { useForm } from "react-hook-form";
 import Section from "../Section/Section";
 import "./style.scss";
+import { useState } from "react";
 
 interface User {
   uid?: string;
@@ -14,15 +15,18 @@ interface User {
 interface Props extends User {
   ListComment: User[];
   onAdd: (data: any) => void;
-  setComment: (value: any) => void;
 }
 
-function Comment({ ListComment, uid, onAdd, setComment }: Props) {
+interface Inputs {
+  comment: string;
+}
+
+function Comment({ ListComment, uid, onAdd }: Props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<Inputs>();
 
   const onSubmit = (data: any) => {
     onAdd(data);
@@ -34,18 +38,11 @@ function Comment({ ListComment, uid, onAdd, setComment }: Props) {
         <h1>Comment</h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="comment-input">
-        <textarea
-          {...register("comment", { required: true })}
-          onChange={(e) => setComment(e.target.value)}
-        ></textarea>
+        <textarea {...register("comment", { required: true })}></textarea>
         {errors?.comment?.type === "required" && (
           <p style={{ color: "red " }}>Validate</p>
         )}
-        {uid ? (
-          <input type="submit" value="Post" />
-        ) : (
-          <input type="submit" value="Post" disabled />
-        )}
+        {uid ? <button>Add</button> : ""}
       </form>
       <div className="list-comment">
         {ListComment.map((item: User, index: number) => (

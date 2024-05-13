@@ -8,7 +8,7 @@ import Search from "./pages/Search";
 import ViewAll from "./pages/ViewAll";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
-import { Profile, UpdateProfile } from "./pages/Profile";
+import { Profile } from "./pages/Profile";
 import ProtectRoute from "./Auth/ProtectRoute";
 import TvShow from "./pages/TvShow";
 import DetailTvShow from "./pages/DetailTvShow";
@@ -28,7 +28,6 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route element={<ProtectRoute />}>
           <Route path="/profile" element={<Profile />} />
-          <Route path="/profile/update" element={<UpdateProfile />} />
         </Route>
         <Route path="/tv-show" element={<TvShow />} />
         <Route path="/detail-tv-show/:id" element={<DetailTvShow />} />

@@ -1,14 +1,15 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
+import useAuthStageChange from "../hooks/useAuthStageChange";
 
-function Protect() {
+function ProtectRoute() {
   const location = useLocation();
-  const currentUser = localStorage.getItem("User");
+  const { user } = useAuthStageChange();
 
-  return !currentUser ? (
+  return user === null ? (
     <Navigate to="/" state={{ from: location }} replace />
   ) : (
     <Outlet />
   );
 }
 
-export default Protect;
+export default ProtectRoute;

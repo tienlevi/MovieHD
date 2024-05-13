@@ -10,13 +10,14 @@ import Embed from "../components/Movies/Embed";
 import Comment from "../components/Comment/Comment";
 import { MovieId } from "../interface/movie";
 import { getComments, addComment } from "../config/action";
+import useAuthStageChange from "../hooks/useAuthStageChange";
 
 function Detail() {
   const { id }: any = useParams();
   const [list, setList] = useState([]);
   const [comment, setComment] = useState<string>("");
   const [detail, setDetail] = useState<MovieId>();
-  const user = JSON.parse(localStorage.getItem("User") as any);
+  const { user } = useAuthStageChange();
 
   const sortList = list.sort((a: any, b: any) => {
     if (a.uid === user?.uid) {
@@ -47,14 +48,14 @@ function Detail() {
     getData();
   }, []);
 
-  const handleAdd = async () => {
+  const handleAdd = async (data: any) => {
     try {
       const add = {
         id: id,
         uid: user?.uid,
         displayName: user?.displayName,
         photoURL: user?.photoURL,
-        comment: comment,
+        comment: data.comment,
         create_at: new Date().toLocaleString(),
       };
       await addComment(
@@ -62,7 +63,7 @@ function Detail() {
         user?.uid,
         user?.displayName,
         user?.photoURL,
-        comment
+        data.comment
       );
       toast.success("Add success");
       setList((prev): any => {
@@ -84,14 +85,9 @@ function Detail() {
         pauseOnHover={false}
         style={{ width: "300px", height: "50px" }}
       />
-      <Embed id={id} />
+      {/* <Embed id={id} /> */}
       {detail && <MovieDetail movie={detail} />}
-      <Comment
-        ListComment={sortList}
-        uid={user?.uid}
-        onAdd={handleAdd}
-        setComment={setComment}
-      />
+      <Comment ListComment={sortList} uid={user?.uid} onAdd={handleAdd} />
       <Footer />
     </>
   );

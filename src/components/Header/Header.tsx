@@ -4,18 +4,19 @@ import SearchIcon from "@mui/icons-material/Search";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-
 import LoginIcon from "@mui/icons-material/Login";
 import "./style.scss";
 import Navbar from "./Navbar";
 import { imageSrc } from "../../constants";
 import Avatar from "./Avatar";
+import useAuthStageChange from "../../hooks/useAuthStageChange";
+import { auth } from "../../config/firebase";
 
 function Header() {
   const [search, setSearch] = useState<string>("");
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
-  const user = JSON.parse(localStorage.getItem("User") as any);
+  const { user } = useAuthStageChange();
 
   const handleToggle = () => {
     setToggle(!toggle);
@@ -50,7 +51,7 @@ function Header() {
           <MenuRoundedIcon />
         </div>
         {user ? (
-          <Avatar img={user.photoURL} />
+          <Avatar img={user?.photoURL} />
         ) : (
           <Link to="/signin" className="header-btn">
             <LoginIcon />
