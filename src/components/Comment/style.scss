@@ -79,6 +79,67 @@
       color: $white;
       font-size: 15px;
       line-height: 33px;
+      border-bottom: 1px solid $bodyTextColor;
+    }
+
+    .comment-item-action {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+
+      .comment-item-reply {
+        display: flex;
+        align-items: center;
+        color: $blue;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          color: $red;
+        }
+
+        p {
+          margin-top: 3px;
+          margin-left: 6px;
+          font-size: 16px;
+        }
+      }
+
+      .comment-item-btn {
+        display: flex;
+        .comment-item-btn-delete {
+          @include button-style($red, $white);
+
+          &::before {
+            @include button-style-before($blue);
+          }
+
+          &:hover::before {
+            width: 120%;
+            height: 120%;
+          }
+        }
+
+        .comment-item-btn-edit {
+          margin-left: 10px;
+          @include button-style($yellow, $white);
+
+          &::before {
+            @include button-style-before($blue);
+          }
+
+          &:hover::before {
+            width: 120%;
+            height: 120%;
+          }
+
+          span {
+            margin-left: 5px;
+          }
+        }
+      }
     }
   }
 }

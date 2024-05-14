@@ -1,8 +1,7 @@
-import { Timestamp } from "firebase/firestore";
 import { useForm } from "react-hook-form";
+import ReplyIcon from "@mui/icons-material/Reply";
 import Section from "../Section/Section";
 import "./style.scss";
-import { useState } from "react";
 
 interface User {
   uid?: string;
@@ -60,7 +59,19 @@ function Comment({ ListComment, uid, onAdd }: Props) {
                 </div>
               </div>
             </div>
-            <div className="comment-item-content">{item.comment}</div>
+            <div className="comment-item-content">
+              <p>{item.comment}</p>
+            </div>
+            <div className="comment-item-action">
+              <div className="comment-item-reply">
+                <ReplyIcon style={{ fontSize: 20 }} />
+                <p>Reply</p>
+              </div>
+              <div className="comment-item-btn">
+                <div className="comment-item-btn-delete">Delete</div>
+                <div className="comment-item-btn-edit">Edit</div>
+              </div>
+            </div>
           </div>
         ))}
       </div>
