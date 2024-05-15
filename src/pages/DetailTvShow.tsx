@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,15 +11,18 @@ import EmbedTv from "../components/TV/EmbedTv";
 import Season from "../components/TV/Season";
 import Espisode from "../components/TV/Espisode";
 import Comment from "../components/Comment/Comment";
-import { getCommentTvShows, addCommentTvShow } from "../config/action";
+import {
+  getCommentTvShows,
+  addCommentTvShow,
+  deleteCommentTvShow,
+} from "../config/action";
 import useAuthStageChange from "../hooks/useAuthStageChange";
 
 function DetailTvShow() {
   const { id }: any = useParams();
-  const [list, setList] = useState<[]>([]);
+  const [list, setList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [detail, setDetail] = useState<TvShowDetail>();
-  const [comment, setComment] = useState<string>("");
   const paramSeason: any = searchParams.get("season") || "1";
   const paramEspisode: any = searchParams.get("episode") || 1;
   const { user } = useAuthStageChange();
@@ -94,6 +97,16 @@ function DetailTvShow() {
     }
   };
 
+  const handleDelete = useCallback(async (id: string) => {
+    if (confirm("Are sure want to delete ?")) {
+      const response = await deleteCommentTvShow(id);
+      const deleteItem = list.filter((item: any) => item.id !== id);
+      setList(deleteItem);
+      toast.error("Delete success");
+      return response;
+    }
+  }, []);
+
   return (
     <>
       <Header />
@@ -115,7 +128,12 @@ function DetailTvShow() {
         />
       )}
       <Espisode id={id} season={paramSeason} handleClick={handleClickEpisode} />
-      <Comment ListComment={sortList} uid={user?.uid} onAdd={handleAdd} />
+      <Comment
+        listComment={sortList}
+        uid={user?.uid}
+        onAdd={handleAdd}
+        onDelete={handleDelete}
+      />
       <Footer />
     </>
   );

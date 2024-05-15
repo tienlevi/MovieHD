@@ -1,10 +1,11 @@
 import {
   collection,
   addDoc,
+  getDoc,
   getDocs,
   deleteDoc,
+  updateDoc,
   doc,
-  Timestamp,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -32,7 +33,19 @@ export const getComments = async (MovieId: string) => {
   try {
     const lists = collection(db, "comments");
     const response = (await getDocs(lists)).docs.map((item) => item.data());
-    const data = response.filter((item) => item.MovieId === MovieId);
+    const subCollection = (await getDocs(lists)).docs.map((item) => {
+      return { id: item.id };
+    });
+    const merged = response.map((item, index) => ({
+      id: subCollection[index].id,
+      MovieId: item.MovieId,
+      displayName: item.displayName,
+      uid: item.uid,
+      photoURL: item.photoURL,
+      comment: item.comment,
+      create_at: item.create_at,
+    }));
+    const data = merged.filter((item) => item.MovieId === MovieId);
     return data;
   } catch (error) {
     console.log(error);
@@ -73,6 +86,16 @@ export const addComment = async (
   }
 };
 
+export const deleteComment = async (id: string) => {
+  try {
+    const docRef = doc(db, "comments", id);
+    const response = await deleteDoc(docRef);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addCommentTvShow = async (
   TvId: any,
   uid: any,
@@ -90,6 +113,16 @@ export const addCommentTvShow = async (
       create_at: new Date().toLocaleString(),
     };
     const response = await addDoc(collection(db, "commentTvShows"), data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteCommentTvShow = async (id: string) => {
+  try {
+    const docRef = doc(db, "commentTvShows", id);
+    const response = await deleteDoc(docRef);
     return response;
   } catch (error) {
     console.log(error);

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,13 +9,12 @@ import Footer from "../components/Footer/Footer";
 import Embed from "../components/Movies/Embed";
 import Comment from "../components/Comment/Comment";
 import { MovieId } from "../interface/movie";
-import { getComments, addComment } from "../config/action";
+import { getComments, addComment, deleteComment } from "../config/action";
 import useAuthStageChange from "../hooks/useAuthStageChange";
 
 function Detail() {
   const { id }: any = useParams();
   const [list, setList] = useState([]);
-  const [comment, setComment] = useState<string>("");
   const [detail, setDetail] = useState<MovieId>();
   const { user } = useAuthStageChange();
 
@@ -74,6 +73,15 @@ function Detail() {
     }
   };
 
+  const handleDelete = useCallback(async (id: string) => {
+    if (confirm("Are sure want to delete ?")) {
+      await deleteComment(id);
+      const deleteItem = list.filter((item: any) => item.id !== id);
+      setList(deleteItem);
+      toast.error("Delete success");
+    }
+  }, []);
+
   return (
     <>
       <Header />
@@ -85,9 +93,14 @@ function Detail() {
         pauseOnHover={false}
         style={{ width: "300px", height: "50px" }}
       />
-      {/* <Embed id={id} /> */}
+      <Embed id={id} />
       {detail && <MovieDetail movie={detail} />}
-      <Comment ListComment={sortList} uid={user?.uid} onAdd={handleAdd} />
+      <Comment
+        listComment={sortList}
+        uid={user?.uid}
+        onAdd={handleAdd}
+        onDelete={handleDelete}
+      />
       <Footer />
     </>
   );

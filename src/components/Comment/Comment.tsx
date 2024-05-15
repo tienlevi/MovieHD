@@ -4,6 +4,7 @@ import Section from "../Section/Section";
 import "./style.scss";
 
 interface User {
+  id?: string;
   uid?: string;
   displayName?: string;
   photoURL?: string;
@@ -12,15 +13,17 @@ interface User {
 }
 
 interface Props extends User {
-  ListComment: User[];
+  listComment: User[];
   onAdd: (data: any) => void;
+  onDelete: (id: string) => void;
+  onEdit?: (id: string, data: any) => void;
 }
 
 interface Inputs {
   comment: string;
 }
 
-function Comment({ ListComment, uid, onAdd }: Props) {
+function Comment({ listComment, uid, onAdd, onDelete }: Props) {
   const {
     register,
     handleSubmit,
@@ -44,7 +47,7 @@ function Comment({ ListComment, uid, onAdd }: Props) {
         {uid ? <button>Add</button> : ""}
       </form>
       <div className="list-comment">
-        {ListComment.map((item: User, index: number) => (
+        {listComment.map((item: User, index: number) => (
           <div className="comment-item" key={index}>
             <div className="comment-item-user">
               <div className="comment-item-img">
@@ -62,16 +65,23 @@ function Comment({ ListComment, uid, onAdd }: Props) {
             <div className="comment-item-content">
               <p>{item.comment}</p>
             </div>
-            <div className="comment-item-action">
-              <div className="comment-item-reply">
-                <ReplyIcon style={{ fontSize: 20 }} />
-                <p>Reply</p>
+            {uid === item.uid && (
+              <div key={index} className="comment-item-action">
+                <div className="comment-item-reply">
+                  <ReplyIcon style={{ fontSize: 20 }} />
+                  <p>Reply</p>
+                </div>
+                <div className="comment-item-btn">
+                  <div
+                    className="comment-item-btn-delete"
+                    onClick={() => onDelete(item?.id as any)}
+                  >
+                    Delete
+                  </div>
+                  <div className="comment-item-btn-edit">Edit</div>
+                </div>
               </div>
-              <div className="comment-item-btn">
-                <div className="comment-item-btn-delete">Delete</div>
-                <div className="comment-item-btn-edit">Edit</div>
-              </div>
-            </div>
+            )}
           </div>
         ))}
       </div>
