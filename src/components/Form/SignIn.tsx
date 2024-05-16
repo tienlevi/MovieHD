@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import {
   signInWithPopup,
   GoogleAuthProvider,
@@ -15,6 +21,7 @@ import Section from "../Section/Section";
 import "./style.scss";
 
 function SignIn() {
+  const location = useLocation();
   const { user } = useAuthStageChange();
   const [data, setData] = useState<any>([]);
 
@@ -26,9 +33,6 @@ function SignIn() {
     formState: { errors },
   } = useForm({ defaultValues: { email: "", password: "" } });
 
-  useEffect(() => {
-    user && navigate("/");
-  }, []);
   useEffect(() => {
     const getData = async () => {
       const response = await getUser();
@@ -67,6 +71,11 @@ function SignIn() {
   const onSubmit = (data: any) => {
     console.log(data);
   };
+
+  if (user) {
+    navigate("/");
+  }
+
   return (
     <Section className="form">
       <h1>Sign In</h1>
