@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, CSSProperties } from "react";
+import { useState, useEffect, CSSProperties } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { getDocs, collection } from "firebase/firestore";
 import BounceLoader from "react-spinners/BounceLoader";
@@ -22,11 +22,11 @@ function Genre() {
   const params: any = searchParams.get("page") ?? 1;
   const genreName: any = genre.find((item: any) => item.id === Number(id));
 
-  const handleClickPage = useCallback((page: number | string) => {
+  const handleClickPage = (page: number | string) => {
     searchParams.set("page", page.toString());
     setSearchParams(searchParams);
     window.location.reload();
-  }, []);
+  };
 
   const override: CSSProperties = {
     position: "fixed",

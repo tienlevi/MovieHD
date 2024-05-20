@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import TV from "../components/TV/TV";
 import Title from "../components/Title/Title";
 import Header from "../components/Header/Header";
@@ -12,11 +12,11 @@ function TvShow() {
   const [searchParams, setSearchParams] = useSearchParams();
   const params: any = searchParams.get("page");
   const paramPage = Number(params);
-  const handleClickPage = useCallback((page: number | string) => {
+  const handleClickPage = (page: number | string) => {
     searchParams.set("page", page.toString());
     setSearchParams(searchParams);
     window.location.reload();
-  }, []);
+  };
 
   useEffect(() => {
     const getData = async () => {

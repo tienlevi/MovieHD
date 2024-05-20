@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Header from "../components/Header/Header";
 import SearchFilter from "../components/Filter/SearchFilter";
@@ -16,11 +16,11 @@ function Search() {
   const paramPage = searchParams.get("page");
   const paramPageNumber = Number(paramPage);
 
-  const handleClickPage = useCallback((page: number) => {
+  const handleClickPage = (page: number) => {
     searchParams.set("page", page.toString());
     setSearchParams(searchParams);
     window.location.reload();
-  }, []);
+  };
 
   useEffect(() => {
     const getData = async () => {

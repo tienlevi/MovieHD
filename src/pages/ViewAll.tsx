@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import Movies from "../components/Movies/Movies";
 import Header from "../components/Header/Header";
@@ -11,11 +10,11 @@ function ViewAll() {
   const getParams = searchParams.get("page");
   const params = Number(getParams);
 
-  const handleClickPage = useCallback((page: number) => {
+  const handleClickPage = (page: number) => {
     searchParams.set("page", page.toString());
     setSearchParams(searchParams);
     window.location.reload();
-  }, []);
+  };
   const checkTypeApi = type === "popular" ? "top_rated" : "now_playing";
   const checkTypeName = type === "popular" ? "Popular" : "New";
 

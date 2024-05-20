@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import BounceLoader from "react-spinners/BounceLoader";
 import Header from "../components/Header/Header";
@@ -18,21 +18,18 @@ function Country() {
   const paramTitle: any = searchParams.get("title");
   const paramPage: any = parseInt(searchParams.get("page") as string);
 
-  const handleSelect = useCallback(
-    (name: string, title: string) => {
-      searchParams.set("name", name);
-      searchParams.set("title", title);
-      setSearchParams(searchParams);
-      window.location.reload();
-    },
-    [paramName, paramPage]
-  );
+  const handleSelect = (name: string, title: string) => {
+    searchParams.set("name", name);
+    searchParams.set("title", title);
+    setSearchParams(searchParams);
+    window.location.reload();
+  };
 
-  const handleClickPage = useCallback((page: number) => {
+  const handleClickPage = (page: number) => {
     searchParams.set("page", page.toString());
     setSearchParams(searchParams);
     window.location.reload();
-  }, []);
+  };
 
   useEffect(() => {
     const getData = async () => {
