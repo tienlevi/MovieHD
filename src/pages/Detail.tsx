@@ -9,12 +9,18 @@ import Footer from "../components/Footer/Footer";
 import Embed from "../components/Movies/Embed";
 import Comment from "../components/Comment/Comment";
 import { MovieId } from "../interface/movie";
-import { getComments, addComment, deleteComment } from "../config/action";
 import useAuthStageChange from "../hooks/useAuthStageChange";
+import {
+  getComments,
+  addComment,
+  deleteComment,
+  editComment,
+} from "../config/action";
+import User from "../interface/user";
 
 function Detail() {
   const { id }: any = useParams();
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<User[]>([]);
   const [detail, setDetail] = useState<MovieId>();
   const { user } = useAuthStageChange();
 
@@ -73,14 +79,26 @@ function Detail() {
     }
   };
 
-  const handleDelete = useCallback(async (id: string) => {
-    if (confirm("Are sure want to delete ?")) {
-      await deleteComment(id);
-      const deleteItem = list.filter((item: any) => item.id !== id);
-      setList(deleteItem);
-      toast.error("Delete success");
-    }
-  }, []);
+  const handleDelete = useCallback(
+    async (id: string) => {
+      if (confirm("Are sure want to delete ?")) {
+        await deleteComment(id);
+        const deleteItem = list.filter((item: User) => item.id !== id);
+        setList(deleteItem);
+        toast.error("Delete success");
+      }
+    },
+    [list]
+  );
+
+  const handleEdit = async (data: any) => {
+    await editComment(data.id, data.comment);
+    const editItem = list.map((item: User) =>
+      item.id === data.id ? data : item
+    );
+    toast.success("Edit success");
+    setList(editItem);
+  };
 
   return (
     <>
@@ -100,6 +118,7 @@ function Detail() {
         uid={user?.uid}
         onAdd={handleAdd}
         onDelete={handleDelete}
+        onEdit={handleEdit}
       />
       <Footer />
     </>

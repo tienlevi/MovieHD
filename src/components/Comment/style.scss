@@ -26,7 +26,7 @@
     }
   }
 
-  button {
+  .comment-item-btn-add {
     width: 150px;
     height: 50px;
     margin-top: 15px;
@@ -42,6 +42,36 @@
 .list-comment {
   display: block;
   margin-bottom: 15px;
+
+  .comment-item-btn-select {
+    display: flex;
+    margin: 15px 0px;
+    .comment-item-btn-confirm {
+      margin-left: 15px;
+      @include button-style($yellow, $white);
+
+      &::before {
+        @include button-style-before($blue);
+      }
+
+      &:hover::before {
+        width: 120%;
+        height: 120%;
+      }
+    }
+    .comment-item-btn-cancel {
+      @include button-style($red, $white);
+
+      &::before {
+        @include button-style-before($blue);
+      }
+
+      &:hover::before {
+        width: 120%;
+        height: 120%;
+      }
+    }
+  }
 
   .comment-item {
     margin: 17px 0px;

@@ -15,12 +15,14 @@ import {
   getCommentTvShows,
   addCommentTvShow,
   deleteCommentTvShow,
+  editCommentTvShow,
 } from "../config/action";
 import useAuthStageChange from "../hooks/useAuthStageChange";
+import User from "../interface/user";
 
 function DetailTvShow() {
   const { id }: any = useParams();
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<User[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [detail, setDetail] = useState<TvShowDetail>();
   const paramSeason: any = searchParams.get("season") || "1";
@@ -107,6 +109,15 @@ function DetailTvShow() {
     }
   }, []);
 
+  const handleEdit = async (data: any) => {
+    await editCommentTvShow(data.id, data.comment);
+    const editItem = list.map((item: User) =>
+      item.id === data.id ? data : item
+    );
+    toast.success("Edit success");
+    setList(editItem);
+  };
+
   return (
     <>
       <Header />
@@ -133,6 +144,7 @@ function DetailTvShow() {
         uid={user?.uid}
         onAdd={handleAdd}
         onDelete={handleDelete}
+        onEdit={handleEdit}
       />
       <Footer />
     </>

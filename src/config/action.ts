@@ -96,6 +96,18 @@ export const deleteComment = async (id: string) => {
   }
 };
 
+export const editComment = async (id: string, comment: any) => {
+  try {
+    const docRef = doc(db, "comments", id);
+    const response = await updateDoc(docRef, {
+      comment: comment,
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addCommentTvShow = async (
   TvId: any,
   uid: any,
@@ -123,6 +135,19 @@ export const deleteCommentTvShow = async (id: string) => {
   try {
     const docRef = doc(db, "commentTvShows", id);
     const response = await deleteDoc(docRef);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const editCommentTvShow = async (id: string, comment: any) => {
+  try {
+    const docRef = doc(db, "commentTvShows", id);
+
+    const response = await updateDoc(docRef, {
+      comment: comment,
+    });
     return response;
   } catch (error) {
     console.log(error);
