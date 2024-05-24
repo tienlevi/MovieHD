@@ -97,9 +97,15 @@
         }
 
         .comment-item-date {
+          display: flex;
+          align-items: center;
           font-size: 17px;
           color: $blue;
           margin-top: 5px;
+
+          p {
+            margin-left: 5px;
+          }
         }
       }
     }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import ReplyIcon from "@mui/icons-material/Reply";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import Section from "../Section/Section";
 import "./style.scss";
 import User from "../../interface/user";
@@ -103,6 +104,7 @@ function Comment({ listComment, uid, onAdd, onDelete, onEdit }: Props) {
                     <h2>{item.displayName}</h2>
                   </div>
                   <div className="comment-item-date">
+                    <AccessTimeIcon />
                     <p>
                       {item.update_at
                         ? `Edit at ${item.update_at}`

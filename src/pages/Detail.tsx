@@ -111,7 +111,7 @@ function Detail() {
         pauseOnHover={false}
         style={{ width: "300px", height: "50px" }}
       />
-      {/* <Embed id={id} /> */}
+      <Embed id={id} />
       {detail && <MovieDetail movie={detail} />}
       <Comment
         listComment={sortList}
