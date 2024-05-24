@@ -110,7 +110,7 @@ function DetailTvShow() {
   }, []);
 
   const handleEdit = async (data: any) => {
-    await editCommentTvShow(data.id, data.comment);
+    await editCommentTvShow(data.id, data.comment, data.update_at);
     const editItem = list.map((item: User) =>
       item.id === data.id ? data : item
     );

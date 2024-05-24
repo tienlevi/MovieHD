@@ -92,7 +92,7 @@ function Detail() {
   );
 
   const handleEdit = async (data: any) => {
-    await editComment(data.id, data.comment);
+    await editComment(data.id, data.comment, data.update_at);
     const editItem = list.map((item: User) =>
       item.id === data.id ? data : item
     );
@@ -111,7 +111,7 @@ function Detail() {
         pauseOnHover={false}
         style={{ width: "300px", height: "50px" }}
       />
-      <Embed id={id} />
+      {/* <Embed id={id} /> */}
       {detail && <MovieDetail movie={detail} />}
       <Comment
         listComment={sortList}

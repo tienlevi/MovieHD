@@ -44,6 +44,7 @@ export const getComments = async (MovieId: string) => {
       photoURL: item.photoURL,
       comment: item.comment,
       create_at: item.create_at,
+      update_at: item.update_at,
     }));
     const data = merged.filter((item) => item.MovieId === MovieId);
     return data;
@@ -56,7 +57,20 @@ export const getCommentTvShows = async (TvId: string) => {
   try {
     const lists = collection(db, "commentTvShows");
     const response = (await getDocs(lists)).docs.map((item) => item.data());
-    const data = response.filter((item) => item.TvId === TvId);
+    const subCollection = (await getDocs(lists)).docs.map((item) => {
+      return { id: item.id };
+    });
+    const merged = response.map((item, index) => ({
+      id: subCollection[index].id,
+      TvId: item.TvId,
+      displayName: item.displayName,
+      uid: item.uid,
+      photoURL: item.photoURL,
+      comment: item.comment,
+      create_at: item.create_at,
+      update_at: item.update_at,
+    }));
+    const data = merged.filter((item) => item.TvId === TvId);
     return data;
   } catch (error) {
     console.log(error);
@@ -96,11 +110,12 @@ export const deleteComment = async (id: string) => {
   }
 };
 
-export const editComment = async (id: string, comment: any) => {
+export const editComment = async (id: string, comment: any, update_at: any) => {
   try {
     const docRef = doc(db, "comments", id);
     const response = await updateDoc(docRef, {
       comment: comment,
+      update_at: update_at,
     });
     return response;
   } catch (error) {
@@ -141,12 +156,17 @@ export const deleteCommentTvShow = async (id: string) => {
   }
 };
 
-export const editCommentTvShow = async (id: string, comment: any) => {
+export const editCommentTvShow = async (
+  id: string,
+  comment: any,
+  update_at: any
+) => {
   try {
     const docRef = doc(db, "commentTvShows", id);
 
     const response = await updateDoc(docRef, {
       comment: comment,
+      update_at: update_at,
     });
     return response;
   } catch (error) {

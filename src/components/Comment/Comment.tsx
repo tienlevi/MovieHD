@@ -17,7 +17,7 @@ interface Inputs {
   uid?: string;
   displayName?: string;
   photoURL?: string;
-  create_at?: any;
+  update_at?: any;
   comment: string;
 }
 
@@ -45,7 +45,7 @@ function Comment({ listComment, uid, onAdd, onDelete, onEdit }: Props) {
         uid: selectItem.uid,
         photoURL: selectItem.photoURL,
         comment: selectItem.comment,
-        create_at: selectItem.create_at,
+        update_at: new Date().toLocaleString(),
       });
     }
     return selectItem;
@@ -103,7 +103,11 @@ function Comment({ listComment, uid, onAdd, onDelete, onEdit }: Props) {
                     <h2>{item.displayName}</h2>
                   </div>
                   <div className="comment-item-date">
-                    <p>{item.create_at}</p>
+                    <p>
+                      {item.update_at
+                        ? `Edit at ${item.update_at}`
+                        : item.create_at}
+                    </p>
                   </div>
                 </div>
               </div>
