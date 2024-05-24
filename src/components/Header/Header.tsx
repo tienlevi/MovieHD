@@ -33,8 +33,21 @@ function Header() {
 
   return (
     <header className="header">
-      <div>
-        <img src={imageSrc.logo} alt="" width={175} height={37} />
+      <div className="header-img">
+        <img
+          src={imageSrc.logo}
+          alt=""
+          width={60}
+          height={60}
+          style={{ objectFit: "contain" }}
+        />
+        <img
+          src={imageSrc.logoName}
+          alt=""
+          width={125}
+          height={50}
+          style={{ objectFit: "cover", marginLeft: 8 }}
+        />
       </div>
       <Navbar active={toggleMenu} />
       <div className="header-icon-btn">

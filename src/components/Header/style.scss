@@ -104,6 +104,13 @@ header {
     }
   }
 
+  .header-img {
+    display: flex;
+    align-items: center;
+    width: 175px;
+    height: 50px;
+  }
+
   .header-icon-btn {
     position: relative;
     display: flex;

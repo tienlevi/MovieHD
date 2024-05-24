@@ -11,7 +11,22 @@ function Footer() {
       <Section className="container-footer">
         <div className="footer-wrapper">
           <div className="footer-children about-us">
-            <img src={imageSrc.logo} alt="" width={175} height={37} />
+            <div className="footer-children-logo">
+              <img
+                src={imageSrc.logo}
+                alt=""
+                width={60}
+                height={60}
+                style={{ objectFit: "contain" }}
+              />
+              <img
+                src={imageSrc.logoName}
+                alt=""
+                width={120}
+                height={37}
+                style={{ objectFit: "cover", marginLeft: 10 }}
+              />
+            </div>
             <p>
               We are many variations of passages available the majority have
               suffered alteration in some form by injected humour words

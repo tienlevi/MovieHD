@@ -15,6 +15,11 @@ footer {
         margin: 0px 15px;
         padding: 0px 15px;
 
+        .footer-children-logo {
+          display: flex;
+          align-items: center;
+        }
+
         h3 {
           font-size: 20px;
           margin-bottom: 30px;

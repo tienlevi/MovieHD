@@ -8,7 +8,7 @@ import Partner from "../components/Partner/Partner";
 
 function Home() {
   return (
-    <Title title="MoPlay - Watch Free Movies Online">
+    <Title title="MovieHD - Watch Free Movies Online">
       <Header />
       <SlideShow />
       <Movies type="New Movies" typeHref="new" typeApi="now_playing" page={1} />
