@@ -10,6 +10,10 @@
   display: block;
   margin-bottom: 15px;
 
+  .comment-input-reply {
+    display: flex;
+  }
+
   textarea {
     resize: none;
     width: 100%;
@@ -27,15 +31,16 @@
   }
 
   .comment-item-btn-add {
-    width: 150px;
-    height: 50px;
-    margin-top: 15px;
-    background-color: $blue;
-    border: none;
-    font-size: 18px;
-    color: $white;
-    border-radius: 10px;
-    cursor: pointer;
+    @include button-style($blue, $white);
+
+    &::before {
+      @include button-style-before($red);
+    }
+
+    &:hover::before {
+      width: 120%;
+      height: 120%;
+    }
   }
 }
 
@@ -48,10 +53,10 @@
     margin: 15px 0px;
     .comment-item-btn-confirm {
       margin-left: 15px;
-      @include button-style($yellow, $white);
+      @include button-style($blue, $white);
 
       &::before {
-        @include button-style-before($blue);
+        @include button-style-before($red);
       }
 
       &:hover::before {
@@ -175,6 +180,42 @@
             margin-left: 5px;
           }
         }
+      }
+    }
+  }
+
+  .reply-comment {
+    width: 95%;
+    margin-left: auto;
+
+    .reply-comment-view {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      color: $blue;
+      transition: all 0.3s;
+      cursor: pointer;
+
+      p {
+        margin-left: 8px;
+        margin-top: 3px;
+      }
+
+      &:hover {
+        color: $red;
+      }
+    }
+
+    .comment-item-btn-cancel {
+      @include button-style($red, $white);
+
+      &::before {
+        @include button-style-before($blue);
+      }
+
+      &:hover::before {
+        width: 120%;
+        height: 120%;
       }
     }
   }

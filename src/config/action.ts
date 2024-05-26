@@ -43,6 +43,7 @@ export const getComments = async (MovieId: string) => {
       uid: item.uid,
       photoURL: item.photoURL,
       comment: item.comment,
+      parentCommentId: item.parentCommentId,
       create_at: item.create_at,
       update_at: item.update_at,
     }));
@@ -67,6 +68,7 @@ export const getCommentTvShows = async (TvId: string) => {
       uid: item.uid,
       photoURL: item.photoURL,
       comment: item.comment,
+      parentCommentId: item.parentCommentId,
       create_at: item.create_at,
       update_at: item.update_at,
     }));
@@ -117,6 +119,31 @@ export const editComment = async (id: string, comment: any, update_at: any) => {
       comment: comment,
       update_at: update_at,
     });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const replyComment = async (
+  MovieId: any,
+  uid: any,
+  displayName: string,
+  photoURL: string,
+  comment: string,
+  parentCommentId: string
+) => {
+  try {
+    const data = {
+      MovieId: MovieId,
+      uid: uid,
+      displayName: displayName,
+      photoURL: photoURL,
+      comment: comment,
+      parentCommentId: parentCommentId,
+      create_at: new Date().toLocaleString(),
+    };
+    const response = await addDoc(collection(db, "comments"), data);
     return response;
   } catch (error) {
     console.log(error);

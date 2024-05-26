@@ -115,6 +115,7 @@ function Detail() {
       {detail && <MovieDetail movie={detail} />}
       <Comment
         listComment={sortList}
+        id={id}
         uid={user?.uid}
         onAdd={handleAdd}
         onDelete={handleDelete}
