@@ -98,7 +98,10 @@ main {
   .sidebar-profile {
     display: flex;
     align-items: center;
-    padding: 20px 30px;
+    padding-top: 100px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
     border-bottom: 1px solid $headingColor;
 
     p {

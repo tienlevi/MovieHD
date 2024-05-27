@@ -24,7 +24,20 @@ function Overview() {
     <>
       <header className="header-profile">
         <Link to="/">
-          <img src={imageSrc.logo} alt="" width={175} height={37} />
+          <img
+            src={imageSrc.logo}
+            alt=""
+            width={60}
+            height={60}
+            style={{ objectFit: "contain" }}
+          />
+          <img
+            src={imageSrc.logoName}
+            alt=""
+            width={125}
+            height={60}
+            style={{ objectFit: "cover", marginLeft: 8 }}
+          />
         </Link>
       </header>
       <SideBar />
