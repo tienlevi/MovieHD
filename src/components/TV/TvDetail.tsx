@@ -4,7 +4,12 @@ import Section from "../Section/Section";
 import { TvShowDetail } from "../../interface/tv";
 import "./style.scss";
 
-function TvDetail({ tv }: { tv: TvShowDetail }) {
+interface Props {
+  tv: TvShowDetail;
+  onAdd: (data: any) => void;
+}
+
+function TvDetail({ tv, onAdd }: Props) {
   useEffect(() => {
     document.title = `Watch ${tv?.name}`;
   }, [document.title]);
@@ -45,6 +50,9 @@ function TvDetail({ tv }: { tv: TvShowDetail }) {
             <p>
               Release: <span>{tv?.first_air_date}</span>
             </p>
+          </div>
+          <div className="movie-detail-btn" onClick={() => onAdd(tv)}>
+            Add to favorites
           </div>
         </div>
       </div>

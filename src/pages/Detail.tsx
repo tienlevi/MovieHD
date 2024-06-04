@@ -25,6 +25,7 @@ function Detail() {
   const [listComment, setListComment] = useState<User[]>([]);
   const [listFavorite, setListFavorite] = useState([]);
   const [detail, setDetail] = useState<MovieId>();
+  const [exit, setExit] = useState<boolean>(false);
   const { user } = useAuthStageChange();
 
   const sortList = listComment.sort((a: any, b: any) => {
@@ -58,7 +59,7 @@ function Detail() {
       setListFavorite(response);
     };
     getData();
-  }, [user.uid]);
+  }, [listFavorite]);
 
   const handleAdd = async (data: any) => {
     try {
@@ -113,6 +114,7 @@ function Detail() {
       const movieExit = listFavorite.some(
         (item: any) => item.uid === user.uid && item.detailId === id
       );
+      setExit(movieExit);
 
       if (movieExit) {
         return toast.warning("Movie already exit");

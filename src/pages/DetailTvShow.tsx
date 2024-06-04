@@ -16,6 +16,8 @@ import {
   addCommentTvShow,
   deleteCommentTvShow,
   editCommentTvShow,
+  addFavoriteMovie,
+  getFavoriteMovie,
 } from "../config/action";
 import useAuthStageChange from "../hooks/useAuthStageChange";
 import User from "../interface/user";
@@ -23,6 +25,8 @@ import User from "../interface/user";
 function DetailTvShow() {
   const { id }: any = useParams();
   const [list, setList] = useState<User[]>([]);
+  const [listFavorite, setListFavorite] = useState([]);
+  const [exit, setExit] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [detail, setDetail] = useState<TvShowDetail>();
   const paramSeason: any = searchParams.get("season") || "1";
@@ -57,6 +61,14 @@ function DetailTvShow() {
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response: any = await getFavoriteMovie(user.uid);
+      setListFavorite(response);
+    };
+    getData();
+  }, [listFavorite]);
 
   const handleClickSeason = (query: string, season: string) => {
     searchParams.set("q", query);
@@ -118,6 +130,26 @@ function DetailTvShow() {
     setList(editItem);
   };
 
+  const addFavorite = async (data: any) => {
+    if (!user) return toast.error("You have to log in");
+    const tvExit = listFavorite.some(
+      (item: any) => item.uid === user.uid && item.detailId === id
+    );
+    setExit(tvExit);
+
+    if (tvExit) {
+      return toast.warning("Movie already exit");
+    }
+    await addFavoriteMovie(
+      id,
+      user.uid,
+      data.original_name,
+      data.poster_path,
+      "tv"
+    );
+    toast.success("Add success");
+  };
+
   return (
     <>
       <Header />
@@ -130,7 +162,7 @@ function DetailTvShow() {
         style={{ width: "300px", height: "50px" }}
       />
       <EmbedTv id={id} season={paramSeason} episode={paramEspisode} />
-      {detail && <TvDetail tv={detail} />}
+      {detail && <TvDetail tv={detail} onAdd={addFavorite} />}
       {detail && (
         <Season
           tv={detail}
