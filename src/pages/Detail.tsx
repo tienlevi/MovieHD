@@ -15,16 +15,19 @@ import {
   addComment,
   deleteComment,
   editComment,
+  addFavoriteMovie,
+  getFavoriteMovie,
 } from "../config/action";
 import User from "../interface/user";
 
 function Detail() {
   const { id }: any = useParams();
-  const [list, setList] = useState<User[]>([]);
+  const [listComment, setListComment] = useState<User[]>([]);
+  const [listFavorite, setListFavorite] = useState([]);
   const [detail, setDetail] = useState<MovieId>();
   const { user } = useAuthStageChange();
 
-  const sortList = list.sort((a: any, b: any) => {
+  const sortList = listComment.sort((a: any, b: any) => {
     if (a.uid === user?.uid) {
       return -1;
     }
@@ -43,15 +46,19 @@ function Detail() {
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        const response: any = await getComments(id);
-        setList(response);
-      } catch (error) {
-        console.log(error);
-      }
+      const response: any = await getComments(id);
+      setListComment(response);
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response: any = await getFavoriteMovie(user.uid);
+      setListFavorite(response);
+    };
+    getData();
+  }, [user.uid]);
 
   const handleAdd = async (data: any) => {
     try {
@@ -71,7 +78,7 @@ function Detail() {
         data.comment
       );
       toast.success("Add success");
-      setList((prev): any => {
+      setListComment((prev): any => {
         return [...prev, add];
       });
     } catch (error) {
@@ -83,21 +90,36 @@ function Detail() {
     async (id: string) => {
       if (confirm("Are sure want to delete ?")) {
         await deleteComment(id);
-        const deleteItem = list.filter((item: User) => item.id !== id);
-        setList(deleteItem);
+        const deleteItem = listComment.filter((item: User) => item.id !== id);
+        setListComment(deleteItem);
         toast.error("Delete success");
       }
     },
-    [list]
+    [listComment]
   );
 
   const handleEdit = async (data: any) => {
     await editComment(data.id, data.comment, data.update_at);
-    const editItem = list.map((item: User) =>
+    const editItem = listComment.map((item: User) =>
       item.id === data.id ? data : item
     );
     toast.success("Edit success");
-    setList(editItem);
+    setListComment(editItem);
+  };
+
+  const addFavorite = async (data: any) => {
+    if (!user) return toast.error("You have to log in");
+    if (listFavorite) {
+      const movieExit = listFavorite.some(
+        (item: any) => item.uid === user.uid && item.detailId === id
+      );
+
+      if (movieExit) {
+        return toast.warning("Movie already exit");
+      }
+    }
+    await addFavoriteMovie(id, user.uid, data.title, data.poster_path, "movie");
+    toast.success("Add success");
   };
 
   return (
@@ -112,7 +134,7 @@ function Detail() {
         style={{ width: "300px", height: "50px" }}
       />
       <Embed id={id} />
-      {detail && <MovieDetail movie={detail} />}
+      {detail && <MovieDetail movie={detail} onAdd={addFavorite} />}
       <Comment
         listComment={sortList}
         id={id}

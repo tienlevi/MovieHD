@@ -4,11 +4,18 @@
 .header-profile {
   display: flex;
   justify-content: start;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: $bgForm;
   padding: 0px 25px;
+
+  .header-profile-icon {
+    display: none;
+    color: $white;
+    margin-right: 20px;
+    cursor: pointer;
+  }
 }
 
 main {
@@ -74,11 +81,77 @@ main {
       }
     }
   }
+
+  .favorite-movie {
+    display: block;
+    margin-top: 20px;
+
+    h1 {
+      color: $white;
+    }
+
+    .favorite-movie-list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .favorite-movie-children {
+      width: 270px;
+      padding-right: 30px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+
+      .favorite-movie-img {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 15px;
+
+        img {
+          width: 270px;
+          height: 350px;
+          object-fit: cover;
+        }
+      }
+
+      .favorite-movie-children-btn {
+        margin-top: 15px;
+
+        @include button-style($red, $white);
+
+        &::before {
+          @include button-style-before($blue);
+        }
+
+        &:hover::before {
+          width: 120%;
+          height: 120%;
+        }
+      }
+
+      .favorite-movie-title {
+        color: $white;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        h2 {
+          font-size: 18px;
+          margin-top: 8px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+      }
+    }
+  }
 }
 
 .sidebar {
-  position: absolute;
-  top: 0;
+  display: block;
+  position: fixed;
+  bottom: 0;
   left: 0;
   width: 250px;
   height: 100%;
@@ -130,5 +203,27 @@ main {
         padding-left: 10px;
       }
     }
+  }
+}
+
+@media screen and (max-width: $breakpoint-small) {
+  .header-profile {
+    .header-profile-icon {
+      display: block;
+    }
+  }
+
+  main {
+    margin-left: 20px;
+  }
+
+  .sidebar {
+    left: -100%;
+    transition: 0.3s;
+  }
+
+  .sidebar-active {
+    left: 0;
+    transition: 0.3s;
   }
 }

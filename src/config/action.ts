@@ -200,3 +200,58 @@ export const editCommentTvShow = async (
     console.log(error);
   }
 };
+
+export const getFavoriteMovie = async (uid: string) => {
+  try {
+    const lists = collection(db, "favorite");
+    const docRef = (await getDocs(lists)).docs.map((item) => item.data());
+    const subCollection = (await getDocs(lists)).docs.map((item) => {
+      return { id: item.id };
+    });
+    const merged = docRef.map((item, index) => ({
+      id: subCollection[index].id,
+      detailId: item.detailId,
+      uid: item.uid,
+      title: item.title,
+      poster_path: item.poster_path,
+      type: item.type,
+    }));
+    const response = merged.filter((item) => item.uid === uid);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addFavoriteMovie = async (
+  detailId: string,
+  uid: string,
+  title: string,
+  poster_path: string,
+  type: string
+) => {
+  try {
+    const data = {
+      detailId: detailId,
+      uid: uid,
+      title: title,
+      poster_path: poster_path,
+      type: type,
+    };
+
+    const response = await addDoc(collection(db, "favorite"), data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteFavoriteMovie = async (id: string) => {
+  try {
+    const docRef = doc(db, "favorite", id);
+    const response = await deleteDoc(docRef);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

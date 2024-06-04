@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { imageSrc } from "../../constants";
 import "./style.scss";
 
-function SideBar() {
+interface Props {
+  active: boolean;
+}
+
+function SideBar({ active }: Props) {
   return (
     <>
-      <div className="sidebar">
+      <div className={`sidebar${active ? "" : " sidebar-active"}`}>
         <div className="sidebar-profile">
           <img
             src="https://flixtv.volkovdesign.com/admin/img/user.svg"

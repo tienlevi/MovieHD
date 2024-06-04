@@ -4,7 +4,12 @@ import { MovieId } from "../../interface/movie";
 import Section from "../Section/Section";
 import "./style.scss";
 
-function MovieDetail({ movie }: { movie: MovieId }) {
+interface Props {
+  movie: MovieId;
+  onAdd: (data: any) => void;
+}
+
+function MovieDetail({ movie, onAdd }: Props) {
   useEffect(() => {
     document.title = `Watch ${movie?.original_title}`;
   }, [document.title]);
@@ -45,6 +50,9 @@ function MovieDetail({ movie }: { movie: MovieId }) {
             <p>
               Release: <span>{movie?.release_date}</span>
             </p>
+          </div>
+          <div className="movie-detail-btn" onClick={() => onAdd(movie)}>
+            Add to favorites
           </div>
         </div>
       </div>
