@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import ScrollToTop from "./utils/ScrollToTop";
 import Detail from "./pages/Detail";
@@ -13,28 +14,40 @@ import ProtectRoute from "./auth/ProtectRoute";
 import TvShow from "./pages/TvShow";
 import DetailTvShow from "./pages/DetailTvShow";
 import AppContext from "./context/AppContext";
+import Loading from "./components/Loading/Loading";
 import "./styles/themeMode.scss";
 
 function App() {
+  const [loading, setLoading] = useState<boolean>(true);
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 3000);
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
-    <AppContext>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/country" element={<Country />} />
-        <Route path="/genre/:id" element={<Genre />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/view-all/:type" element={<ViewAll />} />
-        <Route path="/signin" element={<SignInPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route element={<ProtectRoute />}>
-          <Route path="/profile" element={<Profile />} />
-        </Route>
-        <Route path="/tv-show" element={<TvShow />} />
-        <Route path="/detail-tv-show/:id" element={<DetailTvShow />} />
-      </Routes>
-    </AppContext>
+    <>
+      <AppContext>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/country" element={<Country />} />
+          <Route path="/genre/:id" element={<Genre />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/view-all/:type" element={<ViewAll />} />
+          <Route path="/signin" element={<SignInPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route element={<ProtectRoute />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+          <Route path="/tv-show" element={<TvShow />} />
+          <Route path="/detail-tv-show/:id" element={<DetailTvShow />} />
+        </Routes>
+      </AppContext>
+    </>
   );
 }
 
