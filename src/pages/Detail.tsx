@@ -61,31 +61,34 @@ function Detail() {
     getData();
   }, [listFavorite]);
 
-  const handleAdd = async (data: any) => {
-    try {
-      const add = {
-        id: id,
-        uid: user?.uid,
-        displayName: user?.displayName,
-        photoURL: user?.photoURL,
-        comment: data.comment,
-        create_at: new Date().toLocaleString(),
-      };
-      await addComment(
-        id,
-        user?.uid,
-        user?.displayName,
-        user?.photoURL,
-        data.comment
-      );
-      toast.success("Add success");
-      setListComment((prev): any => {
-        return [...prev, add];
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const handleAdd = useCallback(
+    async (data: any) => {
+      try {
+        const add = {
+          id: id,
+          uid: user?.uid,
+          displayName: user?.displayName,
+          photoURL: user?.photoURL,
+          comment: data.comment,
+          create_at: new Date().toLocaleString(),
+        };
+        await addComment(
+          id,
+          user?.uid,
+          user?.displayName,
+          user?.photoURL,
+          data.comment
+        );
+        toast.success("Add success");
+        setListComment((prev): any => {
+          return [...prev, add];
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [listComment]
+  );
 
   const handleDelete = useCallback(
     async (id: string) => {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, memo } from "react";
 import { useForm } from "react-hook-form";
 import ReplyIcon from "@mui/icons-material/Reply";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -183,4 +183,4 @@ function Comment({ listComment, id, uid, onAdd, onDelete, onEdit }: Props) {
   );
 }
 
-export default Comment;
+export default memo(Comment);

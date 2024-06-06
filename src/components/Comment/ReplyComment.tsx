@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -255,4 +255,4 @@ function ReplyComment({
   );
 }
 
-export default memo(ReplyComment);
+export default ReplyComment;
