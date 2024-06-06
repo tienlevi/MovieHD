@@ -50,11 +50,15 @@ function Overview() {
   return (
     <>
       <ToastContainer />
-      <header className="header-profile">
+      <div className="header-profile">
         <div className="header-profile-icon" onClick={handleToggle}>
           <MenuRoundedIcon />
         </div>
-        <Link to="/">
+        <Link
+          to="/"
+          className="header-profile-logo"
+          style={{ display: "block" }}
+        >
           <img
             src={imageSrc.logo}
             alt=""
@@ -70,7 +74,7 @@ function Overview() {
             style={{ objectFit: "cover", marginLeft: 8 }}
           />
         </Link>
-      </header>
+      </div>
       <SideBar active={toggle} />
       <main>
         <div className="overview-profile">

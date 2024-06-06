@@ -7,14 +7,20 @@
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
   background-color: $bgForm;
   padding: 0px 25px;
+  z-index: 100;
 
   .header-profile-icon {
     display: none;
     color: $white;
     margin-right: 20px;
     cursor: pointer;
+  }
+
+  .header-profile-logo {
+    display: block;
   }
 }
 
@@ -206,8 +212,9 @@ main {
   }
 }
 
-@media screen and (max-width: $breakpoint-small) {
+@media screen and (max-width: $breakpoint-large) {
   .header-profile {
+    display: block;
     .header-profile-icon {
       display: block;
     }
