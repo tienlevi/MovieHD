@@ -276,4 +276,24 @@
       }
     }
   }
+
+  main {
+    .overview-profile {
+      h1,
+      p {
+        color: $black;
+      }
+    }
+  }
+
+  .favorite-movie {
+    color: $black;
+    .favorite-movie-list {
+      .favorite-movie-children {
+        .favorite-movie-title {
+          color: $black;
+        }
+      }
+    }
+  }
 }
