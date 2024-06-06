@@ -10,7 +10,7 @@ import ViewAll from "./pages/ViewAll";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import { Profile } from "./pages/Profile";
-import ProtectRoute from "./auth/ProtectRoute";
+import ProtectRoute from "./authentication/ProtectRoute";
 import TvShow from "./pages/TvShow";
 import DetailTvShow from "./pages/DetailTvShow";
 import AppContext from "./context/AppContext";
