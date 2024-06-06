@@ -9,13 +9,15 @@ import ViewAll from "./pages/ViewAll";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import { Profile } from "./pages/Profile";
-import ProtectRoute from "./Auth/ProtectRoute";
+import ProtectRoute from "./auth/ProtectRoute";
 import TvShow from "./pages/TvShow";
 import DetailTvShow from "./pages/DetailTvShow";
+import AppContext from "./context/AppContext";
+import "./styles/themeMode.scss";
 
 function App() {
   return (
-    <>
+    <AppContext>
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -32,7 +34,7 @@ function App() {
         <Route path="/tv-show" element={<TvShow />} />
         <Route path="/detail-tv-show/:id" element={<DetailTvShow />} />
       </Routes>
-    </>
+    </AppContext>
   );
 }
 

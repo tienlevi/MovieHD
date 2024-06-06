@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
@@ -10,9 +10,10 @@ import Navbar from "./Navbar";
 import { imageSrc } from "../../constants";
 import Avatar from "./Avatar";
 import useAuthStageChange from "../../hooks/useAuthStageChange";
-import { auth } from "../../config/firebase";
+import { AppProvider } from "../../context/AppContext";
 
 function Header() {
+  const { toggleDarkLight, toggleTheme } = useContext(AppProvider);
   const [search, setSearch] = useState<string>("");
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
@@ -32,7 +33,9 @@ function Header() {
   };
 
   return (
-    <header className="header">
+    <header
+      className={`header ${toggleDarkLight === "light" && "header-light-mode"}`}
+    >
       <div className="header-img">
         <img
           src={imageSrc.logo}
@@ -54,8 +57,12 @@ function Header() {
         <div className="header-icon" onClick={handleToggle}>
           <SearchIcon />
         </div>
-        <div className="header-icon">
-          <LightModeOutlinedIcon />
+        <div className="header-icon" onClick={toggleTheme}>
+          {toggleDarkLight === "dark" ? (
+            <LightModeOutlinedIcon />
+          ) : (
+            <DarkModeOutlinedIcon />
+          )}
         </div>
         <div
           className="header-icon header-icon-menu"

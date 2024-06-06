@@ -3,6 +3,7 @@
 
 .header-profile {
   display: flex;
+  align-items: center;
   justify-content: start;
   position: fixed;
   top: 0;
@@ -214,7 +215,6 @@ main {
 
 @media screen and (max-width: $breakpoint-large) {
   .header-profile {
-    display: block;
     .header-profile-icon {
       display: block;
     }
