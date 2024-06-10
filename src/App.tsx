@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import ScrollToTop from "./utils/ScrollToTop";
 import Detail from "./pages/Detail";
@@ -14,19 +13,9 @@ import ProtectRoute from "./authentication/ProtectRoute";
 import TvShow from "./pages/TvShow";
 import DetailTvShow from "./pages/DetailTvShow";
 import AppContext from "./context/AppContext";
-import Loading from "./components/Loading/Loading";
 import "./styles/themeMode.scss";
 
 function App() {
-  const [loading, setLoading] = useState<boolean>(true);
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 3000);
-  }, []);
-
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
     <>
       <AppContext>

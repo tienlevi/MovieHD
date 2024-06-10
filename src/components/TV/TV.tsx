@@ -8,6 +8,7 @@ import { getTvShow, ImageTv } from "../../api/tv";
 import { MovieGenre } from "../../interface/movie";
 import { getGenres } from "../../api/movie";
 import { TvShowList } from "../../interface/tv";
+import Loading from "../Loading/Loading";
 interface TvProps {
   page: string | number;
 }
@@ -44,37 +45,41 @@ function TV({ page }: TvProps) {
         </Link>
       </div>
       <div className="movie-content">
-        {lists?.map((list: TvShowList) => (
-          <div className="movie-content-children" key={list?.id}>
-            <Link
-              to={`/detail-tv-show/${list?.id}`}
-              className="movie-content-img"
-            >
-              <img src={ImageTv(list.poster_path)} alt="" />
-              <div className="movie-content-play-icon">
-                <PlayArrowRoundedIcon
-                  style={{ fontSize: 35, color: "white" }}
-                />
-              </div>
-              <div className="movie-content-language">
-                {list.original_language}
-              </div>
-            </Link>
-            <Link
-              to={`/detail/${list?.id}`}
-              key={list?.id}
-              className="movie-content-title"
-            >
-              <h2>{list.name}</h2>
-            </Link>
-            <p className="movie-content-genre">
-              {genres
-                .filter((genre) => list.genre_ids.includes(genre.id))
-                .map((genre) => genre.name)
-                .join(", ")}
-            </p>
-          </div>
-        ))}
+        {lists.length === 0 ? (
+          <Loading />
+        ) : (
+          lists?.map((list: TvShowList) => (
+            <div className="movie-content-children" key={list?.id}>
+              <Link
+                to={`/detail-tv-show/${list?.id}`}
+                className="movie-content-img"
+              >
+                <img src={ImageTv(list.poster_path)} alt="" />
+                <div className="movie-content-play-icon">
+                  <PlayArrowRoundedIcon
+                    style={{ fontSize: 35, color: "white" }}
+                  />
+                </div>
+                <div className="movie-content-language">
+                  {list.original_language}
+                </div>
+              </Link>
+              <Link
+                to={`/detail/${list?.id}`}
+                key={list?.id}
+                className="movie-content-title"
+              >
+                <h2>{list.name}</h2>
+              </Link>
+              <p className="movie-content-genre">
+                {genres
+                  .filter((genre) => list.genre_ids.includes(genre.id))
+                  .map((genre) => genre.name)
+                  .join(", ")}
+              </p>
+            </div>
+          ))
+        )}
       </div>
     </Section>
   );
