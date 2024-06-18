@@ -296,4 +296,18 @@
       }
     }
   }
+
+  .episode {
+    .episode-content {
+      .episode-content-children {
+        .episode-content-title {
+          color: $black;
+
+          &:hover {
+            color: $blue;
+          }
+        }
+      }
+    }
+  }
 }

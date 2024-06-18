@@ -1,19 +1,19 @@
 import { createContext, useState, useEffect } from "react";
 
 interface Context {
-  toggleDarkLight: string;
+  theme: string;
   toggleTheme: () => void;
 }
 
 export const AppProvider = createContext({} as Context);
 
 function AppContext({ children }: any) {
-  const [toggleDarkLight, setToggleDarkLight] = useState<string>("dark");
+  const [theme, setTheme] = useState<string>("dark");
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme) {
-      setToggleDarkLight(storedTheme);
+      setTheme(storedTheme);
     }
     if (storedTheme === "light") {
       document.body.classList.add("theme-mode");
@@ -23,15 +23,15 @@ function AppContext({ children }: any) {
   }, []);
 
   const toggleTheme = () => {
-    const name = toggleDarkLight === "dark" ? "light" : "dark";
+    const name = theme === "dark" ? "light" : "dark";
     localStorage.setItem("theme", name);
-    setToggleDarkLight(name);
+    setTheme(name);
     document.body.style.backgroundColor = name === "dark" ? "black" : "white";
     document.body.classList.toggle("theme-mode");
   };
 
   return (
-    <AppProvider.Provider value={{ toggleDarkLight, toggleTheme }}>
+    <AppProvider.Provider value={{ theme, toggleTheme }}>
       {children}
     </AppProvider.Provider>
   );

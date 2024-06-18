@@ -13,7 +13,7 @@ import useAuthStageChange from "../../hooks/useAuthStageChange";
 import { AppProvider } from "../../context/AppContext";
 
 function Header() {
-  const { toggleDarkLight, toggleTheme } = useContext(AppProvider);
+  const { theme, toggleTheme } = useContext(AppProvider);
   const [search, setSearch] = useState<string>("");
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
@@ -33,9 +33,7 @@ function Header() {
   };
 
   return (
-    <header
-      className={`header ${toggleDarkLight === "light" && "header-light-mode"}`}
-    >
+    <header className={`header ${theme === "light" && "header-light-mode"}`}>
       <div className="header-img">
         <img
           src={imageSrc.logo}
@@ -58,7 +56,7 @@ function Header() {
           <SearchIcon />
         </div>
         <div className="header-icon" onClick={toggleTheme}>
-          {toggleDarkLight === "dark" ? (
+          {theme === "dark" ? (
             <LightModeOutlinedIcon />
           ) : (
             <DarkModeOutlinedIcon />
