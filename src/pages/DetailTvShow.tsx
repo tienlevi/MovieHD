@@ -68,7 +68,7 @@ function DetailTvShow() {
       setListFavorite(response);
     };
     getData();
-  }, [listFavorite]);
+  }, [user]);
 
   const handleClickSeason = (query: string, season: string) => {
     searchParams.set("q", query);

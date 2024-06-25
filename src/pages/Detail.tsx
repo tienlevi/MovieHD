@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,7 +25,6 @@ function Detail() {
   const [listComment, setListComment] = useState<User[]>([]);
   const [listFavorite, setListFavorite] = useState([]);
   const [detail, setDetail] = useState<MovieId>();
-  const [exit, setExit] = useState<boolean>(false);
   const { user } = useAuth();
 
   const sortList = listComment.sort((a: any, b: any) => {
@@ -59,7 +58,7 @@ function Detail() {
       setListFavorite(response);
     };
     getData();
-  }, []);
+  }, [user]);
 
   const handleAdd = useCallback(
     async (data: any) => {
@@ -117,7 +116,6 @@ function Detail() {
       const movieExit = listFavorite.some(
         (item: any) => item.uid === user.uid && item.detailId === id
       );
-      setExit(movieExit);
 
       if (movieExit) {
         return toast.warning("Movie already exit");
@@ -138,7 +136,7 @@ function Detail() {
         pauseOnHover={false}
         style={{ width: "300px", height: "50px" }}
       />
-      {/* <Embed id={id} /> */}
+      <Embed id={id} />
       {detail && <MovieDetail movie={detail} onAdd={addFavorite} />}
       <Comment
         listComment={sortList}
