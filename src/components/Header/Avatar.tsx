@@ -4,10 +4,10 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
-import useAuthStageChange from "../../hooks/useAuthStageChange";
+import useAuth from "../../hooks/useAuth";
 
 function Avatar({ img }: { img: string }) {
-  const { setUser } = useAuthStageChange();
+  const { setUser } = useAuth();
   const [toggle, setToggle] = useState<boolean>(false);
 
   const handleToggle = () => {

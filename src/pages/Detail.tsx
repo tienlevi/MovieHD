@@ -9,7 +9,7 @@ import Footer from "../components/Footer/Footer";
 import Embed from "../components/Movies/Embed";
 import Comment from "../components/Comment/Comment";
 import { MovieId } from "../interface/movie";
-import useAuthStageChange from "../hooks/useAuthStageChange";
+import useAuth from "../hooks/useAuth";
 import {
   getComments,
   addComment,
@@ -26,7 +26,7 @@ function Detail() {
   const [listFavorite, setListFavorite] = useState([]);
   const [detail, setDetail] = useState<MovieId>();
   const [exit, setExit] = useState<boolean>(false);
-  const { user } = useAuthStageChange();
+  const { user } = useAuth();
 
   const sortList = listComment.sort((a: any, b: any) => {
     if (a.uid === user?.uid) {
@@ -59,7 +59,7 @@ function Detail() {
       setListFavorite(response);
     };
     getData();
-  }, [listFavorite]);
+  }, []);
 
   const handleAdd = useCallback(
     async (data: any) => {
@@ -138,7 +138,7 @@ function Detail() {
         pauseOnHover={false}
         style={{ width: "300px", height: "50px" }}
       />
-      <Embed id={id} />
+      {/* <Embed id={id} /> */}
       {detail && <MovieDetail movie={detail} onAdd={addFavorite} />}
       <Comment
         listComment={sortList}

@@ -12,7 +12,7 @@ import {
   FacebookAuthProvider,
 } from "firebase/auth";
 import { useForm } from "react-hook-form";
-import useAuthStageChange from "../../hooks/useAuthStageChange";
+import useAuth from "../../hooks/useAuth";
 import { auth } from "../../config/firebase";
 import { getUser, addUser } from "../../config/action";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -22,7 +22,7 @@ import "./style.scss";
 
 function SignIn() {
   const location = useLocation();
-  const { user } = useAuthStageChange();
+  const { user } = useAuth();
   const [data, setData] = useState<any>([]);
 
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import { useState, memo } from "react";
 import { useForm } from "react-hook-form";
 import ReplyIcon from "@mui/icons-material/Reply";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import useAuthStageChange from "../../hooks/useAuthStageChange";
+import useAuth from "../../hooks/useAuth";
 import Section from "../Section/Section";
 import ReplyComment from "./ReplyComment";
 import CommentInterface from "../../interface/comment";
@@ -31,7 +31,7 @@ function Comment({ listComment, id, uid, onAdd, onDelete, onEdit }: Props) {
   const [select, setSelect] = useState<string>("");
   const [reply, setReply] = useState<string>("");
   const [showReply, setShowReply] = useState<boolean>(false);
-  const { user } = useAuthStageChange();
+  const { user } = useAuth();
 
   const onSubmit = (data: any) => {
     onAdd(data);

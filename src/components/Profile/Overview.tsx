@@ -1,6 +1,6 @@
 import { signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import useAuthStageChange from "../../hooks/useAuthStageChange";
+import useAuth from "../../hooks/useAuth";
 import { auth } from "../../config/firebase";
 import { useState, useEffect } from "react";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
@@ -14,7 +14,7 @@ import "./style.scss";
 function Overview() {
   const [toggle, setToggle] = useState<boolean>(false);
   const [favoriteMovie, setFavoriteMovie] = useState<any>([]);
-  const { user, setUser } = useAuthStageChange();
+  const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ReplyIcon from "@mui/icons-material/Reply";
 import { toast } from "react-toastify";
-import useAuthStageChange from "../../hooks/useAuthStageChange";
+import useAuth from "../../hooks/useAuth";
 import User from "../../interface/user";
 import CommentInterface from "../../interface/comment";
 import {
@@ -43,7 +43,7 @@ function ReplyComment({
 }: Props) {
   const location = useLocation();
 
-  const { user } = useAuthStageChange();
+  const { user } = useAuth();
   const form = useForm<Inputs>();
   const formConfirm = useForm();
   const [select, setSelect] = useState<string>("");

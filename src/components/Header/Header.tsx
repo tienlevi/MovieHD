@@ -9,7 +9,7 @@ import "./style.scss";
 import Navbar from "./Navbar";
 import { imageSrc } from "../../constants";
 import Avatar from "./Avatar";
-import useAuthStageChange from "../../hooks/useAuthStageChange";
+import useAuth from "../../hooks/useAuth";
 import { AppProvider } from "../../context/AppContext";
 
 function Header() {
@@ -17,7 +17,7 @@ function Header() {
   const [search, setSearch] = useState<string>("");
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
-  const { user } = useAuthStageChange();
+  const { user } = useAuth();
 
   const handleToggle = () => {
     setToggle(!toggle);

@@ -19,7 +19,7 @@ import {
   addFavoriteMovie,
   getFavoriteMovie,
 } from "../config/action";
-import useAuthStageChange from "../hooks/useAuthStageChange";
+import useAuth from "../hooks/useAuth";
 import User from "../interface/user";
 
 function DetailTvShow() {
@@ -31,7 +31,7 @@ function DetailTvShow() {
   const [detail, setDetail] = useState<TvShowDetail>();
   const paramSeason: any = searchParams.get("season") || "1";
   const paramEspisode: any = searchParams.get("episode") || 1;
-  const { user } = useAuthStageChange();
+  const { user } = useAuth();
 
   const sortList = listComment.sort((a: any, b: any) => {
     if (a.uid === user?.uid) {
