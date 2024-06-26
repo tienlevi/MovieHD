@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import TvDetail from "../components/TV/TvDetail";
 import { TvShowDetail } from "../interface/tv";
 import { DetailTv } from "../api/tv";
@@ -12,19 +11,20 @@ import Season from "../components/TV/Season";
 import Espisode from "../components/TV/Espisode";
 import Comment from "../components/Comment/Comment";
 import {
-  getCommentTvShows,
-  addCommentTvShow,
-  deleteCommentTvShow,
-  editCommentTvShow,
+  addComment,
   addFavoriteMovie,
+  deleteComment,
+  editComment,
+  getComments,
   getFavoriteMovie,
 } from "../config/action";
 import useAuth from "../hooks/useAuth";
 import User from "../interface/user";
+import CommentInterface from "../interface/comment";
 
 function DetailTvShow() {
   const { id }: any = useParams();
-  const [listComment, setListComment] = useState<User[]>([]);
+  const [listComment, setListComment] = useState<CommentInterface[]>([]);
   const [listFavorite, setListFavorite] = useState([]);
   const [exit, setExit] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -52,18 +52,6 @@ function DetailTvShow() {
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        const response: any = await getCommentTvShows(id);
-        setListComment(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getData();
-  }, []);
-
-  useEffect(() => {
-    const getData = async () => {
       const response: any = await getFavoriteMovie(user.uid);
       setListFavorite(response);
     };
@@ -83,54 +71,6 @@ function DetailTvShow() {
     searchParams.set("episode", episode.toString());
     setSearchParams(searchParams);
     window.location.reload();
-  };
-
-  const handleAdd = useCallback(
-    async (data: any) => {
-      try {
-        const add = {
-          id: id,
-          uid: user?.uid,
-          displayName: user?.displayName,
-          photoURL: user?.photoURL,
-          comment: data.comment,
-          create_at: new Date().toLocaleString(),
-        };
-        await addCommentTvShow(
-          id,
-          user?.uid,
-          user?.displayName,
-          user?.photoURL,
-          data.comment
-        );
-        toast.success("Add success");
-        setListComment((prev): any => {
-          return [...prev, add];
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [listComment]
-  );
-
-  const handleDelete = useCallback(async (id: string) => {
-    if (confirm("Are sure want to delete ?")) {
-      const response = await deleteCommentTvShow(id);
-      const deleteItem = listComment.filter((item: any) => item.id !== id);
-      setListComment(deleteItem);
-      toast.error("Delete success");
-      return response;
-    }
-  }, []);
-
-  const handleEdit = async (data: any) => {
-    await editCommentTvShow(data.id, data.comment, data.update_at);
-    const editItem = listComment.map((item: User) =>
-      item.id === data.id ? data : item
-    );
-    toast.success("Edit success");
-    setListComment(editItem);
   };
 
   const addFavorite = async (data: any) => {
@@ -156,14 +96,7 @@ function DetailTvShow() {
   return (
     <>
       <Header />
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        newestOnTop={false}
-        theme="light"
-        pauseOnHover={false}
-        style={{ width: "300px", height: "50px" }}
-      />
+
       <EmbedTv id={id} season={paramSeason} episode={paramEspisode} />
       {detail && <TvDetail tv={detail} onAdd={addFavorite} />}
       {detail && (
@@ -174,13 +107,7 @@ function DetailTvShow() {
         />
       )}
       <Espisode id={id} season={paramSeason} handleClick={handleClickEpisode} />
-      <Comment
-        listComment={sortList}
-        uid={user?.uid}
-        onAdd={handleAdd}
-        onDelete={handleDelete}
-        onEdit={handleEdit}
-      />
+      <Comment id={id} uid={user?.uid} type="tv" />
       <Footer />
     </>
   );

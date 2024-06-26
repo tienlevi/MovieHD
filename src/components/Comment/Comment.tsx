@@ -1,18 +1,25 @@
-import { useState, memo } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import ReplyIcon from "@mui/icons-material/Reply";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import useAuth from "../../hooks/useAuth";
 import Section from "../Section/Section";
 import ReplyComment from "./ReplyComment";
 import CommentInterface from "../../interface/comment";
+import {
+  addComment,
+  deleteComment,
+  editComment,
+  getComments,
+} from "../../config/action";
 import "./style.scss";
+import User from "../../interface/user";
 
-interface Props extends CommentInterface {
-  listComment: CommentInterface[];
-  onAdd: (data: any) => void;
-  onDelete: (id: string) => void;
-  onEdit: (data: any) => void;
+interface Props {
+  uid: string;
+  id: string;
+  type: string;
 }
 
 interface Inputs {
@@ -25,22 +32,66 @@ interface Inputs {
   parentCommentId: string;
 }
 
-function Comment({ listComment, id, uid, onAdd, onDelete, onEdit }: Props) {
+function Comment({ uid, id, type }: Props) {
   const form = useForm<Inputs>();
   const formConfirm = useForm<Inputs>();
+  const [listComment, setListComment] = useState<CommentInterface[]>([]);
   const [select, setSelect] = useState<string>("");
   const [reply, setReply] = useState<string>("");
-  const [showReply, setShowReply] = useState<boolean>(false);
   const { user } = useAuth();
 
-  const onSubmit = (data: any) => {
-    onAdd(data);
+  useEffect(() => {
+    const getData = async () => {
+      const response: any = await getComments(id as any);
+      setListComment(response);
+    };
+    getData();
+  }, []);
+
+  const handleAdd = useCallback(
+    async (data: any) => {
+      const response = await addComment(
+        id,
+        user?.uid,
+        user?.displayName,
+        user?.photoURL,
+        "movie",
+        data.comment
+      );
+      const add = {
+        id: response?.id,
+        uid: user?.uid,
+        displayName: user?.displayName,
+        photoURL: user?.photoURL,
+        comment: data.comment,
+        create_at: new Date().toLocaleString(),
+      };
+      setListComment((prev): any => [...prev, add]);
+      toast.success("Add success");
+    },
+    [listComment]
+  );
+
+  const handleDelete = async (id: string) => {
+    if (confirm("Are sure want to delete ?")) {
+      await deleteComment(id);
+      const deleteItem = listComment.filter((item: User) => item.id !== id);
+      setListComment(deleteItem);
+      toast.error("Delete success");
+    }
   };
 
-  const onSubmitConfirm = (data: any) => {
-    onEdit(data);
-    setSelect(select);
-  };
+  const handleEdit = useCallback(
+    async (data: any) => {
+      await editComment(data.id, data.comment, data.update_at);
+      const editItem = listComment.map((item: User) =>
+        item.id === data.id ? data : item
+      );
+      toast.success("Edit success");
+      setListComment(editItem);
+    },
+    [listComment]
+  );
 
   const handleSelect = (id: any) => {
     const selectItem = listComment.find(
@@ -72,7 +123,7 @@ function Comment({ listComment, id, uid, onAdd, onDelete, onEdit }: Props) {
       <div className="comment-title">
         <h1>Comment</h1>
       </div>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="comment-input">
+      <form onSubmit={form.handleSubmit(handleAdd)} className="comment-input">
         <textarea {...form.register("comment", { required: true })}></textarea>
         {form.formState.errors?.comment?.type === "required" && (
           <p style={{ color: "red " }}>Validate</p>
@@ -88,7 +139,7 @@ function Comment({ listComment, id, uid, onAdd, onDelete, onEdit }: Props) {
           select === item.id ? (
             <form
               key={index}
-              onSubmit={formConfirm.handleSubmit(onSubmitConfirm)}
+              onSubmit={formConfirm.handleSubmit(handleEdit)}
               className="comment-input"
             >
               <textarea
@@ -114,7 +165,7 @@ function Comment({ listComment, id, uid, onAdd, onDelete, onEdit }: Props) {
             </form>
           ) : (
             <div key={index}>
-              {item.parentCommentId === undefined && (
+              {item.parentCommentId === undefined && item.type === type && (
                 <div className="comment-item">
                   <div className="comment-item-user">
                     <div className="comment-item-img">
@@ -149,7 +200,7 @@ function Comment({ listComment, id, uid, onAdd, onDelete, onEdit }: Props) {
                       <div className="comment-item-btn">
                         <div
                           className="comment-item-btn-delete"
-                          onClick={() => onDelete(item?.id as any)}
+                          onClick={() => handleDelete(item?.id!)}
                         >
                           Delete
                         </div>
@@ -183,4 +234,4 @@ function Comment({ listComment, id, uid, onAdd, onDelete, onEdit }: Props) {
   );
 }
 
-export default memo(Comment);
+export default Comment;

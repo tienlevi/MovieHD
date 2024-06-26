@@ -14,12 +14,22 @@ import TvShow from "./pages/TvShow";
 import DetailTvShow from "./pages/DetailTvShow";
 import AppContext from "./context/AppContext";
 import "./styles/themeMode.scss";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <>
       <AppContext>
         <ScrollToTop />
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          newestOnTop={false}
+          theme="light"
+          pauseOnHover={false}
+          style={{ width: "300px", height: "50px" }}
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />

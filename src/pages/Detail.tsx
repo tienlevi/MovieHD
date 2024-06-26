@@ -1,7 +1,6 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { DetailMovie } from "../api/movie";
 import MovieDetail from "../components/Movies/MovieDetail";
 import Header from "../components/Header/Header";
@@ -10,24 +9,17 @@ import Embed from "../components/Movies/Embed";
 import Comment from "../components/Comment/Comment";
 import { MovieId } from "../interface/movie";
 import useAuth from "../hooks/useAuth";
-import {
-  getComments,
-  addComment,
-  deleteComment,
-  editComment,
-  addFavoriteMovie,
-  getFavoriteMovie,
-} from "../config/action";
-import User from "../interface/user";
+import { addFavoriteMovie, getFavoriteMovie } from "../config/action";
+import CommentInterface from "../interface/comment";
 
 function Detail() {
   const { id }: any = useParams();
-  const [listComment, setListComment] = useState<User[]>([]);
+  const [listComment, setListComment] = useState<CommentInterface[]>([]);
   const [listFavorite, setListFavorite] = useState([]);
   const [detail, setDetail] = useState<MovieId>();
   const { user } = useAuth();
 
-  const sortList = listComment.sort((a: any, b: any) => {
+  const sortList = listComment?.sort((a: any, b: any) => {
     if (a.uid === user?.uid) {
       return -1;
     }
@@ -36,18 +28,11 @@ function Detail() {
     }
     return 0;
   });
+
   useEffect(() => {
     const getData = async () => {
       const response: any = await DetailMovie(id);
       setDetail(response);
-    };
-    getData();
-  }, []);
-
-  useEffect(() => {
-    const getData = async () => {
-      const response: any = await getComments(id);
-      setListComment(response);
     };
     getData();
   }, []);
@@ -59,56 +44,6 @@ function Detail() {
     };
     getData();
   }, [user]);
-
-  const handleAdd = useCallback(
-    async (data: any) => {
-      try {
-        const add = {
-          id: id,
-          uid: user?.uid,
-          displayName: user?.displayName,
-          photoURL: user?.photoURL,
-          comment: data.comment,
-          create_at: new Date().toLocaleString(),
-        };
-        await addComment(
-          id,
-          user?.uid,
-          user?.displayName,
-          user?.photoURL,
-          data.comment
-        );
-        toast.success("Add success");
-        setListComment((prev): any => {
-          return [...prev, add];
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [listComment]
-  );
-
-  const handleDelete = useCallback(
-    async (id: string) => {
-      if (confirm("Are sure want to delete ?")) {
-        await deleteComment(id);
-        const deleteItem = listComment.filter((item: User) => item.id !== id);
-        setListComment(deleteItem);
-        toast.error("Delete success");
-      }
-    },
-    [listComment]
-  );
-
-  const handleEdit = async (data: any) => {
-    await editComment(data.id, data.comment, data.update_at);
-    const editItem = listComment.map((item: User) =>
-      item.id === data.id ? data : item
-    );
-    toast.success("Edit success");
-    setListComment(editItem);
-  };
 
   const addFavorite = async (data: any) => {
     if (!user) return toast.error("You have to log in");
@@ -134,18 +69,14 @@ function Detail() {
         newestOnTop={false}
         theme="light"
         pauseOnHover={false}
-        style={{ width: "300px", height: "50px" }}
+        style={{
+          width: "300px",
+          height: "50px",
+        }}
       />
-      <Embed id={id} />
+      {/* <Embed id={id} /> */}
       {detail && <MovieDetail movie={detail} onAdd={addFavorite} />}
-      <Comment
-        listComment={sortList}
-        id={id}
-        uid={user?.uid}
-        onAdd={handleAdd}
-        onDelete={handleDelete}
-        onEdit={handleEdit}
-      />
+      <Comment id={id} uid={user?.uid} type={"movie"} />
       <Footer />
     </>
   );

@@ -10,7 +10,6 @@ import CommentInterface from "../../interface/comment";
 import {
   deleteComment,
   editComment,
-  editCommentTvShow,
   getComments,
   replyComment,
 } from "../../config/action";
@@ -41,14 +40,11 @@ function ReplyComment({
   detailId,
   uid,
 }: Props) {
-  const location = useLocation();
-
   const { user } = useAuth();
   const form = useForm<Inputs>();
   const formConfirm = useForm();
   const [select, setSelect] = useState<string>("");
   const [lists, setLists] = useState([]);
-  let indexReply = 2;
 
   useEffect(() => {
     const getData = async () => {
@@ -102,11 +98,7 @@ function ReplyComment({
     setLists(editItem);
     setSelect(data);
     toast.success("Edit success");
-    if (location.pathname === `/detail/${detailId}`) {
-      await editComment(data.id, data.comment, data.update_at);
-    } else {
-      await editCommentTvShow(data.id, data.comment, data.update_at);
-    }
+    await editComment(data.id, data.comment, data.update_at);
   };
 
   const handleSelect = (id: any, data: any) => {

@@ -5,6 +5,7 @@ interface CommentInterface {
   photoURL?: string;
   comment?: string;
   parentCommentId?: string;
+  type: string;
   create_at?: any;
   update_at?: any;
 }
