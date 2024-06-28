@@ -23,20 +23,21 @@ interface Props {
 }
 
 interface Inputs {
-  id?: string;
-  uid?: string;
-  displayName?: string;
-  photoURL?: string;
-  update_at?: any;
+  id: string;
   comment: string;
-  parentCommentId: string;
+  commentConfirm: string;
 }
 
 function Comment({ uid, id, type }: Props) {
-  const form = useForm<Inputs>();
-  const formConfirm = useForm<Inputs>();
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const [loading, setLoading] = useState(false);
   const [listComment, setListComment] = useState<CommentInterface[]>([]);
-  const [select, setSelect] = useState<string>("");
+  const [select, setSelect] = useState<string | null>(null);
   const [reply, setReply] = useState<string>("");
   const { user } = useAuth();
 
@@ -46,31 +47,31 @@ function Comment({ uid, id, type }: Props) {
       setListComment(response);
     };
     getData();
-  }, []);
+  }, [loading]);
 
-  const handleAdd = useCallback(
-    async (data: any) => {
-      const response = await addComment(
-        id,
-        user?.uid,
-        user?.displayName,
-        user?.photoURL,
-        "movie",
-        data.comment
-      );
-      const add = {
-        id: response?.id,
-        uid: user?.uid,
-        displayName: user?.displayName,
-        photoURL: user?.photoURL,
-        comment: data.comment,
-        create_at: new Date().toLocaleString(),
-      };
-      setListComment((prev): any => [...prev, add]);
-      toast.success("Add success");
-    },
-    [listComment]
-  );
+  const handleAdd = async (data: any) => {
+    const response = await addComment(
+      id,
+      user?.uid,
+      user?.displayName,
+      user?.photoURL,
+      type,
+      data.comment
+    );
+    const add = {
+      id: response?.id,
+      uid: user?.uid,
+      displayName: user?.displayName,
+      photoURL: user?.photoURL,
+      comment: data.comment,
+      create_at: new Date().toLocaleString(),
+    };
+    setLoading(true);
+    setListComment((prevList): any => {
+      return [...prevList, add];
+    });
+    toast.success("Add success");
+  };
 
   const handleDelete = async (id: string) => {
     if (confirm("Are sure want to delete ?")) {
@@ -81,34 +82,16 @@ function Comment({ uid, id, type }: Props) {
     }
   };
 
-  const handleEdit = useCallback(
-    async (data: any) => {
-      await editComment(data.id, data.comment, data.update_at);
-      const editItem = listComment.map((item: User) =>
-        item.id === data.id ? data : item
-      );
-      toast.success("Edit success");
-      setListComment(editItem);
-    },
-    [listComment]
-  );
-
-  const handleSelect = (id: any) => {
-    const selectItem = listComment.find(
-      (item: CommentInterface) => item.id === id
+  const handleEdit = async (data: any) => {
+    const result = listComment.find((item) => item.id === select);
+    const newComment = { ...result, comment: data.commentConfirm };
+    const editItem = listComment.map((item: any) =>
+      item.id === data.id ? newComment : item
     );
-    setSelect(selectItem?.id as any);
-    if (selectItem) {
-      formConfirm.reset({
-        id: selectItem.id,
-        displayName: selectItem.displayName,
-        uid: selectItem.uid,
-        photoURL: selectItem.photoURL,
-        comment: selectItem.comment,
-        update_at: new Date().toLocaleString(),
-      });
-    }
-    return selectItem;
+    await editComment(newComment);
+    setSelect(null);
+    toast.success("Edit success");
+    setListComment(editItem);
   };
 
   const selectReply = (id: any) => {
@@ -123,9 +106,9 @@ function Comment({ uid, id, type }: Props) {
       <div className="comment-title">
         <h1>Comment</h1>
       </div>
-      <form onSubmit={form.handleSubmit(handleAdd)} className="comment-input">
-        <textarea {...form.register("comment", { required: true })}></textarea>
-        {form.formState.errors?.comment?.type === "required" && (
+      <form onSubmit={handleSubmit(handleAdd)} className="comment-input">
+        <textarea {...register("comment", { required: false })}></textarea>
+        {errors?.comment?.type === "required" && (
           <p style={{ color: "red " }}>Validate</p>
         )}
         {user && (
@@ -139,19 +122,19 @@ function Comment({ uid, id, type }: Props) {
           select === item.id ? (
             <form
               key={index}
-              onSubmit={formConfirm.handleSubmit(handleEdit)}
+              onSubmit={handleSubmit(handleEdit)}
               className="comment-input"
             >
               <textarea
-                {...formConfirm.register("comment", { required: true })}
+                {...register("commentConfirm", { required: true })}
               ></textarea>
-              {form.formState.errors?.comment?.type === "required" && (
+              {errors?.commentConfirm?.type === "required" && (
                 <p style={{ color: "red " }}>Validate</p>
               )}
               <div key={index} className="comment-item-btn-select">
                 <div
                   className="comment-item-btn-cancel"
-                  onClick={() => setSelect("")}
+                  onClick={() => setSelect(null)}
                 >
                   Cancel
                 </div>
@@ -206,7 +189,13 @@ function Comment({ uid, id, type }: Props) {
                         </div>
                         <div
                           className="comment-item-btn-edit"
-                          onClick={() => handleSelect(item.id)}
+                          onClick={() => {
+                            reset({
+                              id: item.id,
+                              commentConfirm: item.comment,
+                            });
+                            setSelect(item.id!);
+                          }}
                         >
                           Edit
                         </div>

@@ -90,12 +90,13 @@ export const deleteComment = async (id: string) => {
   }
 };
 
-export const editComment = async (id: string, comment: any, update_at: any) => {
+export const editComment = async (data: any) => {
   try {
-    const docRef = doc(db, "comments", id);
+    const docRef = doc(db, "comments", data.id);
+    const newDate = new Date().toLocaleString();
     const response = await updateDoc(docRef, {
-      comment: comment,
-      update_at: update_at,
+      comment: data.comment,
+      update_at: newDate,
     });
     return response;
   } catch (error) {
