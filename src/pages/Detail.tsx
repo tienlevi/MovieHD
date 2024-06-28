@@ -74,7 +74,7 @@ function Detail() {
           height: "50px",
         }}
       />
-      {/* <Embed id={id} /> */}
+      <Embed id={id} />
       {detail && <MovieDetail movie={detail} onAdd={addFavorite} />}
       <Comment id={id} uid={user?.uid} type={"movie"} />
       <Footer />
