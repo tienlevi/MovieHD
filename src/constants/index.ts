@@ -1,4 +1,4 @@
-export const ApiKey = "bec721bcb126b9938b6c2f7b39448c63";
+export const ApiKey = import.meta.env.VITE_API_KEY;
 export const imageSrc = {
   logo: new URL("../assets/Img/cinema.png", import.meta.url).href,
   logoName: new URL("../assets/Img/logo.png", import.meta.url).href,
