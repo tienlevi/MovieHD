@@ -61,10 +61,10 @@ function DetailTvShow() {
       const tvExit = listFavorite.some(
         (item: any) => item.uid === user.uid && item.detailId === id
       );
-      setExit(tvExit);
+      setExit(true);
 
-      if (tvExit) {
-        return toast.warning("Movie already exit");
+      if (exit === true || tvExit === true) {
+        return toast.warning("TV already exit");
       }
       await addFavoriteMovie(
         id,

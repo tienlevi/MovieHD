@@ -14,7 +14,7 @@ import { addFavoriteMovie, getFavoriteMovie } from "../config/action";
 function Detail() {
   const { id }: any = useParams();
   const [listFavorite, setListFavorite] = useState([]);
-  const [exit, setExit] = useState<boolean>(false);
+  const [exit, setExit] = useState(false);
   const [detail, setDetail] = useState<MovieId>();
   const { user } = useAuth();
 
@@ -41,18 +41,19 @@ function Detail() {
         const movieExit = listFavorite.some(
           (item: any) => item.uid === user.uid && item.detailId === id
         );
-        setExit(movieExit);
-        if (movieExit === true) {
+        setExit(true);
+        if (exit === true || movieExit === true) {
           return toast.warning("Movie already exit");
         }
       }
-      await addFavoriteMovie(
+      const response = await addFavoriteMovie(
         id,
         user.uid,
         data.title,
         data.poster_path,
         "movie"
       );
+      setListFavorite((prev): any => [...prev, response]);
       toast.success("Add success");
     },
     [listFavorite]
