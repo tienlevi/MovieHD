@@ -10,21 +10,12 @@ import EmbedTv from "../components/TV/EmbedTv";
 import Season from "../components/TV/Season";
 import Espisode from "../components/TV/Espisode";
 import Comment from "../components/Comment/Comment";
-import {
-  addComment,
-  addFavoriteMovie,
-  deleteComment,
-  editComment,
-  getComments,
-  getFavoriteMovie,
-} from "../config/action";
+import { addFavoriteMovie, getFavoriteMovie } from "../config/action";
 import useAuth from "../hooks/useAuth";
-import User from "../interface/user";
 import CommentInterface from "../interface/comment";
 
 function DetailTvShow() {
   const { id }: any = useParams();
-  const [listComment, setListComment] = useState<CommentInterface[]>([]);
   const [listFavorite, setListFavorite] = useState([]);
   const [exit, setExit] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,15 +24,6 @@ function DetailTvShow() {
   const paramEspisode: any = searchParams.get("episode") || 1;
   const { user } = useAuth();
 
-  const sortList = listComment.sort((a: any, b: any) => {
-    if (a.uid === user?.uid) {
-      return -1;
-    }
-    if (b.uid === user?.uid) {
-      return 1;
-    }
-    return 0;
-  });
   useEffect(() => {
     const getData = async () => {
       const response: any = await DetailTv(id);
@@ -73,25 +55,28 @@ function DetailTvShow() {
     window.location.reload();
   };
 
-  const addFavorite = async (data: any) => {
-    if (!user) return toast.error("You have to log in");
-    const tvExit = listFavorite.some(
-      (item: any) => item.uid === user.uid && item.detailId === id
-    );
-    setExit(tvExit);
+  const addFavorite = useCallback(
+    async (data: any) => {
+      if (!user) return toast.error("You have to log in");
+      const tvExit = listFavorite.some(
+        (item: any) => item.uid === user.uid && item.detailId === id
+      );
+      setExit(tvExit);
 
-    if (tvExit) {
-      return toast.warning("Movie already exit");
-    }
-    await addFavoriteMovie(
-      id,
-      user.uid,
-      data.original_name,
-      data.poster_path,
-      "tv"
-    );
-    toast.success("Add success");
-  };
+      if (tvExit) {
+        return toast.warning("Movie already exit");
+      }
+      await addFavoriteMovie(
+        id,
+        user.uid,
+        data.original_name,
+        data.poster_path,
+        "tv"
+      );
+      toast.success("Add success");
+    },
+    [listFavorite]
+  );
 
   return (
     <>

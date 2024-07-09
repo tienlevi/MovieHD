@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { DetailMovie } from "../api/movie";
@@ -10,24 +10,13 @@ import Comment from "../components/Comment/Comment";
 import { MovieId } from "../interface/movie";
 import useAuth from "../hooks/useAuth";
 import { addFavoriteMovie, getFavoriteMovie } from "../config/action";
-import CommentInterface from "../interface/comment";
 
 function Detail() {
   const { id }: any = useParams();
-  const [listComment, setListComment] = useState<CommentInterface[]>([]);
   const [listFavorite, setListFavorite] = useState([]);
+  const [exit, setExit] = useState<boolean>(false);
   const [detail, setDetail] = useState<MovieId>();
   const { user } = useAuth();
-
-  const sortList = listComment?.sort((a: any, b: any) => {
-    if (a.uid === user?.uid) {
-      return -1;
-    }
-    if (b.uid === user?.uid) {
-      return 1;
-    }
-    return 0;
-  });
 
   useEffect(() => {
     const getData = async () => {
@@ -45,20 +34,29 @@ function Detail() {
     getData();
   }, [user]);
 
-  const addFavorite = async (data: any) => {
-    if (!user) return toast.error("You have to log in");
-    if (listFavorite) {
-      const movieExit = listFavorite.some(
-        (item: any) => item.uid === user.uid && item.detailId === id
-      );
-
-      if (movieExit) {
-        return toast.warning("Movie already exit");
+  const addFavorite = useCallback(
+    async (data: any) => {
+      if (!user) return toast.error("You have to log in");
+      if (listFavorite) {
+        const movieExit = listFavorite.some(
+          (item: any) => item.uid === user.uid && item.detailId === id
+        );
+        setExit(movieExit);
+        if (movieExit === true) {
+          return toast.warning("Movie already exit");
+        }
       }
-    }
-    await addFavoriteMovie(id, user.uid, data.title, data.poster_path, "movie");
-    toast.success("Add success");
-  };
+      await addFavoriteMovie(
+        id,
+        user.uid,
+        data.title,
+        data.poster_path,
+        "movie"
+      );
+      toast.success("Add success");
+    },
+    [listFavorite]
+  );
 
   return (
     <>
