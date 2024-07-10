@@ -29,12 +29,15 @@ interface Inputs {
 }
 
 function Comment({ uid, id, type }: Props) {
+  // Add Comment
+  const formAdd = useForm();
+  // Edit Comment
   const {
     handleSubmit,
-    register,
     reset,
     formState: { errors },
-  } = useForm<Inputs>();
+    register,
+  } = useForm();
   const [loading, setLoading] = useState(false);
   const [listComment, setListComment] = useState<CommentInterface[]>([]);
   const [select, setSelect] = useState<string | null>(null);
@@ -106,10 +109,17 @@ function Comment({ uid, id, type }: Props) {
       <div className="comment-title">
         <h1>Comment</h1>
       </div>
-      <form onSubmit={handleSubmit(handleAdd)} className="comment-input">
-        <textarea {...register("comment", { required: false })}></textarea>
-        {errors?.comment?.type === "required" && (
-          <p style={{ color: "red " }}>Validate</p>
+      <form
+        onSubmit={formAdd.handleSubmit(handleAdd)}
+        className="comment-input"
+      >
+        <textarea
+          {...formAdd.register("comment", { required: "Validate" })}
+        ></textarea>
+        {formAdd.formState.errors?.comment && (
+          <p style={{ color: "red" }}>
+            {String(formAdd.formState.errors.comment.message)}
+          </p>
         )}
         {user && (
           <button className="comment-item-btn-add" style={{ border: "none" }}>

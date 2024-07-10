@@ -37,12 +37,15 @@ function ReplyComment({
   uid,
 }: Props) {
   const { user } = useAuth();
+  // Add Comment
+  const formAdd = useForm();
+  // Edit Comment
   const {
     handleSubmit,
-    register,
     reset,
     formState: { errors },
-  } = useForm<Inputs>();
+    register,
+  } = useForm();
   const [select, setSelect] = useState<string | null>(null);
   const [lists, setLists] = useState([]);
 
@@ -106,10 +109,17 @@ function ReplyComment({
   return (
     <div className="list-comment-reply">
       {reply === id && (
-        <form onSubmit={handleSubmit(replyCommentId)} className="comment-input">
-          <textarea {...register("comment", { required: true })}></textarea>
-          {errors?.comment?.type === "required" && (
-            <p style={{ color: "red " }}>Validate</p>
+        <form
+          onSubmit={formAdd.handleSubmit(replyCommentId)}
+          className="comment-input"
+        >
+          <textarea
+            {...formAdd.register("comment", { required: "Validate" })}
+          ></textarea>
+          {formAdd.formState.errors?.comment && (
+            <p style={{ color: "red" }}>
+              {String(formAdd.formState.errors.comment.message)}
+            </p>
           )}
           {user && (
             <div className="comment-input-reply">
