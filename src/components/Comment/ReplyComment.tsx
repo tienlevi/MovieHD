@@ -40,12 +40,7 @@ function ReplyComment({
   // Add Comment
   const formAdd = useForm();
   // Edit Comment
-  const {
-    handleSubmit,
-    reset,
-    formState: { errors },
-    register,
-  } = useForm();
+  const formEdit = useForm();
   const [select, setSelect] = useState<string | null>(null);
   const [lists, setLists] = useState([]);
 
@@ -143,13 +138,13 @@ function ReplyComment({
         select === item.id ? (
           <form
             key={index}
-            onSubmit={handleSubmit(handleEdit)}
+            onSubmit={formEdit.handleSubmit(handleEdit)}
             className="comment-input"
           >
             <textarea
-              {...register("commentConfirm", { required: true })}
+              {...formEdit.register("commentConfirm", { required: true })}
             ></textarea>
-            {errors?.commentConfirm?.type === "required" && (
+            {formEdit.formState.errors?.commentConfirm?.type === "required" && (
               <p style={{ color: "red " }}>Validate</p>
             )}
             <div key={index} className="comment-item-btn-select">
@@ -214,7 +209,7 @@ function ReplyComment({
                           <div
                             className="comment-item-btn-edit"
                             onClick={() => {
-                              reset({
+                              formEdit.reset({
                                 id: item.id,
                                 commentConfirm: item.comment,
                               });
