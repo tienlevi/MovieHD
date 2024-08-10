@@ -16,6 +16,7 @@ import AppContext from "./context/AppContext";
 import "./styles/themeMode.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route element={<ProtectRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
           <Route path="/tv-show" element={<TvShow />} />
           <Route path="/detail-tv-show/:id" element={<DetailTvShow />} />
         </Routes>
