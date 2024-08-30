@@ -11,10 +11,15 @@ function AppContext({ children }: any) {
   const [theme, setTheme] = useState<string>("dark");
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme) {
-      setTheme(storedTheme);
+    let storedTheme = localStorage.getItem("theme");
+
+    if (!storedTheme) {
+      storedTheme = "dark";
+      localStorage.setItem("theme", storedTheme);
     }
+
+    setTheme(storedTheme);
+
     if (storedTheme === "light") {
       document.body.classList.add("theme-mode");
     }
